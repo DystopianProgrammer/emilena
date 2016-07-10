@@ -1,11 +1,6 @@
-import {
-    it,
-    inject,
-    describe,
-    beforeEachProviders,
-    expect
-} from '@angular/core/testing';
+import { it, inject, describe, beforeEachProviders, expect } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+
 describe('App', () => {
     beforeEachProviders(() => [
         AppComponent
