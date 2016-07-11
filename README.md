@@ -1,4 +1,4 @@
-#Francis Taylor Foundation Rota
+#Frances Taylor Foundation Rota
 
 
 Requirements:

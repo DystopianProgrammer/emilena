@@ -1,14 +1,16 @@
-<header>
-    <h1>A minimal Angular 2 &amp; Webpack app with a LESS loader</h1>
-    <nav>
-        <a class="nav-item" [routerLink]="['/add-profile']">Create Profile</a>
-        <a class="nav-item">Item 2</a>
-        <a class="nav-item">Item 3</a>
-    </nav>
-</header>
+<section>
+    <div class="header">
+        <h1>Frances Taylor Foundation Rota</h1>
+        <nav>
+            <div class="nav-item" [routerLink]="['/edit-staff']">Edit Staff</div>
+            <div class="nav-item" [routerLink]="['/edit-client']">Edit Client</div>
+            <div class="nav-item" [routerLink]="['/edit-client']">View Rota</div>
+        </nav>
+    </div>
+</section>
 
-<main>
+<section>
     <router-outlet></router-outlet>
-</main>
+</section>
 
-<footer></footer>
+<section></section>

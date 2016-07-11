@@ -9,18 +9,23 @@ body {
 
 .container {
 
-    header {
-        background: coral;
-        color: antiquewhite;
+    section {
         padding: 5px;
+        .header {
+            background: cornflowerblue;
+            color: antiquewhite;
+        }
     }
 
-    main {
-        padding: 5px;
+    // forms
+    label {
+        display: flex;
+        flex-direction: column;
+        margin: 4px 0;
+        input {
+            width: 30%;
+            height: 20px;
+            margin: 4px 0;
+        }
     }
-
-    footer {
-        padding: 5px;
-    }
-
 }
