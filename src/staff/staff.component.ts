@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { Staff, Senior, SupportWorker } from '../model/staff';
 import { Address } from '../model/address';
 import { StaffService } from './staff.service';
+import { PersonComponent } from '../person/person.component';
 
 @Component({
     selector: 'em-staff',
     templateUrl: './staff.component.html',
+    directives: [PersonComponent],
     providers: [StaffService]
 })
 export class StaffComponent {

@@ -1,16 +1,14 @@
-<section>
-    <div class="header">
-        <h1>Frances Taylor Foundation Rota</h1>
-        <nav>
-            <a class="nav-item" [routerLink]="['/edit-staff']">Edit Staff</a>
-            <a class="nav-item" [routerLink]="['/edit-client']">Edit Client</a>
-            <a class="nav-item" [routerLink]="['/edit-client']">View Rota</a>
-        </nav>
-    </div>
-</section>
+<div id="header">
+    <nav>
+        <a class="nav-item" [routerLink]="['/edit-staff']">Edit Staff</a>
+        <a class="nav-item" [routerLink]="['/edit-client']">Edit Client</a>
+        <a class="nav-item" [routerLink]="['/edit-client']">View Rota</a>
+    </nav>
+    <div class="divider"></div>
+</div>
 
-<section>
+<div id="main">
     <router-outlet></router-outlet>
-</section>
+</div>
 
-<section></section>
+<div id="footer"></div>
