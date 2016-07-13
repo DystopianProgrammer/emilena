@@ -3,50 +3,37 @@ import { Staff, Senior, SupportWorker } from '../model/staff';
 import { Address } from '../model/address';
 import { StaffService } from './staff.service';
 import { PersonComponent } from '../person/person.component';
+import { AddressComponent } from '../address/address.component';
+import { ContractTypeComponent } from '../contract-type/contract-type.component';
 
 @Component({
     selector: 'em-staff',
     templateUrl: './staff.component.html',
-    directives: [PersonComponent],
+    directives: [PersonComponent, AddressComponent, ContractTypeComponent],
     providers: [StaffService]
 })
 export class StaffComponent {
 
-    isSenior: boolean;
-    forename: string;
-    surname: string;
-    email: string;
-    address: Address;
-    contractedHoursPerWeek: number;
-    isContractor: boolean;
+    staff: Staff;
+    isEditMode: boolean;
+    staffActionBtn: string;
 
-    constructor(private staffService: StaffService) {}
+    private DEFAULT_BTN_VALUE: string = 'Add staff member';
 
-    addStaff(): void {
-        let staff: any;
-        if (this.isSenior) {
-            staff = new Senior();
-            this.updateStaffMember(staff);
-
-        } else {
-            staff = new SupportWorker();
-            this.updateStaffMember(staff);
-            staff.isContractor = this.isContractor;
-        }
-        this.staffService.addStaff(staff);
+    constructor(private staffService: StaffService) {
+        this.staffActionBtn = this.DEFAULT_BTN_VALUE;
     }
 
-    private updateStaffMember(staff: Staff) {
-        staff.forename = this.forename;
-        staff.surname = this.surname;
-        staff.email = this.email;
-        staff.address = this.address;
-        staff.contractedHoursPerWeek = this.contractedHoursPerWeek;
+    toggleStaffForm() {
+        this.isEditMode = !this.isEditMode;
+        this.staffActionBtn = (this.isEditMode) ? 'View staff availability' : this.DEFAULT_BTN_VALUE;
+        console.log(this.staffActionBtn);
+    }
+
+    addStaff(): void {
     }
 
     editStaff(staff: Staff): any {
-        this.updateStaffMember(staff);
-        return staff;
     }
 
     removeStaff(staff: Staff): void {

@@ -1,14 +1,11 @@
-<div id="header">
-    <nav>
-        <a class="nav-item" [routerLink]="['/edit-staff']">Edit Staff</a>
-        <a class="nav-item" [routerLink]="['/edit-client']">Edit Client</a>
-        <a class="nav-item" [routerLink]="['/edit-client']">View Rota</a>
-    </nav>
-    <div class="divider"></div>
+<div id="header" class="row">
+    <em-header></em-header>
 </div>
 
-<div id="main">
+<div id="main" class="row">
     <router-outlet></router-outlet>
 </div>
 
-<div id="footer"></div>
+<div id="footer" class="row">
+    <div class="col-xs-12"></div>
+</div>

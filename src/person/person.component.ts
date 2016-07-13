@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './person.component.html'
 })
 export class PersonComponent {
-
 }

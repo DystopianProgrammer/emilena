@@ -1,0 +1,25 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div class="navbar-brand" [routerLink]="['/']">FTF</div>
+            <p class="navbar-text">Signed in as Emily Boyle</p>
+            <button type="button" class="navbar-toggle collapsed" aria-expanded="false" (click)="toggle()">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse" [ngClass]="{collapse: collapse}">
+            <ul class="nav navbar-nav">
+                <li><a [routerLink]="['/edit-staff']">Staff</a></li>
+                <li><a [routerLink]="['/edit-client']">Client</a></li>
+                <li><a [routerLink]="['/edit-client']">Overview</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a>Alerts <i class="fa fa-bell" aria-hidden="false"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
