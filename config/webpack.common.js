@@ -7,8 +7,7 @@ module.exports = {
     entry: {
         'polyfills': './src/polyfills.ts',
         'vendor': './src/vendor.ts',
-        'app': './src/main.ts',
-        'less': './less/style.less'
+        'app': './src/main.ts'
     },
 
     resolve: {
@@ -42,6 +41,10 @@ module.exports = {
             {
                 test: /\.less$/,
                 loader: "style!css!less"
+            },
+            {
+                test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+                loader: 'url-loader'
             }
         ]
     },

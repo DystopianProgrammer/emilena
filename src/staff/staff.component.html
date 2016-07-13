@@ -1,0 +1,60 @@
+<div class="staff">
+    <div class="col-xs-12 info-section">
+        <h2>Staff <small>Manager</small></h2>
+        <p>Manage staff availability here. Update details, and apply preferences</p>
+        <button (click)="toggleStaffForm()" type="button" class="btn btn-primary">{{staffActionBtn}}</button>
+    </div>
+    <!-- staff editor -->
+    <div *ngIf="isEditMode">
+        <div class="col-xs-12 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <em-person></em-person>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <em-address></em-address>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="panel panel-default form-inline">
+                <div class="panel-body">
+                    <em-contract-type></em-contract-type>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="panel panel-default form-inline">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="preferences">Preferences/Notes</label>
+                        <input type="text" id="preferences" class="form-control" placeholder="Preferences">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+            <button type="button" class="btn btn-success">Create</button>
+            <button type="button" class="btn btn-danger">Cancel</button>
+        </div>
+    </div>
+    <!-- staff list -->
+    <div class="col-xs-12" *ngIf="!isEditMode">
+        <div class="table-responsive">
+            <table class="table">
+                <th>#</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Type</th>
+                <th>Hours</th>
+                <th>Days</th>
+                <th>Preferences</th>
+            </table>
+        </div>
+    </div>
+</div>
