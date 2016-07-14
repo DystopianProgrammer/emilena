@@ -4,6 +4,16 @@ export abstract class Person {
     forename: string;
     surname: string;
     email: string;
-    telephone: number;
+    telephoneNumber: number;
     address: Address;
+    dob: Date;
+}
+
+export class Staff extends Person {
+    contractType: string;
+    staffType: string;
+    clients: Client[];
+}
+
+export class Client extends Person {
 }
