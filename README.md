@@ -26,3 +26,7 @@ Requirements:
 ##design
 
 [Design draw.io](https://www.draw.io/#G0B5PamaXEsqiHb3VkbGVFd01rVUk)
+
+##backend
+
+The backend repository is at https://github.com/DystopianProgrammer/emilena-api
