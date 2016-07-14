@@ -1,15 +1,8 @@
-import { Training } from './training';
+import { Person } from './person';
 
-declare abstract class Absence {
-    holiday: Date[];
-    sickness: Date[];
+export class Absence {
+    absenceType: string;
+    date: Date;
     reason: string;
-}
-
-export class ClientAbsence extends Absence {
-    respite: boolean;
-}
-
-export class StaffAbsence extends Absence {
-    training: Training[];
+    person: Person;
 }
