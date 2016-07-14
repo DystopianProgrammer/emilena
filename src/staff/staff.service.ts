@@ -25,9 +25,15 @@ export class StaffService {
     updateStaff(staff: Staff) {
     }
 
+    findAll(): Observable<Staff[]> {
+        return this.http.get('/staff/all')
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
     private extractData(res: Response) {
         let body = res.json();
-        return body.data || {};
+        return body || {};
     }
 
     private handleError(error: any) {

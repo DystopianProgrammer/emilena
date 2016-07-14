@@ -1,6 +1,7 @@
 import { Address } from './address'
 
 export abstract class Person {
+    id: number;
     forename: string;
     surname: string;
     email: string;

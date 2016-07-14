@@ -4,7 +4,10 @@ var commonConfig = require('./webpack.common.js');
 var helpers = require('./helpers');
 
 module.exports = webpackMerge(commonConfig, {
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
+    resolve: {
+        extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
+    },
 
     output: {
         path: helpers.root('dist'),
@@ -22,7 +25,8 @@ module.exports = webpackMerge(commonConfig, {
         stats: 'minimal',
 
         proxy: {
-            '/staff/add': 'http://localhost:9090'
+            '/staff/add': 'http://localhost:9090',
+            '/staff/all': 'http://localhost:9090'
         }
     }
 });

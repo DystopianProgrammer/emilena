@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -24,7 +24,8 @@ export class StaffComponent implements OnDestroy {
     staffActionBtn: string;
 
     private DEFAULT_BTN_VALUE: string = 'Add staff member';
-    private staffSubscriber$: Subscription;
+    private staffAdd$: Subscription;
+    private staffFetchAll$: Subscription;
 
     constructor(private staffService: StaffService) {
         this.staffActionBtn = this.DEFAULT_BTN_VALUE;
@@ -33,14 +34,16 @@ export class StaffComponent implements OnDestroy {
     toggleStaffForm() {
         this.isEditMode = !this.isEditMode;
         this.staffActionBtn = (this.isEditMode) ? 'View staff availability' : this.DEFAULT_BTN_VALUE;
-        this.staff = (this.isEditMode) ? new Staff() : null;
+        if (this.isEditMode) {
+            this.staff = this.initStaff();
+        }
     }
 
     addStaff(staff: Staff) {
-        this.staffSubscriber$ = this.staffService.addStaff(staff)
-            .subscribe(
-            staff => this.staffList.push(staff),
-            error => this.errorMessage = <any>error);
+        this.staffAdd$ = this.staffService.addStaff(staff)
+            .subscribe(staff => this.staffList.push(staff), error => this.errorMessage = <any>error);
+
+        this.toggleStaffForm();
     }
 
     editStaff(staff: Staff): any {
@@ -49,9 +52,29 @@ export class StaffComponent implements OnDestroy {
     removeStaff(staff: Staff): void {
     }
 
+    ngOnInit() {
+        this.getStaff();
+    }
+
     ngOnDestroy() {
-        if(this.staffSubscriber$) {
-            this.staffSubscriber$.unsubscribe();
+        if (this.staffAdd$) {
+            this.staffAdd$.unsubscribe();
         }
+
+        if(this.staffFetchAll$) {
+            this.staffFetchAll$.unsubscribe();
+        }
+    }
+
+    private getStaff(): void {
+        this.staffFetchAll$ = this.staffService.findAll().subscribe(
+            staffList => {this.staffList = staffList},
+            error => this.errorMessage = <any>error)
+    }
+
+    private initStaff(): Staff {
+        let staff = new Staff();
+        staff.address = new Address();
+        return staff;
     }
 }
