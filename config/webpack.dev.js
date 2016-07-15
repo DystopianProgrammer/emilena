@@ -26,7 +26,8 @@ module.exports = webpackMerge(commonConfig, {
 
         proxy: {
             '/staff/add': 'http://localhost:9090',
-            '/staff/all': 'http://localhost:9090'
+            '/staff/all': 'http://localhost:9090',
+            '/staff/delete*': 'http://localhost:9090'
         }
     }
 });

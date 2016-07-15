@@ -26,6 +26,7 @@ export class StaffComponent implements OnDestroy {
     private DEFAULT_BTN_VALUE: string = 'Add staff member';
     private staffAdd$: Subscription;
     private staffFetchAll$: Subscription;
+    private staffDelete$: Subscription;
 
     constructor(private staffService: StaffService) {
         this.staffActionBtn = this.DEFAULT_BTN_VALUE;
@@ -50,6 +51,8 @@ export class StaffComponent implements OnDestroy {
     }
 
     removeStaff(staff: Staff): void {
+        this.staffDelete$ =
+            this.staffService.deleteStaff(staff).subscribe(error => this.errorMessage = <any>error);
     }
 
     ngOnInit() {
@@ -61,14 +64,18 @@ export class StaffComponent implements OnDestroy {
             this.staffAdd$.unsubscribe();
         }
 
-        if(this.staffFetchAll$) {
+        if (this.staffFetchAll$) {
             this.staffFetchAll$.unsubscribe();
+        }
+
+        if (this.staffDelete$) {
+            this.staffDelete$.unsubscribe();
         }
     }
 
     private getStaff(): void {
         this.staffFetchAll$ = this.staffService.findAll().subscribe(
-            staffList => {this.staffList = staffList},
+            staffList => { this.staffList = staffList },
             error => this.errorMessage = <any>error)
     }
 
