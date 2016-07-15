@@ -20,9 +20,7 @@ export class StaffService {
     }
 
     deleteStaff(staff: Staff) {
-        return this.http.delete(`/staff/delete/${staff.id}`)
-            .map(this.extractData)
-            .catch(this.handleError);
+        return this.http.delete(`/staff/delete/${staff.id}`).catch(this.handleError);
     }
 
     updateStaff(staff: Staff) {

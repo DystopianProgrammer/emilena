@@ -51,6 +51,7 @@ export class StaffComponent implements OnDestroy {
     }
 
     removeStaff(staff: Staff): void {
+        this.staffList = this.staffList.splice(this.staffList.findIndex(s => s.id === staff.id), 1);
         this.staffDelete$ =
             this.staffService.deleteStaff(staff).subscribe(error => this.errorMessage = <any>error);
     }
