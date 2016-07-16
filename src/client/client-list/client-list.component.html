@@ -14,13 +14,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let staff of staffList">
+                    <tr *ngFor="let client of clientList">
                         <td>
                             <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
                             <span><i class="fa fa-trash" aria-hidden="true"></i></span>
                         </td>
                         <td>{{client.id}}</td>
-                        <td>{{client.name}}</td>
+                        <td>{{client.surname}}, {{client.forename}}</td>
                         <td>{{client.address.friendlyAddress}}</td>
                         <td>TODO</td>
                         <td>TODO</td>

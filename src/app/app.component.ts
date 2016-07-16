@@ -5,6 +5,7 @@ import { HomeComponent } from '../home/home.component';
 import { StaffComponent } from '../staff/staff.component';
 import { ClientComponent } from '../client/client.component'
 import { AddStaffComponent } from '../staff/add-staff/add-staff.component';
+import { AddClientComponent } from '../client/add-client/add-client.component';
 
 @Component({
   selector: 'my-app',
@@ -15,7 +16,8 @@ import { AddStaffComponent } from '../staff/add-staff/add-staff.component';
     HomeComponent,
     StaffComponent,
     AddStaffComponent,
-    ClientComponent
+    ClientComponent,
+    AddClientComponent
   ]
 })
 export class AppComponent { }
