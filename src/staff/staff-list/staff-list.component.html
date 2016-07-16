@@ -1,0 +1,38 @@
+<div class="col-xs-12">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Type</th>
+                        <th>Hours</th>
+                        <th>Days</th>
+                        <th>Preferences</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let staff of staffList">
+                        <td>
+                            <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                            <span (click)="removeStaff(staff)"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                        </td>
+                        <td>{{staff.id}}</td>
+                        <td>{{staff.name}}</td>
+                        <td>{{staff.address.friendlyAddress}}</td>
+                        <td>{{staff.contractType}}</td>
+                        <td>TODO</td>
+                        <td>TODO</td>
+                        <td>TODO</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12 col-xs-offset-2 col-sm-offset-3 col-md-offset-4">
+    <em-pagination></em-pagination>
+</div>

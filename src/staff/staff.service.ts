@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { Staff } from '../model/person';
+import { Staff } from '../model/model';
 
 @Injectable()
 export class StaffService {
@@ -33,14 +33,10 @@ export class StaffService {
     }
 
     private extractData(res: Response) {
-        let body = res.json();
-        return body || {};
+        return res.json() || {};
     }
 
     private handleError(error: any) {
-        let errMsg = (error.message) ? error.message :
-            error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg);
-        return Observable.throw(errMsg);
+        return Observable.throw(error._body);
     }
 }

@@ -1,78 +1,9 @@
-<div class="staff">
-    <div class="col-xs-12 info-section">
-        <h2>Staff <small>Manager</small></h2>
-        <p>Manage staff availability here. Update details, and apply preferences</p>
-        <button (click)="toggleStaffForm()" type="button" class="btn btn-primary">{{staffActionBtn}}</button>
-    </div>
-    <!-- staff editor -->
-    <div *ngIf="isEditMode">
-        <div class="col-xs-12 col-sm-6">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <em-person [person]="staff"></em-person>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <em-address [person]="staff"></em-address>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6">
-            <div class="panel panel-default form-inline">
-                <div class="panel-body">
-                    <em-contract-type></em-contract-type>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6">
-            <div class="panel panel-default form-inline">
-                <div class="panel-body">
-                    <div class="form-group">
-                        <label for="preferences">Preferences/Notes</label>
-                        <input type="text" id="preferences" class="form-control" placeholder="Preferences">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-12">
-            <button type="button" class="btn btn-success" (click)="addStaff(staff)">Create</button>
-            <button type="button" class="btn btn-danger">Cancel</button>
-        </div>
-    </div>
-    <!-- staff list -->
-    <div class="col-xs-12">
-        <table class="table" *ngIf="!isEditMode">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Type</th>
-                    <th>Hours</th>
-                    <th>Days</th>
-                    <th>Preferences</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let staff of staffList">
-                    <td>
-                        <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                        <span (click)="removeStaff(staff)"><i class="fa fa-trash" aria-hidden="true"></i></span>
-                    </td>
-                    <td>{{staff.id}}</td>
-                    <td>{{staff.forename}} {{staff.surname}}</td>
-                    <td>TODO</td>
-                    <td>TODO</td>
-                    <td>TODO</td>
-                    <td>TODO</td>
-                    <td>TODO</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="col-xs-12 info-section">
+    <h2>Staff <small>View</small></h2>
+</div>
+<div class="col-xs-12 spacer">
+    <a class="btn btn-primary btn-lg" [routerLink]="['/add-staff']">Add Staff</a>
+</div>
+<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+    <em-staff-list></em-staff-list>
 </div>

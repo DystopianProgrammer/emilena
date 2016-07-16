@@ -16,7 +16,6 @@ export class NavbarComponent {
     collapse: string = 'collapse';
 
     toggle(): void {
-        console.log(this.collapse);
         this.collapse = (this.collapse === 'collapse') ? '' : 'collapse';
     }
 }
