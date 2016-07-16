@@ -18,13 +18,14 @@ export class Person {
 export class Staff extends Person {
     contractType: string;
     staffType: string;
-    clients: Client[];
+    availability: Availability;
 }
 
 /**
  * Client
  */
 export class Client extends Person {
+    staff: Staff[];
 }
 
 /**

@@ -1,0 +1,8 @@
+<div class="col-xs-12 col-sm-4">
+    <div class="form-group">
+        <label for="staff">Assign Support Worker</label>
+        <select id="staff" class="form-control" [(ngModel)]="client.staff" multiple="true">
+            <option *ngFor="let staff of staffList" [value]="staff">{{staff.surname}}, {{staff.forename}}</option>
+        </select>
+    </div>
+</div>

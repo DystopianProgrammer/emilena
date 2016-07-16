@@ -30,3 +30,14 @@ Requirements:
 ##backend
 
 The backend repository is at https://github.com/DystopianProgrammer/emilena-api
+
+
+Implementation:
+--------------
+
+##finer details
+
+1. Client and Support worker have a many to many relationhip.
+2. There is a support component and a relationhip component.
+.. The support component assigns support workers to a client
+.. The relationhip component lists the currently assigned support workers to the clients

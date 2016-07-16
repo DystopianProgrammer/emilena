@@ -8,12 +8,13 @@ import { ClientService } from '../client.service';
 import { AddressComponent } from '../../address/address.component';
 import { PersonComponent } from '../../person/person.component';
 import { ValidationComponent } from '../../validation/validation.component';
+import { SupportComponent } from '../../support/support.component';
 
 
 @Component({
     selector: 'em-client',
     templateUrl: './add-client.component.html',
-    directives: [PersonComponent, AddressComponent, ROUTER_DIRECTIVES, ValidationComponent],
+    directives: [PersonComponent, AddressComponent, ROUTER_DIRECTIVES, ValidationComponent, SupportComponent],
     providers: [ClientService]
 })
 export class AddClientComponent {

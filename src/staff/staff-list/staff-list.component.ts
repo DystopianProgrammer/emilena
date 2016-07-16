@@ -18,6 +18,7 @@ export class StaffListComponent implements OnInit, OnDestroy {
     errorMessage: string;
 
     private staffFetchAll$: Subscription;
+    private listClientsForStaff$: Subscription;
 
     constructor(private staffService: StaffService) { }
 
@@ -46,5 +47,15 @@ export class StaffListComponent implements OnInit, OnDestroy {
         if (this.staffFetchAll$) {
             this.staffFetchAll$.unsubscribe();
         }
+
+        if(this.listClientsForStaff$) {}
+    }
+
+    listClients(staff: Staff) {
+        this.staffService.listClientsByStaff(staff).subscribe(res => {
+            console.log(res);
+        }, err => {
+            console.log(err);
+        });
     }
 }

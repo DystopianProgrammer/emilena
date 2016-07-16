@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { Staff } from '../model/model';
+import { Staff, Client } from '../model/model';
 
 @Injectable()
 export class StaffService {
@@ -28,6 +28,12 @@ export class StaffService {
 
     findAll(): Observable<Staff[]> {
         return this.http.get('/staff/all')
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    listClientsByStaff(staff: Staff): Observable<Client[]> {
+        return this.http.get(`/staff/clients/${staff.id}`)
             .map(this.extractData)
             .catch(this.handleError);
     }
