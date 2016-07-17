@@ -14,10 +14,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let client of clientList">
+                    <tr *ngFor="let client of clientList, let i = index">
                         <td>
                             <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                            <i class="fa fa-link" aria-hidden="true"></i>
+                            <i *ngIf="!displaySupportWorkers" class="fa fa-binoculars" aria-hidden="true" (click)="toggle(client, i)"></i>
+                            <i *ngIf="displaySupportWorkers" class="fa fa-times-circle" aria-hidden="true" (click)="toggle(client, i)"></i>
+                            <div *ngIf="displaySupportWorkers && indexed === i">
+                                <em-pop-over>
+                                    <ul class="list-unstyled">
+                                        <p><strong>Assigned Support Workers</strong></p>
+                                        <li *ngFor="let staff of client.staff">
+                                            {{staff.surname}}, {{staff.forename}}
+                                        </li>
+                                    </ul>
+                                </em-pop-over>
+                            </div>
                         </td>
                         <td>{{client.id}}</td>
                         <td>{{client.surname}}, {{client.forename}}</td>

@@ -6,18 +6,20 @@ import { StaffComponent } from '../staff/staff.component';
 import { ClientComponent } from '../client/client.component'
 import { AddStaffComponent } from '../staff/add-staff/add-staff.component';
 import { AddClientComponent } from '../client/add-client/add-client.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
-  directives: [ROUTER_DIRECTIVES, HeaderComponent],
+  directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent],
   precompile: [
     HeaderComponent,
     HomeComponent,
     StaffComponent,
     AddStaffComponent,
     ClientComponent,
-    AddClientComponent
+    AddClientComponent,
+    FooterComponent
   ]
 })
 export class AppComponent { }

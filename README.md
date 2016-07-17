@@ -41,3 +41,10 @@ Implementation:
 + There is a support component and a relationhip component.
  - The support component assigns support workers to a client
  - The relationhip component lists the currently assigned support workers to the clients
+
+TODOs
+------
+
+1. Update operations
+2. Hours/Days
+3. Availability

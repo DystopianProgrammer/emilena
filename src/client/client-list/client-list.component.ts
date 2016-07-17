@@ -5,17 +5,20 @@ import { Subscription } from 'rxjs/Subscription';
 import { Client, Address } from '../../model/model';
 import { ClientService } from '../client.service';
 import { PaginationComponent } from '../../pagination/pagination.component';
+import { PopOverComponent } from '../../pop-over/pop-over.component';
 
 @Component({
     selector: 'em-client-list',
     templateUrl: './client-list.component.html',
-    directives: [PaginationComponent],
+    directives: [PaginationComponent, PopOverComponent],
     providers: [ClientService]
 })
 export class ClientListComponent implements OnInit, OnDestroy {
 
     clientList: Client[] = [];
     errorMessage: string;
+    displaySupportWorkers: boolean;
+    indexed: number;
 
     private staffFetchAll$: Subscription;
 
@@ -25,12 +28,12 @@ export class ClientListComponent implements OnInit, OnDestroy {
         this.staffFetchAll$ = this.clientService.findAll()
             .subscribe(clientList => {
                 this.clientList = clientList.map(client => {
-                    if(client.address === null) {
+                    if (client.address === null) {
                         client.address = new Address();
                     } else {
                         let addressParser = (client: Client) => {
                             return (client.address.town && client.address.postCode) ?
-                                    `${client.address.town}, ${client.address.postCode}` : '';
+                                `${client.address.town}, ${client.address.postCode}` : '';
                         }
                         client.address.friendlyAddress = addressParser(client);
                     }
@@ -45,6 +48,19 @@ export class ClientListComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this.staffFetchAll$) {
             this.staffFetchAll$.unsubscribe();
+        }
+    }
+
+    toggle(client: Client, index: number) {
+        if (this.displaySupportWorkers) {
+            this.displaySupportWorkers = false;
+        } else {
+            if (this.clientList[index].id === client.id) {
+                this.displaySupportWorkers = true;
+                this.indexed = index;
+            } else {
+                this.displaySupportWorkers = false;
+            }
         }
     }
 }
