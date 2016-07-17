@@ -12,8 +12,8 @@
         </div>
         <div class="navbar-collapse" [ngClass]="{collapse: collapse}">
             <ul class="nav navbar-nav">
-                <li><a [routerLink]="['/staff']" routerLinkActive="active">Staff</a></li>
-                <li><a [routerLink]="['/client']" routerLinkActive="active">Client</a></li>
+                <li><a [routerLink]="['/staff']" routerLinkActive="active" (click)="hide()">Staff</a></li>
+                <li><a [routerLink]="['/client']" routerLinkActive="active" (click)="hide()">Client</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a>Alerts <i class="fa fa-bell" aria-hidden="false"></i></a></li>

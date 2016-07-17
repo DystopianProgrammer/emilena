@@ -18,4 +18,8 @@ export class NavbarComponent {
     toggle(): void {
         this.collapse = (this.collapse === 'collapse') ? '' : 'collapse';
     }
+
+    hide(): void {
+        this.collapse = 'collapse';
+    }
 }
