@@ -2,35 +2,22 @@
     <em-validation [error]="errors"></em-validation>
 </div>
 
+<!-- Header -->
+<div class="col-xs-12 info-section">
+    <h2>Client <small>Add</small></h2>
+</div>
+
+<!-- form contents -->
+<div class="col-xs-12 col-sm-6">
+    <em-person [person]="client"></em-person>
+</div>
+<div class="col-xs-12 col-sm-6">
+    <em-address [person]="client"></em-address>
+    <em-support [client]="client"></em-support>
+</div>
+
+<!-- Buttons -->
 <div class="col-xs-12">
-    <div class="row">
-        <div class="col-xs-12 info-section">
-            <h2>Client <small>Add</small></h2>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-            <em-person [person]="client"></em-person>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-            <em-address [person]="client"></em-address>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-            <div class="form-group">
-                <label for="preferences">Preferences/Notes</label>
-                <textarea id="preferences" class="form-control" rows="5"></textarea>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-            <em-support [client]="client"></em-support>
-        </div>
-        <div class="col-xs-12">
-            <div class="row">
-                <div class="col-xs-12">
-                    <button type="button" class="btn btn-success" (click)="addClient(client)">Create
-                            </button>
-                    <button type="button" class="btn btn-danger" (click)="cancel()">Cancel
-                            </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <button type="button" class="btn btn-success" (click)="addClient(client)">Create</button>
+    <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
 </div>
