@@ -10,6 +10,8 @@ export class Person {
     telephoneNumber: number;
     address: Address;
     dob: Date;
+    availability: Availability[];
+    preferences: string;
 }
 
 /**
@@ -18,7 +20,6 @@ export class Person {
 export class Staff extends Person {
     contractType: string;
     staffType: string;
-    availability: Availability;
 }
 
 /**
@@ -46,7 +47,8 @@ export class Address {
  */
 export class Availability {
     dateAndTime: Date;
-    persons: Person[];
+    dayOfWeek: string;
+    persons: Person;
 }
 
 /**
