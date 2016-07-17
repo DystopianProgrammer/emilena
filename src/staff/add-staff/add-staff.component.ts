@@ -37,7 +37,7 @@ export class AddStaffComponent {
                 this.errors = error;
                 setTimeout(() => {
                     this.errors = undefined;
-                }, 5000);
+                }, 10000);
             });
 
         this.initStaff();

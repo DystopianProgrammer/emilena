@@ -1,11 +1,13 @@
-<div id="header" class="row">
-    <em-header></em-header>
+<div id="wrap">
+    <div class="container-fluid">
+        <div id="header" class="row">
+            <em-header></em-header>
+        </div>
+        <div id="main" class="row">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </div>
-
-<div id="main" class="row">
-    <router-outlet></router-outlet>
-</div>
-
-<div id="footer" class="row">
+<div id="footer">
     <em-footer></em-footer>
 </div>
