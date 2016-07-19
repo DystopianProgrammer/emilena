@@ -33,4 +33,44 @@ describe('the calendar functions', () => {
             expect(isLeapYear).toBe(false);
         });
     });
+
+    it('should accumulate correct number of months for leap year', () => {
+        let calendar = new Calendar();
+        let daysForYear = calendar.accumulateDaysForYear(2020);
+
+        expect(daysForYear.year).toBe(2020);
+        expect(daysForYear.monthsWithDays.length).toBe(12);
+        expect(daysForYear.monthsWithDays[0].length).toBe(31);
+        expect(daysForYear.monthsWithDays[1].length).toBe(29);
+        expect(daysForYear.monthsWithDays[2].length).toBe(31);
+        expect(daysForYear.monthsWithDays[3].length).toBe(30);
+        expect(daysForYear.monthsWithDays[4].length).toBe(31);
+        expect(daysForYear.monthsWithDays[5].length).toBe(30);
+        expect(daysForYear.monthsWithDays[6].length).toBe(31);
+        expect(daysForYear.monthsWithDays[7].length).toBe(31);
+        expect(daysForYear.monthsWithDays[8].length).toBe(30);
+        expect(daysForYear.monthsWithDays[9].length).toBe(31);
+        expect(daysForYear.monthsWithDays[10].length).toBe(30);
+        expect(daysForYear.monthsWithDays[11].length).toBe(31);
+    });
+
+    it('should accumulate correct number of months for non leap year', () => {
+        let calendar = new Calendar();
+        let daysForYear = calendar.accumulateDaysForYear(2017);
+
+        expect(daysForYear.year).toBe(2017);
+        expect(daysForYear.monthsWithDays.length).toBe(12);
+        expect(daysForYear.monthsWithDays[0].length).toBe(31);
+        expect(daysForYear.monthsWithDays[1].length).toBe(28);
+        expect(daysForYear.monthsWithDays[2].length).toBe(31);
+        expect(daysForYear.monthsWithDays[3].length).toBe(30);
+        expect(daysForYear.monthsWithDays[4].length).toBe(31);
+        expect(daysForYear.monthsWithDays[5].length).toBe(30);
+        expect(daysForYear.monthsWithDays[6].length).toBe(31);
+        expect(daysForYear.monthsWithDays[7].length).toBe(31);
+        expect(daysForYear.monthsWithDays[8].length).toBe(30);
+        expect(daysForYear.monthsWithDays[9].length).toBe(31);
+        expect(daysForYear.monthsWithDays[10].length).toBe(30);
+        expect(daysForYear.monthsWithDays[11].length).toBe(31);
+    });
 });

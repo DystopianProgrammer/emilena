@@ -6,7 +6,8 @@
     "start": "webpack-dev-server --inline --progress --port 8080",
     "test": "karma start ./config/karma.conf.js",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
-    "postinstall": "typings install"
+    "postinstall": "typings install",
+    "lint": "tslint -c ./tslint.json ./src/**/*.ts"
   },
   "license": "MIT",
   "dependencies": {
@@ -46,6 +47,7 @@
     "rimraf": "^2.5.2",
     "style-loader": "^0.13.1",
     "ts-loader": "^0.8.1",
+    "tslint": "^3.13.0",
     "typescript": "^1.8.10",
     "typings": "^1.0.4",
     "url-loader": "^0.5.7",
