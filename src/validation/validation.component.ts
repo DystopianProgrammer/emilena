@@ -3,8 +3,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'em-validation',
-    templateUrl: './validation.component.html',
-    styles:  [String(require('./validation.component.less'))]
+    templateUrl: './validation.component.html'
 })
 export class ValidationComponent {
 

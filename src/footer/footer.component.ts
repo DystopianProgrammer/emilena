@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'em-footer',
-    templateUrl: './footer.component.html',
-    styles:  [String(require('./footer.component.less'))]
+    templateUrl: './footer.component.html'
 })
 export class FooterComponent implements OnInit {
 

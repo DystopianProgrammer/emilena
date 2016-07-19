@@ -48,7 +48,7 @@ export class Address {
 export class Availability {
     dateAndTime: Date;
     dayOfWeek: string;
-    persons: Person;
+    person: Person;
 }
 
 /**
@@ -59,4 +59,14 @@ export class Absence {
     date: Date;
     reason: string;
     person: Person;
+}
+
+export enum DayOfWeek {
+    MONDAY,
+    TUESDAY,
+    WEDNESDAY,
+    THURSDAY,
+    FRIDAY,
+    SATURDAY,
+    SUNDAY
 }

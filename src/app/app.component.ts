@@ -9,7 +9,7 @@ import { AddClientComponent } from '../client/add-client/add-client.component';
 import { FooterComponent } from '../footer/footer.component';
 
 @Component({
-  selector: 'my-app',
+  selector: 'emilena',
   templateUrl: './app.component.html',
   directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent],
   precompile: [
