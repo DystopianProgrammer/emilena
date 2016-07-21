@@ -20,6 +20,7 @@ export class Person {
 export class Staff extends Person {
     contractType: string;
     staffType: string;
+    contractedHours: number;
 }
 
 /**
@@ -44,10 +45,14 @@ export class Address {
 /**
  * Availability is from Monday to Sunday from 8am till 10pm
  * This should be configurable
+ *
+ * This is a many to one in that a Person can have many availabilities. Note that this is a snapshot in time
+ * for a given date - NOT A DURATION.
  */
 export class Availability {
     dateAndTime: Date;
     dayOfWeek: string;
+    numberOfHours: number;
     person: Person;
 }
 

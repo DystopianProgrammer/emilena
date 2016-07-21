@@ -3,17 +3,18 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { Staff, Address } from '../../model/model';
+import { Staff, Address, Availability } from '../../model/model';
 import { StaffService } from '../staff.service';
 import { AddressComponent } from '../../address/address.component';
 import { PersonComponent } from '../../person/person.component';
 import { ValidationComponent } from '../../validation/validation.component';
+import { AvailabilityComponent } from '../../availability/availability.component';
 
 
 @Component({
     selector: 'em-staff',
     templateUrl: './add-staff.component.html',
-    directives: [PersonComponent, AddressComponent, ROUTER_DIRECTIVES, ValidationComponent],
+    directives: [PersonComponent, AddressComponent, ROUTER_DIRECTIVES, ValidationComponent, AvailabilityComponent],
     providers: [StaffService]
 })
 export class AddStaffComponent {
@@ -22,6 +23,9 @@ export class AddStaffComponent {
     errors: any;
     successMsg: string;
     contractTypes: string[] = ['CONTRACT', 'BANK'];
+    availabilities: Availability[] = [];
+    availability: Availability;
+    showAvailabilityForm: boolean = false;
 
     private staffAdd$: Subscription;
 
@@ -41,6 +45,22 @@ export class AddStaffComponent {
             });
 
         this.initStaff();
+    }
+
+    addAvailability(staff: Staff) {
+        if(this.staff.availability) {
+            this.availabilities = this.staff.availability;
+        } else {
+           this.staff.availability = this.availabilities;
+        }
+        this.availability = new Availability();
+        this.staff.availability.push(this.availability);
+        this.showAvailabilityForm = true;
+    }
+
+    availabilityUpdated(event: any) {
+        console.log('received event' + event);
+        this.showAvailabilityForm = false;
     }
 
     ngOnDestroy() {

@@ -20,9 +20,28 @@
         </select>
     </div>
 </div>
+<div class="col-xs-12 col-sm-3">
+    <div class="form-group">
+        <label for="contractedHours">Contracted hours</label>
+        <input type="number" id="contractedHours" class="form-control" placeholder="e.g. 37.5" [(ngModel)]="staff.contractedHours">
+    </div>
+    <div class="form-group">
+        <label for="availabilityBtn">Availability</label>
+        <button class="btn btn-primary form-control" id="availabilityBtn" (click)="addAvailability()">Add</button>
+    </div>
+    <div *ngIf="showAvailabilityForm" class="em-modal">
+        <em-availability
+            [availability]="availability"
+            (availabilityChange)="availabilityUpdated($event)">
+        </em-availability>
+    </div>
+</div>
 
 <!-- Buttons -->
 <div class="col-xs-12">
-    <button type="button" class="btn btn-success" (click)="addStaff(staff)">Create</button>
-    <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+    <div class="em-form-submit-buttons">
+        <button type="button" class="btn btn-success" (click)="addStaff(staff)">Create</button>
+        <button type="button" class="btn btn-default" (click)="cancel()">Clear</button>
+        <button type="button" class="btn btn-default" [routerLink]="['/staff']">Cancel</button>
+    </div>
 </div>

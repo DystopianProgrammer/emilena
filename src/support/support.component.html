@@ -1,6 +1,16 @@
-<div class="form-group">
-    <label for="staff">Assign Support Worker/s</label>
-    <select id="staff" class="form-control" [(ngModel)]="client.staff" multiple="true">
+<div class="em-support">
+    <div class="form-group">
+        <label for="staff">Assign Support Worker/s</label>
+        <select id="staff" class="form-control" [(ngModel)]="client.staff" multiple="true">
         <option *ngFor="let staff of staffList" [value]="staff">{{staff.surname}}, {{staff.forename}}</option>
     </select>
+    </div>
+    <div *ngIf="client.staff && client.staff.length > 0" class="bg-success staff-added">
+        <div class="message-dialog">
+            <strong>Staff Added:</strong>
+            <ol>
+                <li *ngFor="let staff of client.staff">{{ staff.surname }}, {{ staff.forename }}</li>
+            </ol>
+        </div>
+    </div>
 </div>

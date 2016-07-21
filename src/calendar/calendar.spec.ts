@@ -1,6 +1,8 @@
-import { Calendar } from './calendar';
+import { EmCalendar } from './calendar';
 
 describe('the calendar functions', () => {
+
+    let months = EmCalendar.EmMonths;
 
     it('should evaluate true for all leap years', () => {
         let leapYears = [1904, 1908, 1912, 1916, 1920,
@@ -11,8 +13,7 @@ describe('the calendar functions', () => {
 
         leapYears.forEach(leapYear => {
 
-            let calendar = new Calendar();
-            let isLeapYear = calendar.isLeapYear(leapYear);
+            let isLeapYear = EmCalendar.isLeapYear(leapYear);
 
             expect(isLeapYear).toBe(true);
         });
@@ -27,50 +28,52 @@ describe('the calendar functions', () => {
 
         leapYears.forEach(leapYear => {
 
-            let calendar = new Calendar();
-            let isLeapYear = calendar.isLeapYear(leapYear);
+            let isLeapYear = EmCalendar.isLeapYear(leapYear);
 
             expect(isLeapYear).toBe(false);
         });
     });
 
     it('should accumulate correct number of months for leap year', () => {
-        let calendar = new Calendar();
-        let daysForYear = calendar.accumulateDaysForYear(2020);
+
+        let daysForYear = EmCalendar.accumulateDaysForYear(2020);
 
         expect(daysForYear.year).toBe(2020);
+
         expect(daysForYear.monthsWithDays.length).toBe(12);
-        expect(daysForYear.monthsWithDays[0].length).toBe(31);
-        expect(daysForYear.monthsWithDays[1].length).toBe(29);
-        expect(daysForYear.monthsWithDays[2].length).toBe(31);
-        expect(daysForYear.monthsWithDays[3].length).toBe(30);
-        expect(daysForYear.monthsWithDays[4].length).toBe(31);
-        expect(daysForYear.monthsWithDays[5].length).toBe(30);
-        expect(daysForYear.monthsWithDays[6].length).toBe(31);
-        expect(daysForYear.monthsWithDays[7].length).toBe(31);
-        expect(daysForYear.monthsWithDays[8].length).toBe(30);
-        expect(daysForYear.monthsWithDays[9].length).toBe(31);
-        expect(daysForYear.monthsWithDays[10].length).toBe(30);
-        expect(daysForYear.monthsWithDays[11].length).toBe(31);
+        expect(daysForYear.monthsWithDays[months.JANUARY].length).toBe(31);
+        expect(daysForYear.monthsWithDays[months.FEBRUARY].length).toBe(29);
+        expect(daysForYear.monthsWithDays[months.MARCH].length).toBe(31);
+        expect(daysForYear.monthsWithDays[months.APRIL].length).toBe(30);
+        expect(daysForYear.monthsWithDays[months.MAY].length).toBe(31);
+        expect(daysForYear.monthsWithDays[months.JUNE].length).toBe(30);
+        expect(daysForYear.monthsWithDays[months.JULY].length).toBe(31);
+        expect(daysForYear.monthsWithDays[months.AUGUST].length).toBe(31);
+        expect(daysForYear.monthsWithDays[months.SEPTEMBER].length).toBe(30);
+        expect(daysForYear.monthsWithDays[months.OCTOBER].length).toBe(31);
+        expect(daysForYear.monthsWithDays[months.NOVEMBER].length).toBe(30);
+        expect(daysForYear.monthsWithDays[months.DECEMBER].length).toBe(31);
     });
 
     it('should accumulate correct number of months for non leap year', () => {
-        let calendar = new Calendar();
-        let daysForYear = calendar.accumulateDaysForYear(2017);
+
+
+        let daysForYear = EmCalendar.accumulateDaysForYear(2017);
 
         expect(daysForYear.year).toBe(2017);
+
         expect(daysForYear.monthsWithDays.length).toBe(12);
-        expect(daysForYear.monthsWithDays[0].length).toBe(31);
-        expect(daysForYear.monthsWithDays[1].length).toBe(28);
-        expect(daysForYear.monthsWithDays[2].length).toBe(31);
-        expect(daysForYear.monthsWithDays[3].length).toBe(30);
-        expect(daysForYear.monthsWithDays[4].length).toBe(31);
-        expect(daysForYear.monthsWithDays[5].length).toBe(30);
-        expect(daysForYear.monthsWithDays[6].length).toBe(31);
-        expect(daysForYear.monthsWithDays[7].length).toBe(31);
-        expect(daysForYear.monthsWithDays[8].length).toBe(30);
-        expect(daysForYear.monthsWithDays[9].length).toBe(31);
-        expect(daysForYear.monthsWithDays[10].length).toBe(30);
-        expect(daysForYear.monthsWithDays[11].length).toBe(31);
+        expect(daysForYear.monthsWithDays[months.JANUARY].length).toBe(31);
+        expect(daysForYear.monthsWithDays[months.FEBRUARY].length).toBe(28);
+        expect(daysForYear.monthsWithDays[months.MARCH].length).toBe(31);
+        expect(daysForYear.monthsWithDays[months.APRIL].length).toBe(30);
+        expect(daysForYear.monthsWithDays[months.MAY].length).toBe(31);
+        expect(daysForYear.monthsWithDays[months.JUNE].length).toBe(30);
+        expect(daysForYear.monthsWithDays[months.JULY].length).toBe(31);
+        expect(daysForYear.monthsWithDays[months.AUGUST].length).toBe(31);
+        expect(daysForYear.monthsWithDays[months.SEPTEMBER].length).toBe(30);
+        expect(daysForYear.monthsWithDays[months.OCTOBER].length).toBe(31);
+        expect(daysForYear.monthsWithDays[months.NOVEMBER].length).toBe(30);
+        expect(daysForYear.monthsWithDays[months.DECEMBER].length).toBe(31);
     });
 });

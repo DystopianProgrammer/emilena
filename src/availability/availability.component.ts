@@ -1,29 +1,23 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Person, Staff, Client, Availability, DayOfWeek } from '../model/model';
+// import { CalendarComponent } from '../calendar/calendar.component';
+// import { EmCalendar } from '../calendar/calendar';
 
+/**
+ * This is a many to one in that a Person can have many availabilities. Note that this is a snapshot in time
+ * for a given date - NOT A DURATION.
+ */
+@Component({
+    selector: 'em-availability',
+    templateUrl: './availability.component.html'
+})
 export class AvailabilityComponent {
 
-    /**
-     * The person to which we assign the availability to. Note, that a person can have many
-     * availabilities.
-     */
-    @Input() person: Person;
+    @Input() availability: any;
+    @Output() availabilityChange = new EventEmitter<Availability>();
 
-    /**
-     * Represents the days of the week that both client and staff are available
-     */
-    day: DayOfWeek[];
-
-    /**
-     * Represents the hours for both staff and client.
-     * Staff - This is the total number of hours that they are available during the course of a week.
-     * Client - The total number of hours support the client receives each week.
-     */
-    hoursPerWeek: number;
-
-    /**
-     * Represents the number of allocated hours for a given day.
-     *
-     */
-    hoursPerDay: Map<DayOfWeek, number>[];
+    update(availability: any) {
+        console.log('emitting event' + availability);
+        this.availabilityChange.emit(availability);
+    }
 }

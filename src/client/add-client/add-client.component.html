@@ -8,16 +8,21 @@
 </div>
 
 <!-- form contents -->
-<div class="col-xs-12 col-sm-6">
+<div class="col-xs-12 col-sm-3">
     <em-person [person]="client"></em-person>
 </div>
-<div class="col-xs-12 col-sm-6">
+<div class="col-xs-12 col-sm-3">
     <em-address [person]="client"></em-address>
+</div>
+<div class="col-xs-12 col-sm-3">
     <em-support [client]="client"></em-support>
 </div>
 
 <!-- Buttons -->
 <div class="col-xs-12">
-    <button type="button" class="btn btn-success" (click)="addClient(client)">Create</button>
-    <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+    <div class="em-form-submit-buttons">
+        <button type="button" class="btn btn-success" (click)="addClient(client)">Create</button>
+        <button type="button" class="btn btn-default" (click)="cancel()">Clear</button>
+        <button type="button" class="btn btn-default" [routerLink]="['/client']">Cancel</button>
+    </div>
 </div>
