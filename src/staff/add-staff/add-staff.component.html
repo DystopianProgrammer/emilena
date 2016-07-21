@@ -35,6 +35,13 @@
             (availabilityChange)="availabilityUpdated($event)">
         </em-availability>
     </div>
+    <span *ngFor="let availability of availabilities; let index=index">
+        <div *ngIf="index % 2 === 0" class="spacer"></div>
+        <em-badge>
+            <strong>Date:</strong>{{availability.dateAndTime}},
+            <strong>Hours:</strong> {{availability.numberOfHours}}
+        </em-badge>
+    </span>
 </div>
 
 <!-- Buttons -->

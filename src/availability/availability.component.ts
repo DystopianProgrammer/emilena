@@ -17,7 +17,6 @@ export class AvailabilityComponent {
     @Output() availabilityChange = new EventEmitter<Availability>();
 
     update(availability: any) {
-        console.log('emitting event' + availability);
         this.availabilityChange.emit(availability);
     }
 }

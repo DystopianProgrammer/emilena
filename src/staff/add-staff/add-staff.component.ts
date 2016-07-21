@@ -9,12 +9,18 @@ import { AddressComponent } from '../../address/address.component';
 import { PersonComponent } from '../../person/person.component';
 import { ValidationComponent } from '../../validation/validation.component';
 import { AvailabilityComponent } from '../../availability/availability.component';
+import { BadgeComponent } from '../../badge/badge.component';
 
 
 @Component({
     selector: 'em-staff',
     templateUrl: './add-staff.component.html',
-    directives: [PersonComponent, AddressComponent, ROUTER_DIRECTIVES, ValidationComponent, AvailabilityComponent],
+    directives: [PersonComponent,
+        AddressComponent,
+        ROUTER_DIRECTIVES,
+        ValidationComponent,
+        AvailabilityComponent,
+        BadgeComponent],
     providers: [StaffService]
 })
 export class AddStaffComponent {
@@ -48,18 +54,18 @@ export class AddStaffComponent {
     }
 
     addAvailability(staff: Staff) {
-        if(this.staff.availability) {
+        if (this.staff.availability) {
             this.availabilities = this.staff.availability;
         } else {
-           this.staff.availability = this.availabilities;
+            this.staff.availability = this.availabilities;
         }
         this.availability = new Availability();
-        this.staff.availability.push(this.availability);
+
         this.showAvailabilityForm = true;
     }
 
     availabilityUpdated(event: any) {
-        console.log('received event' + event);
+        this.availabilities.push(event);
         this.showAvailabilityForm = false;
     }
 
