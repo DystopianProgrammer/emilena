@@ -47,7 +47,7 @@ export class AddStaffComponent {
                 this.errors = error;
                 setTimeout(() => {
                     this.errors = undefined;
-                }, 10000);
+                }, 5000);
             });
 
         this.initStaff();
@@ -59,14 +59,20 @@ export class AddStaffComponent {
         } else {
             this.staff.availability = this.availabilities;
         }
-        this.availability = new Availability();
 
+        this.availability = new Availability();
         this.showAvailabilityForm = true;
     }
 
-    availabilityUpdated(event: any) {
-        this.availabilities.push(event);
+    availabilityUpdated(availability: Availability) {
+        if (availability.dateAndTime && availability.numberOfHours) {
+            this.availabilities.push(availability);
+        }
         this.showAvailabilityForm = false;
+    }
+
+    removeAvailability(index: number) {
+        this.staff.availability.splice(index, 1);
     }
 
     ngOnDestroy() {

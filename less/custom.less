@@ -32,12 +32,17 @@ html, body {
 
 #main {
 
-    i { cursor: pointer; }
-    textarea { resize: none; }
+    i {
+        cursor: pointer;
+    }
+
+    textarea {
+        resize: none;
+    }
+
     padding-bottom:150px;
     margin-bottom: 20px;
 
-    // the main form buttons
     .em-form-submit-buttons {
         border-top: 1px solid @gray-lighter;
         margin: 10px;
@@ -64,7 +69,10 @@ html, body {
 
     .em-badge {
         background: @brand-success-border;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
         border-radius: 10px;
+        -khtml-border-radius: 10px;
         padding: 4px;
         margin: 2px;
         color: @brand-success-text;
@@ -73,7 +81,10 @@ html, body {
     .em-support {
         .staff-added {
             border: 1px solid @brand-success-border;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
             border-radius: 4px;
+            -khtml-border-radius: 4px;
             color: @brand-success-text;
             .message-dialog {
                 padding: 4px;
@@ -88,33 +99,12 @@ html, body {
         padding: 10px;
         -moz-border-radius: 10px;
         -webkit-border-radius: 10px;
-        border-radius: 10px; /* future proofing */
-        -khtml-border-radius: 10px; /* for old Konqueror browsers */
+        border-radius: 10px;
+        -khtml-border-radius: 10px;
     }
 
     .em-pop-over-hide {
         display: none;
-    }
-
-    .em-validation {
-        position: fixed;
-        width: 25%;
-        z-index: 10;
-        bottom: 50%;
-        top: 50%;
-        -moz-border-radius: 10px;
-        -webkit-border-radius: 10px;
-        border-radius: 10px; /* future proofing */
-        -khtml-border-radius: 10px; /* for old Konqueror browsers */
-        color: #FA2121;
-        border: 1px #FA2121 solid;
-        padding: 40px;
-        text-align: center;
-
-        ul {
-            text-align: center;
-            list-style-type: none;
-        }
     }
 }
 
