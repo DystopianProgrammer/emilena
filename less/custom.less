@@ -40,6 +40,37 @@ html, body {
         resize: none;
     }
 
+    em-calendar {
+        position: absolute;
+        z-index: 1000;
+        top: 0;
+        width: 90%;
+        background: @gray-light;
+        color: @gray-darker;
+        padding: 4px;
+        border-radius: 4px;
+
+        table {
+            position: fixed;
+            background: #FFFFFF;
+            width: 11%;
+            margin-top: 10px;
+            thead {
+                background: @gray-lighter;
+                color: black;
+            }
+            tr {
+                border: 1px solid @gray-darker;
+            }
+            td{
+                width: 50%;
+                text-align: left;
+                border: 1px solid black;
+                cursor: pointer;
+            }
+        }
+    }
+
     padding-bottom:150px;
     margin-bottom: 20px;
 
@@ -60,11 +91,19 @@ html, body {
     }
 
     .availability-component {
-        background: #FFFFFF;
         position: fixed;
         top: 20%;
-        left: 10%;
-        width: 80%;
+        left: 30%;
+        width: 38%
+    }
+
+    @media screen and (max-width: 760px) {
+        .availability-component {
+            position: fixed;
+            top: 20%;
+            left: 10%;
+            width: 80%
+        }
     }
 
     .em-badge {
@@ -105,6 +144,15 @@ html, body {
 
     .em-pop-over-hide {
         display: none;
+    }
+
+    .panel-heading {
+        i {
+            position: absolute;
+            right: 1%;
+            top: 3%;
+            font-size: 18px;
+        }
     }
 }
 

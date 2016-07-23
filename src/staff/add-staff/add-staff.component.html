@@ -22,8 +22,8 @@
         <input type="number" id="contractedHours" class="form-control" placeholder="e.g. 37.5" [(ngModel)]="staff.contractedHours">
     </div>
     <div class="form-group">
-        <label for="availabilityBtn">Availability</label>
-        <button class="btn btn-primary form-control" id="availabilityBtn" (click)="addAvailability()">Add</button>
+        <label for="availabilityBtn" class="sr-only">Availability</label>
+        <button class="btn btn-primary" id="availabilityBtn" (click)="addAvailability()">Add Availability</button>
     </div>
     <div *ngIf="showAvailabilityForm" class="em-modal">
         <em-availability
@@ -32,7 +32,7 @@
         </em-availability>
     </div>
     <span *ngFor="let availability of availabilities; let index=index">
-        <div *ngIf="index % 2 === 0" class="spacer"></div>
+        <div class="spacer"></div>
         <em-badge (dismissBadge)="removeAvailability(index)">
             {{availability.dateAndTime}},
             {{availability.numberOfHours}} hours

@@ -1,8 +1,9 @@
-import { EmCalendar } from './calendar';
+import { EmCalendar, EmMonths } from './calendar';
 
 describe('the calendar functions', () => {
 
-    let months = EmCalendar.EmMonths;
+    let months = EmMonths;
+    let emCalendar = new EmCalendar();
 
     it('should evaluate true for all leap years', () => {
         let leapYears = [1904, 1908, 1912, 1916, 1920,
@@ -13,7 +14,7 @@ describe('the calendar functions', () => {
 
         leapYears.forEach(leapYear => {
 
-            let isLeapYear = EmCalendar.isLeapYear(leapYear);
+            let isLeapYear = emCalendar.isLeapYear(leapYear);
 
             expect(isLeapYear).toBe(true);
         });
@@ -28,7 +29,7 @@ describe('the calendar functions', () => {
 
         leapYears.forEach(leapYear => {
 
-            let isLeapYear = EmCalendar.isLeapYear(leapYear);
+            let isLeapYear = emCalendar.isLeapYear(leapYear);
 
             expect(isLeapYear).toBe(false);
         });
@@ -36,7 +37,7 @@ describe('the calendar functions', () => {
 
     it('should accumulate correct number of months for leap year', () => {
 
-        let daysForYear = EmCalendar.accumulateDaysForYear(2020);
+        let daysForYear = emCalendar.accumulateDaysForYear(2020);
 
         expect(daysForYear.year).toBe(2020);
 
@@ -58,7 +59,7 @@ describe('the calendar functions', () => {
     it('should accumulate correct number of months for non leap year', () => {
 
 
-        let daysForYear = EmCalendar.accumulateDaysForYear(2017);
+        let daysForYear = emCalendar.accumulateDaysForYear(2017);
 
         expect(daysForYear.year).toBe(2017);
 

@@ -9,14 +9,20 @@ import { EmCalendar } from '../calendar/calendar';
  */
 @Component({
     selector: 'em-availability',
-    templateUrl: './availability.component.html'
+    templateUrl: './availability.component.html',
+    directives: [CalendarComponent]
 })
 export class AvailabilityComponent {
 
     @Input() availability: any;
     @Output() availabilityChange = new EventEmitter<Availability>();
+    calendarActive: boolean = false;
 
     update(availability: any) {
         this.availabilityChange.emit(availability);
+    }
+
+    activateCalendar() {
+        this.calendarActive = true;
     }
 }

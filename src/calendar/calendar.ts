@@ -1,54 +1,57 @@
+import { Injectable } from '@angular/core';
+
 const _MAX: number = 31;
 const _AVG: number = 30;
 const _MIN: number = 28;
 const _LEP: number = 29;
 
-export module EmCalendar {
+/**
+ * Enum representing days of week. Zero indexed.
+ */
+export enum EmDays {
+    SUNDAY = 0,
+    MONDAY = 1,
+    TUESDAY = 2,
+    WEDNESDAY = 3,
+    THURSDAY = 4,
+    FRIDAY = 5,
+    SATURDAY = 6
+}
 
-    /**
-     * Enum representing days of week. Zero indexed.
-     */
-    export enum EmDays {
-        SUNDAY = 0,
-        MONDAY = 1,
-        TUESDAY = 2,
-        WEDNESDAY = 3,
-        THURSDAY = 4,
-        FRIDAY = 5,
-        SATURDAY = 6
-    }
+/**
+ * Enum representing months of the year. Each month is zero indexed for ease.
+ */
+export enum EmMonths {
+    JANUARY = 0,
+    FEBRUARY = 1,
+    MARCH = 2,
+    APRIL = 3,
+    MAY = 4,
+    JUNE = 5,
+    JULY = 6,
+    AUGUST = 7,
+    SEPTEMBER = 8,
+    OCTOBER = 9,
+    NOVEMBER = 10,
+    DECEMBER = 11
+}
 
-    /**
-     * Enum representing months of the year. Each month is zero indexed for ease.
-     */
-    export enum EmMonths {
-        JANUARY = 0,
-        FEBRUARY = 1,
-        MARCH = 2,
-        APRIL = 3,
-        MAY = 4,
-        JUNE = 5,
-        JULY = 6,
-        AUGUST = 7,
-        SEPTEMBER = 8,
-        OCTOBER = 9,
-        NOVEMBER = 10,
-        DECEMBER = 11
-    }
+/**
+ * A value class for storing the months and days for a given year
+ */
+export class EmDaysForYear {
+    monthsWithDays: number[][];
+    year: number;
+}
 
-    /**
-     * A value class for storing the months and days for a given year
-     */
-    export class EmDaysForYear {
-        monthsWithDays: number[][];
-        year: number;
-    }
+@Injectable()
+export class EmCalendar {
 
     /**
      * The main method for this module. This is what you're likely to call in order to return
      * a value object - EmDaysForYear - which stores a mapping of months & days for a given year
      */
-    export function accumulateDaysForYear(year: number): EmDaysForYear {
+    accumulateDaysForYear(year: number): EmDaysForYear {
 
         let days = (limit: number, collection: number[]): number[] => {
             for (let i = 1; i <= limit; i++) {
@@ -93,7 +96,7 @@ export module EmCalendar {
     /**
      * Simple formula for determining if a leap year. True for leap year, otherwise false.
      */
-    export function isLeapYear(year: number) {
+    isLeapYear(year: number) {
         return (year % 100 === 0) || (year % 400 === 0) || (year % 4 === 0);
     }
 }
