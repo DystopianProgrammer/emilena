@@ -1,53 +1,81 @@
 import { Component, Input, Output, OnInit } from '@angular/core';
 
-import { EmCalendar, EmMonths, EmDays, EmDaysForYear } from '../calendar/calendar';
+import * as moment from 'moment';
+
+import { PaddedDatePipe } from './calendar.pipe';
+
+enum MonthsEnum {
+    January, February, March, April, May, June, July, August, September, October, November, December
+}
+
+const MAX_YEARS: number = 5;
 
 @Component({
     selector: 'em-calendar',
     templateUrl: './calendar.component.html',
-    providers: [EmCalendar]
+    pipes: [PaddedDatePipe]
 })
 export class CalendarComponent implements OnInit {
 
-    constructor(private emCalendar: EmCalendar) { }
-
-    months: string[];
-    days: number[];
-    selectedMonth: any = {};
+    dates: moment.MomentDateObject[] = [];
+    selectYear: number[] = [];
+    currentMonths: string;
 
     // the chunking - 5 rows to cater for the max number of days in a month
-    row1: number[];
-    row2: number[];
-    row3: number[];
-    row4: number[];
-    row5: number[];
+    row1: moment.MomentDateObject[];
+    row2: moment.MomentDateObject[];
+    row3: moment.MomentDateObject[];
+    row4: moment.MomentDateObject[];
+    row5: moment.MomentDateObject[];
 
     ngOnInit() {
-        this.months =
-            Object.keys(EmMonths).map(key => EmMonths[key]).filter(key => typeof key !== 'number');
-        this.initCalendar(1)
+        let momentDateObject = moment().toObject();
+        this.initCalendar(momentDateObject.date, momentDateObject.months, momentDateObject.years);
     }
 
     selectMonth() {
-        let month = EmMonths[this.selectedMonth];
-        this.initCalendar(month)
     }
 
-    private initCalendar(monthIndex: any) {
+    private initCalendar(date: number, month: number, year: number) {
 
-        let monthsAndDays = new EmCalendar().accumulateDaysForYear(new Date().getFullYear()).monthsWithDays;
-        this.days = monthsAndDays[monthIndex];
+        let selectableYear = year;
+        for(let i = year; i < year + MAX_YEARS; i++) {
+            this.selectYear.push(selectableYear);
+            selectableYear++;
+        }
+
+        let dates: moment.MomentDateObject[] = [];
+
+        for (let i = 0; i < 35; i++) {
+            let momentDateObject =
+                moment(`${month}-${date}-${year}`, 'MM-DD-YYYY').add(i, 'd').toObject();
+            this.dates.push(momentDateObject);
+        }
 
         // then we need to chunk it in rows of 7
-        this.row1 = this.days.slice(0, 7);
-        this.row2 = this.days.slice(7, 14);
-        this.row3 = this.days.slice(14, 21);
-        this.row4 = this.days.slice(21, 28);
-        this.row5 = this.days.slice(28, this.days.length);
+        this.row1 = this.dates.slice(0, 7);
+        this.row2 = this.dates.slice(7, 14);
+        this.row3 = this.dates.slice(14, 21);
+        this.row4 = this.dates.slice(21, 28);
+        this.row5 = this.dates.slice(28, this.dates.length);
 
         let filler = 7 - this.row5.length;
         for (let i = 0; i < filler; i++) {
             this.row5.splice(this.row5.length, 0, 0);
         }
+
+        this.displayCurrentMonths();
+    }
+
+    private displayCurrentMonths(): void {
+        let container = new Array<number>();
+        this.dates.forEach(date => container.push(date.months));
+
+        let dateString = '';
+
+        this.currentMonths =
+            container.filter((item, pos) => container.indexOf(item)== pos)
+                .map(date => dateString = MonthsEnum[date + 1])
+                .join('/');
     }
 }

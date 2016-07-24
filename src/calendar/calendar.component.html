@@ -1,40 +1,54 @@
 <div class="em-calendar">
-  <div class="years">
-    <select [(ngModel)]="selectedMonth" (ngModelChange)="selectMonth()">
-      <option *ngFor="let month of months" [value]="month">{{month}}</option>
+  <div class="em-calendar-header">
+    <div class="col-xs-4">
+      <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+    </div>
+    <div class="col-xs-4">
+      <select class="form-control">
+      <option *ngFor="let year of selectYear">{{year}}</option>
     </select>
-    <select>
-      <option>2016</option>
-    </select>
+    </div>
+    <div class="col-xs-4">
+      <i class="fa fa-arrow-circle-right pull-right" aria-hidden="true"></i>
+    </div>
   </div>
-  <table>
-    <thead>
-      <tr>
-        <td>S</td>
-        <td>M</td>
-        <td>T</td>
-        <td>W</td>
-        <td>T</td>
-        <td>F</td>
-        <td>S</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td *ngFor="let row of row1">{{row}}</td>
-      </tr>
-      <tr>
-        <td *ngFor="let row of row2">{{row}}</td>
-      </tr>
-      <tr>
-        <td *ngFor="let row of row3">{{row}}</td>
-      </tr>
-      <tr>
-        <td *ngFor="let row of row4">{{row}}</td>
-      </tr>
-      <tr>
-        <td *ngFor="let row of row5">{{row}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="col-xs-12">
+    <div class="em-calendar-body">
+      <table>
+        <thead>
+          <tr>
+            <td>Sun</td>
+            <td>Mon</td>
+            <td>Tues</td>
+            <td>Weds</td>
+            <td>Thurs</td>
+            <td>Fri</td>
+            <td>Sat</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td *ngFor="let row of row1">{{row.date | paddedDate}}</td>
+          </tr>
+          <tr>
+            <td *ngFor="let row of row2">{{row.date | paddedDate}}</td>
+          </tr>
+          <tr>
+            <td *ngFor="let row of row3">{{row.date | paddedDate}}</td>
+          </tr>
+          <tr>
+            <td *ngFor="let row of row4">{{row.date | paddedDate}}</td>
+          </tr>
+          <tr>
+            <td *ngFor="let row of row5">{{row.date | paddedDate}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <div class="em-calendar-footer text-center">
+        {{currentMonths}}
+    </div>
+  </div>
 </div>

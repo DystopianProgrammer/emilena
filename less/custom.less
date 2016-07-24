@@ -1,3 +1,5 @@
+@white: #FFFFFF;
+
 @gray-darker:  lighten(#000, 13.5%); // #222
 @gray-dark:    lighten(#000, 20%);   // #333
 @gray:         lighten(#000, 33.5%); // #555
@@ -40,34 +42,57 @@ html, body {
         resize: none;
     }
 
-    em-calendar {
+    .em-calendar {
         position: absolute;
-        z-index: 1000;
         top: 0;
-        width: 90%;
-        background: @gray-light;
+        min-height: 280px;
+        z-index: 3;
         color: @gray-darker;
+        border: 1px solid @gray-light;
+        background: @white;
         padding: 4px;
         border-radius: 4px;
-
-        table {
-            position: fixed;
-            background: #FFFFFF;
-            width: 11%;
-            margin-top: 10px;
-            thead {
-                background: @gray-lighter;
-                color: black;
+        margin: 4px 4px 10px 4px;
+        -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        i {
+            font-size: 36px;
+            color: @brand-primary;
+            cursor: pointer;
+            &:hover {
+                font-weight: bold;
             }
-            tr {
-                border: 1px solid @gray-darker;
+        }
+        .em-calendar-header {
+            font-weight: 900;
+            margin-top: 20px;
+        }
+        .em-calendar-body {
+            margin-top: 20px;
+            table {
+                table-layout: fixed;
+                width:100%;
+                background: @white;
+                thead {
+                    font-weight: bold;
+                    border-bottom: 1px solid @gray-light;
+                }
+                tr {
+                    padding: 0 0 0 4px;
+                }
+                td {
+                    cursor: pointer;
+                    &:hover {
+                        font-weight: bold;
+                    }
+                }
             }
-            td{
-                width: 50%;
-                text-align: left;
-                border: 1px solid black;
-                cursor: pointer;
-            }
+        }
+        .em-calendar-footer {
+            text-align: center;
+            font-weight: 900;
+            margin-top: 20px;
         }
     }
 
