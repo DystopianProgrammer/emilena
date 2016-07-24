@@ -5,14 +5,14 @@
     <div class="panel-body">
         <div class="form-group">
             <label for="datetime">Date and time</label>
-            <input type="text" id="datetime" class="form-control" placeholder="22/03/2016 10:05" [(ngModel)]="availability.dateAndTime" (click)="activateCalendar()">
+            <input type="text" id="datetime" class="form-control" placeholder="22/03/2016 10:05" [value]="date" (click)="activateCalendar()">
         </div>
         <div class="form-group">
             <label for="hours">Number of hours</label>
             <input type="number" id="hours" class="form-control" placeholder="e.g. 0.5 or 3" [(ngModel)]="availability.numberOfHours">
         </div>
         <div *ngIf="calendarActive">
-            <em-calendar></em-calendar>
+            <em-calendar (dateSelection)="setDate($event)"></em-calendar>
         </div>
         <div class="col-xs-12">
             <div class="em-form-submit-buttons">

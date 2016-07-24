@@ -1,4 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+import * as moment from 'moment';
+
 import { Person, Staff, Client, Availability, DayOfWeek } from '../model/model';
 import { CalendarComponent } from '../calendar/calendar.component';
 
@@ -17,8 +20,17 @@ export class AvailabilityComponent {
     @Output() availabilityChange = new EventEmitter<Availability>();
     calendarActive: boolean = false;
 
+    date: string = '';
+
     update(availability: any) {
         this.availabilityChange.emit(availability);
+    }
+
+    setDate(date: moment.MomentDateObject) {
+        this.calendarActive = false;
+        let day = (date.date < 10) ? `0${date.date}` : `${date.date}`;
+        let month = (date.months < 10) ? `0${date.months}` : `${date.months}`;
+        this.date = `${day}/${month}/${date.years}`;
     }
 
     activateCalendar() {
