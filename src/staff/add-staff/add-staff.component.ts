@@ -29,7 +29,6 @@ export class AddStaffComponent {
     errors: any;
     successMsg: string;
     contractTypes: string[] = ['CONTRACT', 'BANK'];
-    availabilities: Availability[] = [];
     availability: Availability;
     showAvailabilityForm: boolean = false;
     active = true;
@@ -57,19 +56,13 @@ export class AddStaffComponent {
     }
 
     addAvailability(staff: Staff) {
-        if (this.staff.availability) {
-            this.availabilities = this.staff.availability;
-        } else {
-            this.staff.availability = this.availabilities;
-        }
-
         this.availability = new Availability();
         this.showAvailabilityForm = true;
     }
 
     availabilityUpdated(availability: Availability) {
         if (availability.dateAndTime && availability.numberOfHours) {
-            this.availabilities.push(availability);
+            this.staff.availability.push(availability);
         }
         this.showAvailabilityForm = false;
     }
@@ -91,5 +84,6 @@ export class AddStaffComponent {
     private initStaff(): void {
         this.staff = new Staff();
         this.staff.address = new Address();
+        this.staff.availability = [];
     }
 }

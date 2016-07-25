@@ -8,6 +8,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Address</th>
+                        <th>Telephone</th>
                         <th>Type</th>
                         <th>Hours</th>
                         <th>Days</th>
@@ -22,7 +23,8 @@
                         </td>
                         <td>{{staff.id}}</td>
                         <td>{{staff.surname}}, {{staff.forename}}</td>
-                        <td>{{staff.address.friendlyAddress}}</td>
+                        <td>{{staff.address.town}}, {{staff.address.postCode}}</td>
+                        <td>{{staff.telephoneNumber}}</td>
                         <td>{{staff.contractType}}</td>
                         <td>TODO</td>
                         <td>TODO</td>

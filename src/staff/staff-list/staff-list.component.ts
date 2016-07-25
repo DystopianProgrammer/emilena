@@ -26,15 +26,6 @@ export class StaffListComponent implements OnInit, OnDestroy {
         this.staffFetchAll$ = this.staffService.findAll()
             .subscribe(staffList => {
                 this.staffList = staffList.map(staff => {
-                    if(staff.address === null) {
-                        staff.address = new Address();
-                    } else {
-                        let addressParser = (staff: Staff) => {
-                            return (staff.address.town && staff.address.postCode) ?
-                                    `${staff.address.town}, ${staff.address.postCode}` : '';
-                        }
-                        staff.address.friendlyAddress = addressParser(staff);
-                    }
                     return staff;
                 });
             },

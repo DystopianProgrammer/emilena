@@ -28,15 +28,6 @@ export class ClientListComponent implements OnInit, OnDestroy {
         this.staffFetchAll$ = this.clientService.findAll()
             .subscribe(clientList => {
                 this.clientList = clientList.map(client => {
-                    if (client.address === null) {
-                        client.address = new Address();
-                    } else {
-                        let addressParser = (client: Client) => {
-                            return (client.address.town && client.address.postCode) ?
-                                `${client.address.town}, ${client.address.postCode}` : '';
-                        }
-                        client.address.friendlyAddress = addressParser(client);
-                    }
                     return client;
                 });
             },

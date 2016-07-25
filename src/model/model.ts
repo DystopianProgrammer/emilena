@@ -39,7 +39,6 @@ export class Address {
     secondLine: string;
     town: string;
     postCode: string;
-    friendlyAddress: string;
 }
 
 /**

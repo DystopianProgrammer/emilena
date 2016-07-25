@@ -28,7 +28,7 @@ export class AvailabilityComponent {
         this.calendarActive = false;
         let day = (date.date < 10) ? `0${date.date}` : `${date.date}`;
         let month = (date.months < 10) ? `0${date.months}` : `${date.months}`;
-        this.availability.dateAndTime = `${day}/${month}/${date.years}`;
+        this.availability.dateAndTime = `${date.years}-${month}-${day}`;
     }
 
     activateCalendar() {
