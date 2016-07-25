@@ -4,21 +4,23 @@
 </div>
 
 <!-- form contents -->
-<div class="col-xs-12 col-sm-4">
-    <em-person [person]="client"></em-person>
-</div>
-<div class="col-xs-12 col-sm-4">
-    <em-address [person]="client"></em-address>
-</div>
-<div class="col-xs-12 col-sm-4">
-    <em-support [client]="client"></em-support>
-</div>
-
-<!-- Buttons -->
-<div class="col-xs-12">
-    <div class="em-form-submit-buttons">
-        <button type="button" class="btn btn-success" (click)="addClient(client)">Create</button>
-        <button type="button" class="btn btn-default" (click)="cancel()">Clear</button>
-        <button type="button" class="btn btn-default" [routerLink]="['/client']">Cancel</button>
+<form *ngIf="active" (ngSubmit)="addClient(client)" #clientForm="ngForm">
+    <div class="col-xs-12 col-sm-4">
+        <em-person [person]="client"></em-person>
     </div>
-</div>
+    <div class="col-xs-12 col-sm-4">
+        <em-address [person]="client"></em-address>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <em-support [client]="client"></em-support>
+    </div>
+
+    <!-- Buttons -->
+    <div class="col-xs-12">
+        <div class="em-form-submit-buttons">
+            <button type="submit" class="btn btn-success">Create</button>
+            <button type="button" class="btn btn-default" (click)="cancel()">Clear</button>
+            <button type="button" class="btn btn-default" [routerLink]="['/client']">Cancel</button>
+        </div>
+    </div>
+</form>

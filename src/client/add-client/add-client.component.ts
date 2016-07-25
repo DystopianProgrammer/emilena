@@ -22,6 +22,7 @@ export class AddClientComponent {
     client: Client;
     errors: any;
     successMsg: string;
+    active = true;
 
     private clientAdd$: Subscription;
 
@@ -40,6 +41,8 @@ export class AddClientComponent {
                 }, 5000);
             });
 
+        this.active = false;
+        setTimeout(() => this.active = true, 0);
         this.initClient();
     }
 

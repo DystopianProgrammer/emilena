@@ -4,47 +4,47 @@
 </div>
 
 <!-- form contents -->
-<div class="col-xs-12 col-sm-4">
-    <em-person [person]="staff"></em-person>
-</div>
-<div class="col-xs-12 col-sm-4">
-    <em-address [person]="staff"></em-address>
-    <div class="form-group">
-        <label for="contract-type">Contract Type</label>
-        <select id="contract-type" class="form-control" required>
+<form *ngIf="active" (ngSubmit)="addStaff(staff)" #addStaffForm="ngForm">
+    <div class="col-xs-12 col-sm-4">
+        <em-person [person]="staff"></em-person>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <em-address [person]="staff"></em-address>
+        <div class="form-group">
+            <label for="contract-type">Contract Type</label>
+            <select id="contract-type" class="form-control" required>
             <option *ngFor="let contractType of contractTypes" [value]="staff.contractType">{{contractType}}</option>
         </select>
+        </div>
     </div>
-</div>
-<div class="col-xs-12 col-sm-4">
-    <div class="form-group">
-        <label for="contractedHours">Contracted hours</label>
-        <input type="number" id="contractedHours" class="form-control" placeholder="e.g. 37.5" [(ngModel)]="staff.contractedHours">
+    <div class="col-xs-12 col-sm-4">
+        <div class="form-group">
+            <label for="contractedHours">Contracted hours</label>
+            <input type="number" id="contractedHours" name="contractedHours" class="form-control" placeholder="e.g. 37.5" [(ngModel)]="staff.contractedHours">
+        </div>
+        <div class="form-group">
+            <label for="availabilityBtn" class="sr-only">Availability</label>
+            <button class="btn btn-primary" id="availabilityBtn" (click)="addAvailability()">Add Availability</button>
+        </div>
+        <div *ngIf="showAvailabilityForm" class="em-modal">
+            <em-availability [availability]="availability" (availabilityChange)="availabilityUpdated($event)">
+            </em-availability>
+        </div>
+        <span *ngFor="let availability of availabilities; let index=index">
+            <div class="spacer"></div>
+            <em-badge (dismissBadge)="removeAvailability(index)">
+                {{availability.dateAndTime}},
+                {{availability.numberOfHours}} hours
+            </em-badge>
+        </span>
     </div>
-    <div class="form-group">
-        <label for="availabilityBtn" class="sr-only">Availability</label>
-        <button class="btn btn-primary" id="availabilityBtn" (click)="addAvailability()">Add Availability</button>
-    </div>
-    <div *ngIf="showAvailabilityForm" class="em-modal">
-        <em-availability
-            [availability]="availability"
-            (availabilityChange)="availabilityUpdated($event)">
-        </em-availability>
-    </div>
-    <span *ngFor="let availability of availabilities; let index=index">
-        <div class="spacer"></div>
-        <em-badge (dismissBadge)="removeAvailability(index)">
-            {{availability.dateAndTime}},
-            {{availability.numberOfHours}} hours
-        </em-badge>
-    </span>
-</div>
 
-<!-- Buttons -->
-<div class="col-xs-12">
-    <div class="em-form-submit-buttons">
-        <button type="button" class="btn btn-success" (click)="addStaff(staff)">Create</button>
-        <button type="button" class="btn btn-default" (click)="cancel()">Clear</button>
-        <button type="button" class="btn btn-default" [routerLink]="['/staff']">Cancel</button>
+    <!-- Buttons -->
+    <div class="col-xs-12">
+        <div class="em-form-submit-buttons">
+            <button type="submit" class="btn btn-success" [disabled]="!addStaffForm.form.valid">Create</button>
+            <button type="button" class="btn btn-default" (click)="cancel()">Clear</button>
+            <button type="button" class="btn btn-default" [routerLink]="['/staff']">Cancel</button>
+        </div>
     </div>
-</div>
+</form>

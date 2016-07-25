@@ -32,6 +32,7 @@ export class AddStaffComponent {
     availabilities: Availability[] = [];
     availability: Availability;
     showAvailabilityForm: boolean = false;
+    active = true;
 
     private staffAdd$: Subscription;
 
@@ -50,6 +51,8 @@ export class AddStaffComponent {
                 }, 5000);
             });
 
+        this.active = false;
+        setTimeout(() => this.active = true, 0);
         this.initStaff();
     }
 
