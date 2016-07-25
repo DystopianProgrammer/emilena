@@ -20,8 +20,6 @@ export class AvailabilityComponent {
     @Output() availabilityChange = new EventEmitter<Availability>();
     calendarActive: boolean = false;
 
-    date: string = '';
-
     update(availability: any) {
         this.availabilityChange.emit(availability);
     }
@@ -30,7 +28,7 @@ export class AvailabilityComponent {
         this.calendarActive = false;
         let day = (date.date < 10) ? `0${date.date}` : `${date.date}`;
         let month = (date.months < 10) ? `0${date.months}` : `${date.months}`;
-        this.date = `${day}/${month}/${date.years}`;
+        this.availability.dateAndTime = `${day}/${month}/${date.years}`;
     }
 
     activateCalendar() {

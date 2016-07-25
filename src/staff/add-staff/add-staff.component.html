@@ -4,10 +4,10 @@
 </div>
 
 <!-- form contents -->
-<div class="col-xs-12 col-sm-3">
+<div class="col-xs-12 col-sm-4">
     <em-person [person]="staff"></em-person>
 </div>
-<div class="col-xs-12 col-sm-3">
+<div class="col-xs-12 col-sm-4">
     <em-address [person]="staff"></em-address>
     <div class="form-group">
         <label for="contract-type">Contract Type</label>
@@ -16,7 +16,7 @@
         </select>
     </div>
 </div>
-<div class="col-xs-12 col-sm-3">
+<div class="col-xs-12 col-sm-4">
     <div class="form-group">
         <label for="contractedHours">Contracted hours</label>
         <input type="number" id="contractedHours" class="form-control" placeholder="e.g. 37.5" [(ngModel)]="staff.contractedHours">

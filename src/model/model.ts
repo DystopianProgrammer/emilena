@@ -50,7 +50,7 @@ export class Address {
  * for a given date - NOT A DURATION.
  */
 export class Availability {
-    dateAndTime: Date;
+    dateAndTime: String;
     dayOfWeek: string;
     numberOfHours: number;
     person: Person;
