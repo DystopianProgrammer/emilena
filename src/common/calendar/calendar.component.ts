@@ -88,7 +88,7 @@ export class CalendarComponent implements OnInit {
         let dateString = '';
 
         this.currentMonths =
-            container.filter((item, pos) => container.indexOf(item) == pos)
+            container.filter((item, pos) => container.indexOf(item) === pos)
                 .map(date => dateString = MonthsEnum[date + 1])
                 .join('/');
     }

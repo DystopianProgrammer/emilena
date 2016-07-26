@@ -1,0 +1,53 @@
+.em-calendar {
+    position: absolute;
+    top: 0;
+    min-height: 280px;
+    z-index: 3;
+    color: @gray-darker;
+    border: 1px solid @gray-light;
+    background: @white;
+    padding: 4px;
+    border-radius: 4px;
+    margin: 4px 4px 10px 4px;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    i {
+        font-size: 36px;
+        color: @brand-primary;
+        cursor: pointer;
+        &:hover {
+            font-weight: bold;
+        }
+    }
+    .em-calendar-header {
+        font-weight: 900;
+        margin-top: 20px;
+    }
+    .em-calendar-body {
+        margin-top: 20px;
+        table {
+            table-layout: fixed;
+            width:100%;
+            background: @white;
+            thead {
+                font-weight: bold;
+                border-bottom: 1px solid @gray-light;
+            }
+            tr {
+                padding: 0 0 0 4px;
+            }
+            td {
+                cursor: pointer;
+                &:hover {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+    .em-calendar-footer {
+        text-align: center;
+        font-weight: 900;
+        margin-top: 20px;
+    }
+}

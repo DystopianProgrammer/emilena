@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
 import { StaffService } from './staff.service';
 import { StaffListComponent } from './staff-list/staff-list.component';
 

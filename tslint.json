@@ -15,7 +15,7 @@
         "no-trailing-whitespace": true,
         "no-var-keyword": true,
         "no-unused-variable": [
-            false
+            true
         ],
         "one-line": [
             true,

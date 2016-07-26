@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Staff } from '../model/model';
 
 @Component({
     selector: 'em-pop-over',

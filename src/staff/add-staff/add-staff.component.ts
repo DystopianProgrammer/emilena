@@ -9,7 +9,8 @@ import { AddressComponent } from '../../address/address.component';
 import { PersonComponent } from '../../person/person.component';
 import { ValidationComponent } from '../../validation/validation.component';
 import { AvailabilityComponent } from '../../availability/availability.component';
-import { BadgeComponent } from '../../badge/badge.component';
+import { BadgeComponent } from '../../common/badge/badge.component';
+import { CollapsibleContentComponent } from '../../common/collapsible-content/collapsible-content.component';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { BadgeComponent } from '../../badge/badge.component';
         ROUTER_DIRECTIVES,
         ValidationComponent,
         AvailabilityComponent,
+        CollapsibleContentComponent,
         BadgeComponent],
     providers: [StaffService]
 })

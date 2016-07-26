@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { Staff, Client } from '../model/model';
+import { Staff } from '../model/model';
 import { StaffService } from '../staff/staff.service';
 import { ClientService } from '../client/client.service';
 

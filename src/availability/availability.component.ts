@@ -2,8 +2,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import * as moment from 'moment';
 
-import { Person, Staff, Client, Availability, DayOfWeek } from '../model/model';
-import { CalendarComponent } from '../calendar/calendar.component';
+import { Availability } from '../model/model';
+import { CalendarComponent } from '../common/calendar/calendar.component';
 
 /**
  * This is a many to one in that a Person can have many availabilities. Note that this is a snapshot in time
