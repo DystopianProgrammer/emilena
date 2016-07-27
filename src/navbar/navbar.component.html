@@ -3,22 +3,25 @@
         <div class="navbar-header">
             <div class="navbar-brand" [routerLink]="['/']">FTF</div>
             <p class="navbar-text">Signed in as Emily Boyle</p>
-            <button type="button" class="navbar-toggle collapsed" aria-expanded="false" (click)="toggle()">
+            <button type="button" class="navbar-toggle collapsed" aria-expanded="false" (click)=toggle()>
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <div class="navbar-collapse" [ngClass]="{collapse: collapse}">
+
+        <div class="navbar-collapse" [ngClass]="{collapse: isCollapsed}">
             <ul class="nav navbar-nav">
-                <li><a [routerLink]="['/staff']" routerLinkActive="active" (click)="hide()">Staff</a></li>
-                <li><a [routerLink]="['/client']" routerLinkActive="active" (click)="hide()">Client</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a>Alerts <i class="fa fa-bell" aria-hidden="false"></i></a></li>
+                <em-navbar-item-header class="item-header" [heading]="'Staff'">
+                    <em-navbar-item [title]="'Staff List'" [emRoute]="['/staff']"></em-navbar-item>
+                </em-navbar-item-header>
+
+                <em-navbar-item-header class="item-header" [heading]="'Client'">
+                    <em-navbar-item [title]="'Client List'" [emRoute]="['/client']"></em-navbar-item>
+                </em-navbar-item-header>
             </ul>
         </div>
+
     </div>
 </nav>
-

@@ -2,7 +2,56 @@
     .navbar-brand {
         cursor: pointer;
     }
-    .active {
-        background: rgb(54, 54, 54, 0.5);
+    ul > li {
+        cursor: pointer;
+    }
+    .dropdown-menu {
+        background: @gray-darker;
+        min-height: 50px;
+        em-navbar-item > li {
+            margin-left: 10px;
+        }
+
+        em-navbar-item {
+            li > a {
+                color: @white;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+        background-color: @gray-dark;
+        border-color: #337ab7;
+    }
+
+    .nav {
+        &.navbar-nav {
+            .item-header {
+                li {
+                    padding: 10px;
+                    cursor: pointer;
+                    :hover {
+                        background: @gray-dark;
+                    }
+                }
+                a {
+                    color: #9d9d9d;
+                    text-decoration: none;
+                }
+                margin: 5px;
+                display: block;
+            }
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .nav {
+            &.navbar-nav {
+                .item-header {
+                    float: left;
+                }
+            }
+        }
     }
 }
