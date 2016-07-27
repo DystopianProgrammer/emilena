@@ -6,37 +6,43 @@
 <!-- form contents -->
 <form *ngIf="active" (ngSubmit)="addStaff(staff)" #staffForm="ngForm">
     <div class="col-xs-12 col-sm-4">
-        <em-person [person]="staff"></em-person>
+        <em-collapsible-content [title]="'Person'">
+            <em-person [person]="staff"></em-person>
+        </em-collapsible-content>
     </div>
     <div class="col-xs-12 col-sm-4">
-        <em-address [person]="staff"></em-address>
-        <div class="form-group">
-            <label for="contract-type">Contract Type</label>
-            <select id="contract-type" class="form-control" name="contract-type" [(ngModel)]="staff.contractType" required>
-            <option *ngFor="let contractType of contractTypes">{{contractType}}</option>
-        </select>
-        </div>
+        <em-collapsible-content [title]="'Address'" [isCollapsed]="true">
+            <em-address [person]="staff"></em-address>
+        </em-collapsible-content>
     </div>
     <div class="col-xs-12 col-sm-4">
-        <div class="form-group">
-            <label for="contractedHours">Contracted hours</label>
-            <input type="number" id="contractedHours" name="contractedHours" class="form-control" placeholder="e.g. 37.5" [(ngModel)]="staff.contractedHours">
-        </div>
-        <div class="form-group">
-            <label for="availabilityBtn" class="sr-only">Availability</label>
-            <a class="btn btn-primary" id="availabilityBtn" (click)="addAvailability()">Add Availability</a>
-        </div>
-        <div *ngIf="showAvailabilityForm" class="em-modal">
-            <em-availability [availability]="availability" (availabilityChange)="availabilityUpdated($event)">
-            </em-availability>
-        </div>
-        <span *ngFor="let availability of staff.availability; let index=index">
-            <div class="spacer"></div>
-            <em-badge (dismissBadge)="removeAvailability(index)">
-                {{availability.dateAndTime}},
-                {{availability.numberOfHours}}h
-            </em-badge>
-        </span>
+        <em-collapsible-content [title]="'Availability/Type'" [isCollapsed]="true">
+            <div class="form-group">
+                <label for="contract-type">Contract Type</label>
+                <select id="contract-type" class="form-control" name="contract-type" [(ngModel)]="staff.contractType" required>
+                    <option *ngFor="let contractType of contractTypes">{{contractType}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="contractedHours">Contracted hours</label>
+                <input type="number" id="contractedHours" name="contractedHours" class="form-control" placeholder="e.g. 37.5" [(ngModel)]="staff.contractedHours">
+            </div>
+            <div class="form-group">
+                <label for="availabilityBtn" class="sr-only">Availability</label>
+                <a class="btn btn-primary" id="availabilityBtn" (click)="addAvailability()">Add Availability</a>
+            </div>
+            <div *ngIf="showAvailabilityForm" class="em-modal">
+                <em-availability [availability]="availability" (availabilityChange)="availabilityUpdated($event)">
+                </em-availability>
+            </div>
+            <span *ngFor="let availability of staff.availability; let index=index">
+                <div class="spacer"></div>
+                <em-badge (dismissBadge)="removeAvailability(index)">
+                    {{availability.dateAndTime}},
+                    {{availability.numberOfHours}}h
+                </em-badge>
+            </span>
+        </em-collapsible-content>
     </div>
 
     <!-- Buttons -->

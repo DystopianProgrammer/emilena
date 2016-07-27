@@ -9,12 +9,20 @@ import { AddressComponent } from '../../address/address.component';
 import { PersonComponent } from '../../person/person.component';
 import { ValidationComponent } from '../../validation/validation.component';
 import { SupportComponent } from '../../support/support.component';
+import { CollapsibleContentComponent } from '../../common/collapsible-content/collapsible-content.component';
 
 
 @Component({
     selector: 'em-client',
     templateUrl: './add-client.component.html',
-    directives: [PersonComponent, AddressComponent, ROUTER_DIRECTIVES, ValidationComponent, SupportComponent],
+    directives: [
+        PersonComponent,
+        AddressComponent,
+        ROUTER_DIRECTIVES,
+        ValidationComponent,
+        CollapsibleContentComponent,
+        SupportComponent
+    ],
     providers: [ClientService]
 })
 export class AddClientComponent {

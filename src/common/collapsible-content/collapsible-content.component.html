@@ -1,3 +1,10 @@
 <div class="em-collapsible-content">
-    <ng-content></ng-content>
+    <div class="em-collapsible-content-header text-center" (click)="toggleCollapse()">
+        <strong>{{title}}</strong>
+        <strong *ngIf="isCollapsed"><i class="fa fa-caret-down pull-right" aria-hidden="true"></i></strong>
+        <strong *ngIf="!isCollapsed"><i class="fa fa-caret-up pull-right" aria-hidden="true"></i></strong>
+    </div>
+    <div class="em-collapsible-content-body" [ngClass]="{expand: isCollapsed}">
+        <ng-content></ng-content>
+    </div>
 </div>

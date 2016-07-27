@@ -1,0 +1,33 @@
+.em-collapsible-content {
+    .em-collapsible-content-header {
+        padding: 4px 0 4px 0;
+        background: @brand-primary;
+        .border-radius(4px);
+        margin: 2px;
+        cursor: pointer;
+        color: @white;
+        i {
+            padding-right: 20px;
+        }
+    }
+    .em-collapsible-content-body {
+        padding: 0 2px 0 2px;
+        .border-radius(2px);
+        &.expand {
+            display: none;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .em-collapsible-content {
+        .em-collapsible-content-header {
+            display: none;
+        }
+        .em-collapsible-content-body {
+            &.expand {
+                display: block;
+            }
+        }
+    }
+}
