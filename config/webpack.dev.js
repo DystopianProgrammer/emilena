@@ -31,7 +31,8 @@ module.exports = webpackMerge(commonConfig, {
             '/client/add': 'http://localhost:9090',
             '/client/all': 'http://localhost:9090',
             '/client/delete*': 'http://localhost:9090',
-            '/staff/clients*': 'http://localhost:9090'
+            '/staff/clients*': 'http://localhost:9090',
+            '/user/login': 'http://localhost:9090'
         }
     }
 });

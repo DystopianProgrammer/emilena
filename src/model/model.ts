@@ -1,6 +1,14 @@
+/**
+ * User of the system
+ */
+export class User {
+    userName: string;
+    password: string;
+}
+
 
 /**
- * Person
+ * Person - abstract class for client and staff
  */
 export class Person {
     id: number;
