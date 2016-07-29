@@ -10,15 +10,21 @@ export class AuthenticationService {
     constructor(private http: Http) { }
 
     submit(user: User): Observable<boolean> {
+
+        let headers = this.setHeadersWithCredentials(user);
         let body = JSON.stringify(user);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post('/user/login', {}, options)
+            .map(res => res.json || false)
+            .catch(error => Observable.throw(error._body));
+    }
+
+    setHeadersWithCredentials(user: User): Headers {
         let headers = new Headers();
         let credentials = btoa(user.userName + ':' + user.password);
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', 'Basic ' + credentials);
-        let options = new RequestOptions({ headers: headers });
-
-        return this.http.post('/user/login', user, options)
-            .map(res => res.json || false)
-            .catch(error => Observable.throw(error._body));
+        return headers;
     }
 }
