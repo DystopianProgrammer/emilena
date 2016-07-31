@@ -20,19 +20,25 @@ import { AuthenticationService, AuthenticatedUser, AuthenticationStatus } from '
 export class NavbarComponent {
 
     isCollapsed: boolean = true;
-    authenticatedUser: AuthenticatedUser;
+    authenticatedUser: AuthenticatedUser = new AuthenticatedUser();
 
     constructor(private navbarService: NavBarService, private authenticationService: AuthenticationService) {
-        this.navbarService.toggleNavBar$.subscribe(toggle => this.isCollapsed = !toggle);
-    }
 
-    ngOnInit() {
-        this.authenticationService.authenticatedUserSource$.subscribe(au => {
-            this.authenticatedUser = au;
+        // responsive requirements
+        this.navbarService.toggleNavBar$.subscribe(toggle => this.isCollapsed = !toggle);
+
+        // listen for changes on authentication status
+        this.authenticationService.authenticatedUserSource$.subscribe(user => {
+            this.authenticatedUser = user;
         });
     }
 
     toggle(): void {
         this.isCollapsed = !this.isCollapsed;
+    }
+
+    logout(): void {
+        this.authenticatedUser.authenticationStatus = AuthenticationStatus.LOGGED_OUT;
+        this.authenticationService.notifyAuthenticationStatus(this.authenticatedUser);
     }
 }

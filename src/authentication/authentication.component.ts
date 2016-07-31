@@ -21,8 +21,16 @@ export class AuthenticationComponent {
 
     submit() {
         this.authenticationService.login(this.user).subscribe(res => {
+
+            // for the server-side validation
             this.displayLoginForm.emit(false);
             this.authenticationService.createSessionToken(this.user);
+
+            // for the client-side validation
+            let authenticationUser = new AuthenticatedUser();
+            authenticationUser.name = this.user.userName;
+            authenticationUser.authenticationStatus = AuthenticationStatus.LOGGED_IN;
+            this.authenticationService.notifyAuthenticationStatus(authenticationUser);
         }, err => this.hasAuthenticationFailure = true);
     }
 }

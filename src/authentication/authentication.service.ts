@@ -17,6 +17,11 @@ export class AuthenticatedUser {
     authenticationStatus: AuthenticationStatus;
 }
 
+class SessionStatus {
+    user: string;
+    error: string;
+}
+
 /**
  * Authentication is handled server-side, meaning that the authorisation neither relies on oauth or cookies, as each request
  * has the headers with the authenticated user injected. We need to allow the angular app to be aware of this, and lock down
@@ -47,26 +52,37 @@ export class AuthenticationService {
     /**
      * Notify all subscribers of the authentication (login) status
      */
-    updateAuthenticationStatus(authenticatedUser: AuthenticatedUser): void {
-        sessionStorage.removeItem(TOKEN);
+    notifyAuthenticationStatus(authenticatedUser: AuthenticatedUser): void {
+
+        if (authenticatedUser.authenticationStatus === AuthenticationStatus.LOGGED_OUT) {
+            sessionStorage.removeItem(TOKEN);
+        }
+
         this.authenticatedUserSource.next(authenticatedUser);
-        this.authenticatedUserSource.complete();
     }
 
-    hasSession(): boolean {
-        return sessionStorage.getItem(TOKEN);
+    getSessionStatus(callback: (sessionStatus: SessionStatus) => any): void {
+        let token = sessionStorage.getItem(TOKEN);
+        let sessionStatus = new SessionStatus();
+        if (token) {
+            sessionStatus.user = atob(token);
+            callback(sessionStatus);
+        } else {
+            sessionStatus.error = 'No session for current user';
+            callback(sessionStatus);
+        }
     }
 
     createSessionToken(user: User) {
-        sessionStorage.setItem(TOKEN, btoa(user.userName + ':' + user.password));
-        this.broadCastUser(user);
-    }
-
-    broadCastUser(user: User): void {
+        sessionStorage.setItem(TOKEN, btoa(user.userName));
         let authenticatedUser = new AuthenticatedUser();
         authenticatedUser.name = user.userName;
         authenticatedUser.authenticationStatus = AuthenticationStatus.LOGGED_IN;
         this.authenticatedUserSource.next(authenticatedUser);
+    }
+
+    currentAuthenticationState(): AuthenticationStatus {
+        return (sessionStorage.getItem(TOKEN)) ? AuthenticationStatus.LOGGED_IN : AuthenticationStatus.LOGGED_OUT;
     }
 
     /**
