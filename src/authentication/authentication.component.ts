@@ -1,23 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 import { User } from '../model/model';
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService, AuthenticatedUser, AuthenticationStatus } from './authentication.service';
 
 @Component({
     selector: 'em-authentication',
-    templateUrl: './authentication.component.html',
-    providers: [AuthenticationService]
+    templateUrl: './authentication.component.html'
 })
 export class AuthenticationComponent {
 
     user: User = new User();
-    authenticated: boolean;
 
-    constructor(private authenticationService: AuthenticationService) { }
+    hasAuthenticationFailure: boolean;
+
+    @Output() displayLoginForm = new EventEmitter<boolean>();
+
+    constructor(private authenticationService: AuthenticationService) {
+        this.hasAuthenticationFailure = false;
+    }
 
     submit() {
-        this.authenticationService.submit(this.user).subscribe(res => {
-            this.authenticated = res;
-        }, err => this.authenticated = true);
+        this.authenticationService.login(this.user).subscribe(res => {
+            this.displayLoginForm.emit(false);
+            this.authenticationService.createSessionToken(this.user);
+        }, err => this.hasAuthenticationFailure = true);
     }
 }

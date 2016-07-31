@@ -4,6 +4,6 @@
         <p><a class="btn btn-primary btn-lg" href="https://github.com/DystopianProgrammer/emilena" target="_blank" role="button">Learn more</a></p>
     </div>
 </div>
-<div class="col-xs-12 col-sm-4 col-sm-offset-4">
-    <em-authentication></em-authentication>
+<div *ngIf="displayLoginForm" class="col-xs-12 col-sm-4 col-sm-offset-4">
+    <em-authentication (displayLoginForm)="hideLoginForm($event)"></em-authentication>
 </div>

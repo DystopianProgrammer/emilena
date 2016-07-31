@@ -7,11 +7,13 @@ import { ClientComponent } from '../client/client.component';
 import { AddStaffComponent } from '../staff/add-staff/add-staff.component';
 import { AddClientComponent } from '../client/add-client/add-client.component';
 import { FooterComponent } from '../footer/footer.component';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
   selector: 'emilena',
   templateUrl: './app.component.html',
   directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent],
+  providers: [AuthenticationService],
   precompile: [
     HeaderComponent,
     HomeComponent,
@@ -22,4 +24,5 @@ import { FooterComponent } from '../footer/footer.component';
     FooterComponent
   ]
 })
-export class AppComponent { }
+export class AppComponent {
+}
