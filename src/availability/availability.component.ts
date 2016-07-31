@@ -20,8 +20,20 @@ export class AvailabilityComponent {
     @Output() availabilityChange = new EventEmitter<Availability>();
     calendarActive: boolean = false;
 
-    update(availability: any) {
-        this.availabilityChange.emit(availability);
+    // Reset the form with a new hero AND restore 'pristine' class state
+    // by toggling 'active' flag which causes the form
+    // to be removed/re-added in a tick via NgIf
+    // TODO: Workaround until NgForm has a reset method (#6822)
+    active: boolean = true;
+
+    update() {
+        this.availabilityChange.emit(this.availability);
+    }
+
+    cancel() {
+        this.active = false;
+        // send back the unchanged availability
+        this.update();
     }
 
     setDate(date: moment.MomentDateObject) {

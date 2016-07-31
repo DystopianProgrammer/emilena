@@ -1,23 +1,26 @@
 <div class="availability-component panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">Availability <small>add</small></h3>
-    </div>
-    <div class="panel-body">
-        <div class="form-group">
-            <label for="datetime">Date and time</label>
-            <input type="text" id="datetime" class="form-control" placeholder="22/03/2016 10:05" [(ngModel)]="availability.dateAndTime" (click)="activateCalendar()">
+    <form *ngIf="active" (ngSubmit)="update()" #availabilityForm="ngForm">
+        <div class="panel-heading">
+            <h3 class="panel-title">Availability <small>add</small></h3>
         </div>
-        <div class="form-group">
-            <label for="hours">Number of hours</label>
-            <input type="number" id="hours" class="form-control" placeholder="e.g. 0.5 or 3" [(ngModel)]="availability.numberOfHours">
-        </div>
-        <div *ngIf="calendarActive">
-            <em-calendar (dateSelection)="setDate($event)"></em-calendar>
-        </div>
-        <div class="col-xs-12">
-            <div class="em-form-submit-buttons">
-                <button type="button" class="btn btn-success" (click)="update(availability)">Update</button>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="datetime">Date and time</label>
+                <input type="text" name="datetime" id="datetime" class="form-control" placeholder="22/03/2016 10:05" [(ngModel)]="availability.dateAndTime" (click)="activateCalendar()" required>
+            </div>
+            <div class="form-group">
+                <label for="hours">Number of hours</label>
+                <input type="number" name="hours" id="hours" class="form-control" placeholder="e.g. 0.5 or 3" [(ngModel)]="availability.numberOfHours" required>
+            </div>
+            <div *ngIf="calendarActive">
+                <em-calendar (dateSelection)="setDate($event)"></em-calendar>
+            </div>
+            <div class="col-xs-12">
+                <div class="em-form-submit-buttons">
+                    <button type="submit" class="btn btn-success" [disabled]="!availabilityForm.form.valid">Add</button>
+                    <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
