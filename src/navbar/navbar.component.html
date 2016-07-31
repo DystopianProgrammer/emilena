@@ -22,7 +22,7 @@
                     <em-navbar-item [title]="'Client List'" [emRoute]="['/client']"></em-navbar-item>
                 </em-navbar-item-header>
 
-                <li (click)="logout()"><a>Log-out</a></li>
+                <li (click)="logout()" [routerLink]="['/']"><a>Log-out</a></li>
             </ul>
         </div>
 
