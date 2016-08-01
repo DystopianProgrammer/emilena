@@ -7,6 +7,6 @@ describe('The calendar service', () => {
         let snapshots = calendarService.listSnapshots(2016, 9);
 
         expect(snapshots.length).toEqual(30);
-        expect(snapshots[5].date).toEqual(2); // Monday
+        expect(snapshots[5].date).toEqual(6);
     });
 });

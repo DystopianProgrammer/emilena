@@ -20,6 +20,8 @@ const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 export class Snapshot {
     day: number;
     date: number;
+    month: number;
+    year: number;
     timeFrom: string;
     timeTo: string;
     class: string;
@@ -39,7 +41,9 @@ export class CalendarService {
             let snapshot = new Snapshot();
             snapshot.day = date.getDay();
             snapshot.date = date.getDate();
-            snapshot.friendlyName = date.toDateString();
+            snapshot.month = month;
+            snapshot.year = year;
+            snapshot.friendlyName = date.toLocaleDateString('en-GB');
             snapshots.push(snapshot);
 
             date.setDate(date.getDate() + 1);

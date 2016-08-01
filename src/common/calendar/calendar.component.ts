@@ -1,13 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-
 import { CalendarService, Snapshot, Days } from './calendar.service';
-
 import * as moment from 'moment';
-
 import { PaddedDatePipe } from './calendar.pipe';
-
-
-const MAX_YEARS: number = 5;
 
 @Component({
     selector: 'em-calendar',
@@ -17,13 +11,12 @@ const MAX_YEARS: number = 5;
 })
 export class CalendarComponent implements OnInit {
 
-    dates: moment.MomentDateObject[] = [];
     selectYear: number[] = [];
     selectedYear: number;
-    currentMonth: number; // for tracking
+    currentMonth: number;
     displayMonth: string;
 
-    // chunking snapshots with 7 columns begining Sunday
+    // chunking snapshots
     snapshotRow1: Snapshot[] = [];
     snapshotRow2: Snapshot[] = [];
     snapshotRow3: Snapshot[] = [];
@@ -31,7 +24,7 @@ export class CalendarComponent implements OnInit {
     snapshotRow5: Snapshot[] = [];
     snapshotRow6: Snapshot[] = [];
 
-    @Output() dateSelection = new EventEmitter<moment.MomentDateObject>();
+    @Output() dateSelection = new EventEmitter<Snapshot>();
 
     constructor(private calendarService: CalendarService) { }
 
@@ -56,7 +49,7 @@ export class CalendarComponent implements OnInit {
     }
 
     selectDate(snapshot: Snapshot) {
-        console.log(snapshot);
+        this.dateSelection.emit(snapshot);
     }
 
     selectYearChange(event: any) {
@@ -77,49 +70,52 @@ export class CalendarComponent implements OnInit {
         this.addClassToSnapshots(previous);
         this.addClassToSnapshots(future);
 
-        // give us the last subset of the previous month
+        this.calculateFillFromPreviousMonth(current, previous);
+        this.calculateFillFromNextMonth(current, future);
+    }
+
+    // give us the last subset of the previous month, and fill the current month
+    private calculateFillFromPreviousMonth(current: Snapshot[], previous: Snapshot[]) {
         previous = previous.slice(previous.length - 7, previous.length);
         let index = previous.findIndex(s => s.day === 0);
-        // and break it down to it's final state
         previous = previous.slice(index, previous.length);
         this.snapshotRow1 = this.snapshotRow1.concat(previous);
-
-        // we need this to track where we are
         let trackingIndex = 0;
 
         let updateSnapshotRow = (snapshotRow: Snapshot[]) => {
             while (snapshotRow.length < 7) {
-                if(!current[trackingIndex]) {
+                if (!current[trackingIndex]) {
                     break;
                 }
-
                 snapshotRow.push(current[trackingIndex]);
                 trackingIndex++;
             }
         }
-
         updateSnapshotRow(this.snapshotRow1);
         updateSnapshotRow(this.snapshotRow2);
         updateSnapshotRow(this.snapshotRow3);
         updateSnapshotRow(this.snapshotRow4);
         updateSnapshotRow(this.snapshotRow5);
         updateSnapshotRow(this.snapshotRow6);
+    }
 
+    // give us the last subset of the future month, and fill the current month
+    private calculateFillFromNextMonth(current: Snapshot[], future: Snapshot[]) {
         let futureTrackingIndex = 0;
         let updateFutureSnapshotRow = (snapshotRow: Snapshot[]) => {
             while (snapshotRow.length < 7) {
-                if(!future[futureTrackingIndex]) {
+                if (!future[futureTrackingIndex]) {
                     break;
                 }
                 snapshotRow.push(future[futureTrackingIndex]);
                 futureTrackingIndex++;
             }
         }
-
         updateFutureSnapshotRow(this.snapshotRow4);
         updateFutureSnapshotRow(this.snapshotRow5);
         updateFutureSnapshotRow(this.snapshotRow6);
     }
+
 
     private resetRows() {
         this.snapshotRow1 = [];
@@ -142,5 +138,4 @@ export class CalendarComponent implements OnInit {
             year++;
         }
     }
-
 }

@@ -38,8 +38,7 @@
             <span *ngFor="let availability of staff.availability; let index=index">
                 <div class="spacer"></div>
                 <em-badge (dismissBadge)="removeAvailability(index)">
-                    {{availability.dateAndTime}},
-                    {{availability.numberOfHours}}h
+                    {{availability.date | date }}
                 </em-badge>
             </span>
         </em-collapsible-content>

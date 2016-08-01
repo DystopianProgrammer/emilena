@@ -63,7 +63,7 @@ export class AddStaffComponent {
     }
 
     availabilityUpdated(availability: Availability) {
-        if (availability.dateAndTime && availability.numberOfHours) {
+        if (availability.date) {
             this.staff.availability.push(availability);
         }
         this.showAvailabilityForm = false;

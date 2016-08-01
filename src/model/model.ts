@@ -53,13 +53,11 @@ export class Address {
  * Availability is from Monday to Sunday from 8am till 10pm
  * This should be configurable
  *
- * This is a many to one in that a Person can have many availabilities. Note that this is a snapshot in time
- * for a given date - NOT A DURATION.
  */
 export class Availability {
-    dateAndTime: String;
-    dayOfWeek: string;
-    numberOfHours: number;
+    date: Date;
+    fromDate: Date;
+    toDate: Date;
     person: Person;
 }
 
