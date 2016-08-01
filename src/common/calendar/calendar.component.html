@@ -1,15 +1,15 @@
 <div class="em-calendar">
   <div class="em-calendar-header">
     <div class="col-xs-4">
-      <i class="fa fa-arrow-circle-left" aria-hidden="true" (click)="getPreviousMonth()"></i>
+      <i class="fa fa-arrow-circle-left" aria-hidden="true" (click)="previous()"></i>
     </div>
     <div class="col-xs-4">
-      <select class="form-control">
+      <select class="form-control" [(ngModel)]="selectedYear" (ngModelChange)="selectYearChange($event)">
       <option *ngFor="let year of selectYear">{{year}}</option>
     </select>
     </div>
     <div class="col-xs-4">
-      <i class="fa fa-arrow-circle-right pull-right" aria-hidden="true" (click)="nextMonth()"></i>
+      <i class="fa fa-arrow-circle-right pull-right" aria-hidden="true" (click)="next()"></i>
     </div>
   </div>
   <div class="col-xs-12">
@@ -17,30 +17,33 @@
       <table>
         <thead>
           <tr>
-            <td>Sun</td>
-            <td>Mon</td>
-            <td>Tues</td>
-            <td>Weds</td>
-            <td>Thurs</td>
-            <td>Fri</td>
-            <td>Sat</td>
+            <td>S</td>
+            <td>M</td>
+            <td>T</td>
+            <td>W</td>
+            <td>T</td>
+            <td>F</td>
+            <td>S</td>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td *ngFor="let row of row1" (click)="selectDate(row)">{{row.date | paddedDate}}</td>
+            <td *ngFor="let snapshot of snapshotRow1" (click)="selectDate(snapshot)" [ngClass]="{'em-cal-day-disabled': snapshot.class}">{{snapshot.date | paddedDate}}</td>
           </tr>
           <tr>
-            <td *ngFor="let row of row2" (click)="selectDate(row)">{{row.date | paddedDate}}</td>
+            <td *ngFor="let snapshot of snapshotRow2" (click)="selectDate(snapshot)" [ngClass]="{'em-cal-day-disabled': snapshot.class}">{{snapshot.date | paddedDate}}</td>
           </tr>
           <tr>
-            <td *ngFor="let row of row3" (click)="selectDate(row)">{{row.date | paddedDate}}</td>
+            <td *ngFor="let snapshot of snapshotRow3" (click)="selectDate(snapshot)" [ngClass]="{'em-cal-day-disabled': snapshot.class}">{{snapshot.date | paddedDate}}</td>
           </tr>
           <tr>
-            <td *ngFor="let row of row4" (click)="selectDate(row)">{{row.date | paddedDate}}</td>
+            <td *ngFor="let snapshot of snapshotRow4" (click)="selectDate(snapshot)" [ngClass]="{'em-cal-day-disabled': snapshot.class}">{{snapshot.date | paddedDate}}</td>
           </tr>
           <tr>
-            <td *ngFor="let row of row5" (click)="selectDate(row)">{{row.date | paddedDate}}</td>
+            <td *ngFor="let snapshot of snapshotRow5" (click)="selectDate(snapshot)" [ngClass]="{'em-cal-day-disabled': snapshot.class}">{{snapshot.date | paddedDate}}</td>
+          </tr>
+          <tr>
+            <td *ngFor="let snapshot of snapshotRow6" (click)="selectDate(snapshot)" [ngClass]="{'em-cal-day-disabled': snapshot.class}">{{snapshot.date | paddedDate}}</td>
           </tr>
         </tbody>
       </table>
@@ -48,7 +51,7 @@
   </div>
   <div class="col-xs-12">
     <div class="em-calendar-footer text-center">
-        {{currentMonths}}
+        {{displayMonth}}
     </div>
   </div>
 </div>

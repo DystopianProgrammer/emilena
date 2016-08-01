@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
-import { NavBarItemHeaderComponent } from './navbar-item-header.component.ts';
+import { NavBarItemHeaderComponent } from './navbar-item-header.component';
 import { NavBarComponentItem } from './navbar-item.component';
 import { NavBarService } from './navbar.service';
-import { AuthenticationService, AuthenticatedUser, AuthenticationStatus } from '../authentication/authentication.service.ts'
+import { AuthenticationService, AuthenticatedUser, AuthenticationStatus } from '../authentication/authentication.service';
 
 /**
  * aria = true
