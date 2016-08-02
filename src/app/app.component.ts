@@ -7,7 +7,7 @@ import { ClientComponent } from '../client/client.component';
 import { AddStaffComponent } from '../staff/add-staff/add-staff.component';
 import { AddClientComponent } from '../client/add-client/add-client.component';
 import { FooterComponent } from '../footer/footer.component';
-import { AuthenticationService } from '../authentication/authentication.service';
+import { AuthenticationService, AuthenticatedUser, AuthenticationStatus } from '../authentication/authentication.service';
 
 @Component({
   selector: 'emilena',
@@ -25,4 +25,15 @@ import { AuthenticationService } from '../authentication/authentication.service'
   ]
 })
 export class AppComponent {
+
+  constructor(private authenticationService: AuthenticationService) {
+    this.authenticationService.getSessionStatus(status => {
+      if (status.user && !status.error) {
+        let authenticatedUser = new AuthenticatedUser();
+        authenticatedUser.name = status.user;
+        authenticatedUser.authenticationStatus = AuthenticationStatus.LOGGED_IN;
+        this.authenticationService.notifyAuthenticationStatus(authenticatedUser);
+      }
+    });
+  }
 }

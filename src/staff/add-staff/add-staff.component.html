@@ -32,13 +32,23 @@
                 <a class="btn btn-primary" id="availabilityBtn" (click)="addAvailability()">Add Availability</a>
             </div>
             <div *ngIf="showAvailabilityForm" class="em-modal">
-                <em-availability [availability]="availability" (availabilityChange)="availabilityUpdated($event)">
+                <em-availability [availability]="availability" (generalAvailabilityChange)="generalAvailabilityUpdated($event)" (availabilityChange)="availabilityUpdated($event)">
                 </em-availability>
             </div>
+
+            <!-- general availability -->
+            <div class="spacer"></div>
+            <em-badge *ngIf = "staff.generalAvailability" (dismissBadge)="removeGeneralAvailability(index)">
+                <div>{{staff.generalAvailability | generalAvailabilityPipe}}</div>
+            </em-badge>
+
+            <!-- custom availability -->
             <span *ngFor="let availability of staff.availability; let index=index">
                 <div class="spacer"></div>
                 <em-badge (dismissBadge)="removeAvailability(index)">
-                    {{availability.date | date }}
+                    <div>Date: {{ availability.date | date: 'fullDate' }}</div>
+                    <div>From: {{ availability.fromDate }}</div>
+                    <div>To: {{ availability.toDate }}</div>
                 </em-badge>
             </span>
         </em-collapsible-content>

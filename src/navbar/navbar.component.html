@@ -13,16 +13,20 @@
 
         <div class="navbar-collapse" [ngClass]="{collapse: isCollapsed}" *ngIf="authenticatedUser.authenticationStatus === 0">
             <ul class="nav navbar-nav">
-                <em-navbar-item-header class="item-header" [heading]="'Staff'">
+                <em-navbar-item-header class="item-header" [heading]="'Staff'" [isOpen]="staffMenu" (click)="openStaffMenu()">
                     <em-navbar-item [title]="'Staff List'" [emRoute]="['/staff']"></em-navbar-item>
                     <em-navbar-item [title]="'Add/Edit Staff'" [emRoute]="['/add-staff']"></em-navbar-item>
                 </em-navbar-item-header>
 
-                <em-navbar-item-header class="item-header" [heading]="'Client'">
+                <em-navbar-item-header class="item-header" [heading]="'Client'" [isOpen]="clientMenu" (click)="openClientMenu()">
                     <em-navbar-item [title]="'Client List'" [emRoute]="['/client']"></em-navbar-item>
+                    <em-navbar-item [title]="'Add/Edit Clients'" [emRoute]="['/add-client']"></em-navbar-item>
                 </em-navbar-item-header>
-
-                <li (click)="logout()" [routerLink]="['/']"><a>Log-out</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li (click)="logout()" [routerLink]="['/']">
+                    <a><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Sign out</a>
+                </li>
             </ul>
         </div>
 

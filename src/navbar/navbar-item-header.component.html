@@ -1,5 +1,6 @@
 <li class="dropdown" [ngClass]="{open: isOpen}">
-    <a (click)="open()" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">{{heading}}<span class="caret"></span></a>
+    <a aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-user" aria-hidden="true"></i>&nbsp;{{heading}}<span class="caret"></span></a>
     <ul class="dropdown-menu">
         <ng-content></ng-content>
     </ul>

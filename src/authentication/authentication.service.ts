@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { User } from '../model/model';
 
@@ -32,7 +32,7 @@ export class AuthenticationService {
 
     constructor(private http: Http) { }
 
-    private authenticatedUserSource = new Subject<AuthenticatedUser>();
+    private authenticatedUserSource = new BehaviorSubject(new AuthenticatedUser());
 
     authenticatedUserSource$ = this.authenticatedUserSource.asObservable();
 
@@ -57,7 +57,6 @@ export class AuthenticationService {
         if (authenticatedUser.authenticationStatus === AuthenticationStatus.LOGGED_OUT) {
             sessionStorage.removeItem(TOKEN);
         }
-
         this.authenticatedUserSource.next(authenticatedUser);
     }
 

@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 
-import { NavBarService } from './navbar.service';
 
 @Component({
     selector: 'em-navbar-item-header',
@@ -8,16 +7,6 @@ import { NavBarService } from './navbar.service';
 })
 export class NavBarItemHeaderComponent {
 
-    isOpen: boolean = false;
+    @Input() isOpen: any;
     @Input() heading: any;
-
-    constructor(private navbarService: NavBarService) {
-        this.navbarService.toggleNavBar$.subscribe(toggle => {
-            this.isOpen = toggle;
-        });
-    }
-
-    open() {
-        this.isOpen = !this.isOpen;
-    }
 }

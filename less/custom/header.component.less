@@ -11,28 +11,18 @@
         em-navbar-item > li {
             margin-left: 10px;
         }
-
-        em-navbar-item {
-            li > a {
-                color: @white;
-                text-decoration: none;
-            }
-        }
-    }
-
-    .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
-        background-color: @gray-dark;
-        border-color: @white;
-        color: @white;
     }
 
     .nav {
+        .open > a, .nav .open > a:hover, .nav .open > a:focus {
+            background-color: @gray-darker;
+        }
         &.navbar-nav {
             .item-header {
-                margin: 10px;
+                margin: 1px;
                 display: block;
                 li {
-                    padding: 5px;
+                    padding: 15px;
                     cursor: pointer;
                     :hover {
                         color: @white;

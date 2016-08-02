@@ -20,6 +20,7 @@ export class Person {
     dob: Date;
     availability: Availability[];
     preferences: string;
+    generalAvailability: GeneralAvailability;
 }
 
 /**
@@ -58,6 +59,14 @@ export class Availability {
     date: Date;
     fromDate: Date;
     toDate: Date;
+    person: Person;
+}
+
+/**
+ * One to one with person
+ */
+export class GeneralAvailability {
+    daysOfWeek: DayOfWeek[];
     person: Person;
 }
 

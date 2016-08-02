@@ -23,26 +23,29 @@ export class AvailabilityService {
         return availability;
     }
 
-    availabilityTimes(hours: number, minutes: number): Time[] {
+    availabilityTimes(): Time[] {
 
         const MAX_HOURS = 23;
         const MAX_MINUTES = 59;
 
         let formattedSelectableTimes = new Array<Time>();
 
-        let increment = (hour: number, minute: number) => {
-            for (let h = hour; h <= MAX_HOURS; h++) {
-                for (let m = minute; m <= MAX_MINUTES; m+=5) {
-                    let time = new Time();
-                    time.hours = h;
-                    time.minutes = m;
-                    formattedSelectableTimes.push(time);
-                }
+        let rounder = (value: number) => {
+            if (value === 0) {
+                return value = 5;
+            } else {
+                return value = 5 * Math.ceil(value / 5);
             }
         }
 
-        minutes = 5 * Math.ceil(minutes/ 5);
-        increment(hours, minutes);
+        for (let i = 0; i <= MAX_HOURS; i++) {
+            for (let j = 0; j <= MAX_MINUTES; j += 5) {
+                let time = new Time();
+                time.hours = i;
+                time.minutes = j;
+                formattedSelectableTimes.push(time);
+            }
+        }
 
         return formattedSelectableTimes;
     }
