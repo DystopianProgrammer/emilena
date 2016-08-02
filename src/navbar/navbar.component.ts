@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { NavBarItemHeaderComponent } from './navbar-item-header.component';
@@ -17,22 +17,17 @@ import { AuthenticationService, AuthenticatedUser, AuthenticationStatus } from '
     directives: [ROUTER_DIRECTIVES, NavBarItemHeaderComponent, NavBarComponentItem],
     providers: [NavBarService]
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
     isCollapsed: boolean = true;
-    authenticatedUser: AuthenticatedUser = new AuthenticatedUser();
+    authenticatedUser: AuthenticatedUser;
     staffMenu: boolean = false;
     clientMenu: boolean = false;
 
     constructor(private navbarService: NavBarService, private authenticationService: AuthenticationService) {
-        // responsive requirements
         this.navbarService.toggleNavBar$.subscribe(toggle => this.isCollapsed = !toggle);
-    }
-
-    ngOnInit() {
-        // listen for changes on authentication status
-        this.authenticationService.authenticatedUserSource$.subscribe(user => {
-            this.authenticatedUser = user;
+        this.authenticationService.authenticatedUserSource$.subscribe(authenticatedUser => {
+            this.authenticatedUser = authenticatedUser;
         });
     }
 
@@ -51,7 +46,7 @@ export class NavbarComponent implements OnInit {
     }
 
     logout(): void {
-        this.authenticatedUser.authenticationStatus = AuthenticationStatus.LOGGED_OUT;
-        this.authenticationService.notifyAuthenticationStatus(this.authenticatedUser);
+        this.authenticatedUser = new AuthenticatedUser();
+        this.authenticationService.notify(this.authenticatedUser);
     }
 }

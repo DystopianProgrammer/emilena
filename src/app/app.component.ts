@@ -8,32 +8,15 @@ import { AddStaffComponent } from '../staff/add-staff/add-staff.component';
 import { AddClientComponent } from '../client/add-client/add-client.component';
 import { FooterComponent } from '../footer/footer.component';
 import { AuthenticationService, AuthenticatedUser, AuthenticationStatus } from '../authentication/authentication.service';
+import { User } from '../model/model';
 
 @Component({
   selector: 'emilena',
   templateUrl: './app.component.html',
   directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent],
   providers: [AuthenticationService],
-  precompile: [
-    HeaderComponent,
-    HomeComponent,
-    StaffComponent,
-    AddStaffComponent,
-    ClientComponent,
-    AddClientComponent,
-    FooterComponent
-  ]
+  precompile: [HeaderComponent, HomeComponent, StaffComponent, AddStaffComponent, ClientComponent, AddClientComponent, FooterComponent]
 })
 export class AppComponent {
-
-  constructor(private authenticationService: AuthenticationService) {
-    this.authenticationService.getSessionStatus(status => {
-      if (status.user && !status.error) {
-        let authenticatedUser = new AuthenticatedUser();
-        authenticatedUser.name = status.user;
-        authenticatedUser.authenticationStatus = AuthenticationStatus.LOGGED_IN;
-        this.authenticationService.notifyAuthenticationStatus(authenticatedUser);
-      }
-    });
-  }
+  constructor(private authenticationService: AuthenticationService) { }
 }

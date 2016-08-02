@@ -1,12 +1,15 @@
-import { it, inject, describe, beforeEachProviders, expect } from '@angular/core/testing';
+import { inject, addProviders } from '@angular/core/testing';
+import { HTTP_PROVIDERS } from '@angular/http';
 import { AppComponent } from './app.component';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 describe('App', () => {
-    beforeEachProviders(() => [
-        AppComponent
-    ]);
+
+    beforeEach(() => {
+        addProviders([AppComponent, AuthenticationService, HTTP_PROVIDERS]);
+    });
+
     it('should work', inject([AppComponent], (app: AppComponent) => {
-        // Add real test here
         expect(2).toBe(2);
     }));
 });

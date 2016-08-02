@@ -44,7 +44,7 @@ export class AddStaffComponent {
     }
 
     addStaff(staff: Staff) {
-        this.staffAdd$ = this.staffService.addStaff(staff)
+        this.staffAdd$ = this.staffService.add(staff)
             .subscribe(res => {
                 this.successMsg = `Staff ${res} successfully created`;
             }, error => {
