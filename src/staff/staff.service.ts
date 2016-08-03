@@ -15,7 +15,11 @@ export class StaffService {
      */
     add(staff: Staff): Observable<Staff> {
         let body = JSON.stringify(staff);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+
+        let user = this.authenticationService.authenticatedUser;
+        let headers = this.authenticationService.secureHeader(user.encryptedCredentials);
+        headers.append('Content-Type', 'application/json');
+
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post('/staff/add', body, options)

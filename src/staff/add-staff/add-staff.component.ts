@@ -45,22 +45,11 @@ export class AddStaffComponent {
 
     addStaff(staff: Staff) {
         this.staffAdd$ = this.staffService.add(staff)
-            .subscribe(res => {
-                this.successMsg = `Staff ${res} successfully created`;
-            }, error => {
-                this.errors = error;
-                setTimeout(() => {
-                    this.errors = undefined;
-                }, 5000);
-            });
-
-        this.active = false;
-        setTimeout(() => this.active = true, 0);
+            .subscribe(res => this.successMsg = `Staff ${res} successfully created`, error => this.errors = error);
         this.initStaff();
     }
 
-    addAvailability(staff: Staff) {
-        this.availability = new Availability();
+    addAvailability() {
         this.showAvailabilityForm = true;
     }
 

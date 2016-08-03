@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <div class="navbar-brand" [routerLink]="['/']">FTF</div>
-                <p class="navbar-text" *ngIf="authenticatedUser.user">Signed in as: <strong>{{ authenticatedUser.user.userName }}</strong></p>
+                <p class="navbar-text" *ngIf="authenticatedUser.principle">Signed in as: <strong>{{ authenticatedUser.principle }}</strong></p>
                 <button type="button" class="navbar-toggle collapsed" aria-expanded="false" (click)=toggle()>
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>

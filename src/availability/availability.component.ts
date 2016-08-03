@@ -25,7 +25,7 @@ class CheckBoxItem {
 })
 export class AvailabilityComponent implements OnInit {
 
-    @Input() availability: Availability;
+    availability: Availability = new Availability();
     @Output() availabilityChange = new EventEmitter<Availability>();
     @Output() generalAvailabilityChange = new EventEmitter<GeneralAvailability>();
 
@@ -84,6 +84,7 @@ export class AvailabilityComponent implements OnInit {
     cancel() {
         this.active = false;
         // send back the unchanged availability
+        this.availability = new Availability();
         this.update();
     }
 
@@ -113,7 +114,7 @@ export class AvailabilityComponent implements OnInit {
         // the timeout is for an oddity with event timings
         setTimeout(() => {
             let hasDisabledItems = this.checkBoxItems.filter(item => item.selected === true);
-            this.disableCustom = (hasDisabledItems.length > 0);
+            this.disableCustom = (hasDisabledItems.length > 0)
         }, 100);
     }
 
