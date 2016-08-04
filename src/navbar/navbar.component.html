@@ -13,15 +13,36 @@
 
         <div class="navbar-collapse" [ngClass]="{collapse: isCollapsed}" *ngIf="authenticatedUser.authenticationStatus === 0">
             <ul class="nav navbar-nav">
-                <em-navbar-item-header class="item-header" [heading]="'Staff'" [isOpen]="staffMenu" (click)="openStaffMenu()">
-                    <em-navbar-item [title]="'Staff List'" [emRoute]="['/staff']"></em-navbar-item>
-                    <em-navbar-item [title]="'Add/Edit Staff'" [emRoute]="['/add-staff']"></em-navbar-item>
-                </em-navbar-item-header>
 
-                <em-navbar-item-header class="item-header" [heading]="'Client'" [isOpen]="clientMenu" (click)="openClientMenu()">
-                    <em-navbar-item [title]="'Client List'" [emRoute]="['/client']"></em-navbar-item>
-                    <em-navbar-item [title]="'Add/Edit Clients'" [emRoute]="['/add-client']"></em-navbar-item>
-                </em-navbar-item-header>
+                <li [routerLink]="['/']"><a><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a></li>
+
+                <li class="dropdown" [ngClass]="{open: isStaffMenuOpen}" (click)="openStaffMenu()">
+                    <a aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-plus" aria-hidden="true"></i>
+&nbsp;Staff<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li (click)="sendNoticationToCloseNavBar()" [routerLink]="['/add-staff']">
+                            <a><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add new staff</a>
+                        </li>
+                        <li (click)="sendNoticationToCloseNavBar()" [routerLink]="['/staff']">
+                            <a><i class="fa fa-list" aria-hidden="true"></i>&nbsp;List all staff</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="dropdown" [ngClass]="{open: isClientMenuOpen}" (click)="openClientMenu()">
+                    <a aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Client<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li (click)="sendNoticationToCloseNavBar()" [routerLink]="['/add-client']">
+                            <a><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add new client</a>
+                        </li>
+                        <li (click)="sendNoticationToCloseNavBar()" [routerLink]="['/client']">
+                            <a><i class="fa fa-list" aria-hidden="true"></i>&nbsp;List all clients</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li><a><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;Appointments</a></li>
+                <li><a><i class="fa fa-bell-o" aria-hidden="true"></i>&nbsp;Alerts</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li (click)="logout()" [routerLink]="['/']">
