@@ -12,6 +12,7 @@ import { AvailabilityComponent } from '../../availability/availability.component
 import { BadgeComponent } from '../../common/badge/badge.component';
 import { CollapsibleContentComponent } from '../../common/collapsible-content/collapsible-content.component';
 import { GeneralAvailabilityPipe } from '../../availability/general-availability.pipe';
+import { CommonActions } from '../../person/common-actions';
 
 
 @Component({
@@ -27,46 +28,24 @@ import { GeneralAvailabilityPipe } from '../../availability/general-availability
     pipes: [GeneralAvailabilityPipe],
     providers: [StaffService]
 })
-export class AddStaffComponent {
+export class AddStaffComponent extends CommonActions {
 
     staff: Staff;
     errors: any;
     successMsg: string;
     contractTypes: string[] = ['CONTRACT', 'BANK'];
-    availabilities: Availability;
-    showAvailabilityForm: boolean = false;
-    active = true;
 
     private staffAdd$: Subscription;
 
     constructor(private staffService: StaffService) {
-        this.initStaff();
+        super(new Staff());
+
+        this.staff = <Staff>super.person();
     }
 
     addStaff(staff: Staff) {
         this.staffAdd$ = this.staffService.add(staff)
             .subscribe(res => this.successMsg = `Staff ${res} successfully created`, error => this.errors = error);
-        this.initStaff();
-    }
-
-    addAvailability() {
-        this.showAvailabilityForm = true;
-    }
-
-    availabilityUpdated(availability: Availability) {
-        if (availability.date) {
-            this.staff.availabilities.push(availability);
-        }
-        this.showAvailabilityForm = false;
-    }
-
-    generalAvailabilityUpdated(generalAvailability: GeneralAvailability) {
-        this.showAvailabilityForm = false;
-        this.staff.generalAvailability = generalAvailability;
-    }
-
-    removeAvailability(index: number) {
-        this.staff.availabilities.splice(index, 1);
     }
 
     ngOnDestroy() {
@@ -76,12 +55,6 @@ export class AddStaffComponent {
     }
 
     cancel(): void {
-        this.initStaff();
     }
 
-    private initStaff(): void {
-        this.staff = new Staff();
-        this.staff.address = new Address();
-        this.staff.availabilities = [];
-    }
 }
