@@ -14,13 +14,15 @@ export class Person {
     id: number;
     forename: string;
     surname: string;
+    dob: Date;
     email: string;
     telephoneNumber: number;
     address: Address;
-    dob: Date;
-    availability: Availability[];
+    availabilities: Availability[];
+    absences: Absence[];
     preferences: string;
     generalAvailability: GeneralAvailability;
+    appointments: Appointment[];
 }
 
 /**
@@ -78,6 +80,16 @@ export class Absence {
     date: Date;
     reason: string;
     person: Person;
+}
+
+export class Appointment {
+    staff: Staff;
+    client: Client;
+    fromDate: Date;
+    toDate: Date;
+    location: Address;
+    notes: string;
+    isComplete: boolean;
 }
 
 export enum DayOfWeek {

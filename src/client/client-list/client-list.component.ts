@@ -6,11 +6,13 @@ import { Client, Address } from '../../model/model';
 import { ClientService } from '../client.service';
 import { PaginationComponent } from '../../pagination/pagination.component';
 import { PopOverComponent } from '../../common/pop-over/pop-over.component';
+import { Unspecified } from '../../common/pipes/unspecified.pipe';
 
 @Component({
     selector: 'em-client-list',
     templateUrl: './client-list.component.html',
     directives: [PaginationComponent, PopOverComponent],
+    pipes: [Unspecified],
     providers: [ClientService]
 })
 export class ClientListComponent implements OnInit, OnDestroy {

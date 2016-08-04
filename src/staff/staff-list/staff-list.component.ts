@@ -5,11 +5,13 @@ import { Subscription } from 'rxjs/Subscription';
 import { Staff, Address } from '../../model/model';
 import { StaffService } from '../staff.service';
 import { PaginationComponent } from '../../pagination/pagination.component';
+import { Unspecified } from '../../common/pipes/unspecified.pipe';
 
 @Component({
     selector: 'em-staff-list',
     templateUrl: './staff-list.component.html',
     directives: [PaginationComponent],
+    pipes: [Unspecified],
     providers: [StaffService]
 })
 export class StaffListComponent implements OnInit, OnDestroy {

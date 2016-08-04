@@ -6,7 +6,6 @@ import { StaffListComponent } from './staff-list/staff-list.component';
 @Component({
     selector: 'em-staff',
     templateUrl: './staff.component.html',
-    styles:  [String(require('./staff.component.less'))],
     directives: [StaffListComponent, ROUTER_DIRECTIVES],
     providers: [StaffService]
 })

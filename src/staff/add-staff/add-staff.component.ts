@@ -33,7 +33,7 @@ export class AddStaffComponent {
     errors: any;
     successMsg: string;
     contractTypes: string[] = ['CONTRACT', 'BANK'];
-    availability: Availability;
+    availabilities: Availability;
     showAvailabilityForm: boolean = false;
     active = true;
 
@@ -55,7 +55,7 @@ export class AddStaffComponent {
 
     availabilityUpdated(availability: Availability) {
         if (availability.date) {
-            this.staff.availability.push(availability);
+            this.staff.availabilities.push(availability);
         }
         this.showAvailabilityForm = false;
     }
@@ -66,7 +66,7 @@ export class AddStaffComponent {
     }
 
     removeAvailability(index: number) {
-        this.staff.availability.splice(index, 1);
+        this.staff.availabilities.splice(index, 1);
     }
 
     ngOnDestroy() {
@@ -82,6 +82,6 @@ export class AddStaffComponent {
     private initStaff(): void {
         this.staff = new Staff();
         this.staff.address = new Address();
-        this.staff.availability = [];
+        this.staff.availabilities = [];
     }
 }

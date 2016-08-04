@@ -40,17 +40,7 @@ export class AddClientComponent {
 
     addClient(client: Client) {
         this.clientAdd$ = this.clientService.addClient(client)
-            .subscribe(res => {
-                this.successMsg = `Client ${res} successfully created`;
-            }, error => {
-                this.errors = error;
-                setTimeout(() => {
-                    this.errors = undefined;
-                }, 5000);
-            });
-
-        this.active = false;
-        setTimeout(() => this.active = true, 0);
+            .subscribe(res => this.successMsg = `Client ${res} successfully created`, error => this.errors = error);
         this.initClient();
     }
 

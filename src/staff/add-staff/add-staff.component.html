@@ -43,7 +43,7 @@
             </em-badge>
 
             <!-- custom availability -->
-            <span *ngFor="let availability of staff.availability; let index=index">
+            <span *ngFor="let availability of staff.availabilities; let index=index">
                 <div class="spacer"></div>
                 <em-badge (dismissBadge)="removeAvailability(index)">
                     <div>Date: {{ availability.date | date: 'fullDate' }}</div>
