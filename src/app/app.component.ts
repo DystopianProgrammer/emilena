@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { HomeComponent } from '../home/home.component';
 import { StaffComponent } from '../person/staff/staff.component';
@@ -9,23 +9,33 @@ import { AddClientComponent } from '../person/client/add-client/add-client.compo
 import { FooterComponent } from '../footer/footer.component';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { AppointmentComponent } from '../appointments/appointment.component';
+import { AddAppointmentComponent } from '../appointments/add/add-appointment.component';
+import { EditAppointmentComponent } from '../appointments/edit/edit-appointment.component';
 
 @Component({
-  selector: 'emilena',
-  templateUrl: './app.component.html',
-  directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent],
-  providers: [AuthenticationService],
-  precompile: [
-    HeaderComponent,
-    HomeComponent,
-    StaffComponent,
-    AddStaffComponent,
-    ClientComponent,
-    AddClientComponent,
-    FooterComponent,
-    AppointmentComponent
-  ]
+    selector: 'emilena',
+    templateUrl: './app.component.html',
+    directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent],
+    providers: [AuthenticationService],
+    precompile: [
+        HeaderComponent,
+        HomeComponent,
+        StaffComponent,
+        AddStaffComponent,
+        ClientComponent,
+        AddClientComponent,
+        FooterComponent,
+        AppointmentComponent,
+        AddAppointmentComponent,
+        EditAppointmentComponent
+
+    ]
 })
 export class AppComponent {
-  constructor(private authenticationService: AuthenticationService) { }
+
+    constructor(private router: Router, private authenticationService: AuthenticationService) {
+        if(!authenticationService.authenticatedUser) {
+            this.router.navigate(['/']);
+        }
+    }
 }
