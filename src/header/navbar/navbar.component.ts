@@ -29,6 +29,7 @@ export class NavbarComponent {
     }
 
     logout(): void {
+        this.sendNoticationToCloseNavBar();
         this.authenticatedUser = new AuthenticatedUser();
         this.authenticationService.notify(this.authenticatedUser);
     }

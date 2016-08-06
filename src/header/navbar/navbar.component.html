@@ -41,7 +41,7 @@
                     </ul>
                 </li>
 
-                <li [routerLink]="['/appointment']"><a><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;Appointments</a></li>
+                <li [routerLink]="['/appointment']" (click)="sendNoticationToCloseNavBar()"><a><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;Appointments</a></li>
                 <li><a><i class="fa fa-bell-o" aria-hidden="true"></i>&nbsp;Alerts</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
