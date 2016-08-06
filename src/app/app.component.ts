@@ -8,13 +8,23 @@ import { AddStaffComponent } from '../person/staff/add-staff/add-staff.component
 import { AddClientComponent } from '../person/client/add-client/add-client.component';
 import { FooterComponent } from '../footer/footer.component';
 import { AuthenticationService } from '../authentication/authentication.service';
+import { AppointmentComponent } from '../appointments/appointment.component';
 
 @Component({
   selector: 'emilena',
   templateUrl: './app.component.html',
   directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent],
   providers: [AuthenticationService],
-  precompile: [HeaderComponent, HomeComponent, StaffComponent, AddStaffComponent, ClientComponent, AddClientComponent, FooterComponent]
+  precompile: [
+    HeaderComponent,
+    HomeComponent,
+    StaffComponent,
+    AddStaffComponent,
+    ClientComponent,
+    AddClientComponent,
+    FooterComponent,
+    AppointmentComponent
+  ]
 })
 export class AppComponent {
   constructor(private authenticationService: AuthenticationService) { }
