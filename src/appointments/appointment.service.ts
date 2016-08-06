@@ -16,18 +16,25 @@ export class AppointmentService {
     constructor(private http: Http, private authenticationService: AuthenticationService) { }
 
     fetchActiveClients(): Observable<Client> {
-
         let user = this.authenticationService.authenticatedUser;
         let headers = this.authenticationService.secureHeader(user.encryptedCredentials);
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.get('/client', options)
+        return this.http.get('/client/active', options)
                 .map(res => res.json())
                 .catch(err => (Observable.throw(err._body)));
     }
 
     fetchActiveStaff(): Observable<Staff> {
+        let user = this.authenticationService.authenticatedUser;
+        let headers = this.authenticationService.secureHeader(user.encryptedCredentials);
+        headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get('/staff/active', options)
+                .map(res => res.json())
+                .catch(err => (Observable.throw(err._body)));
     }
 
     create(appointment: Appointment) {
