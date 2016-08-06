@@ -23,6 +23,7 @@ export class Person {
     preferences: string;
     generalAvailability: GeneralAvailability;
     appointments: Appointment[];
+    active: boolean;
 }
 
 /**
