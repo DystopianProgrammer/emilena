@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs/Observable';
-import { AuthenticationService } from '../authentication/authentication.service';
-import { PersonService } from '../person/person.service';
+import { AuthenticationService } from '../../authentication/authentication.service';
+import { PersonService } from '../../person/person.service';
 
-import { Staff, Client } from '../model/model';
+import { Staff, Client } from '../../model/model';
 
 export class StaffService extends PersonService {
 

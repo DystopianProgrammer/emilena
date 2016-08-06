@@ -2,16 +2,18 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { Staff, Address } from '../../model/model';
+import { Staff, Address } from '../../../model/model';
 import { StaffService } from '../staff.service';
-import { PaginationComponent } from '../../pagination/pagination.component';
-import { Unspecified } from '../../common/pipes/unspecified.pipe';
+import { PaginationComponent } from '../../../pagination/pagination.component';
+import { Unspecified } from '../../../common/pipes/unspecified.pipe';
+import { ArrayDelimiter } from '../../../common/pipes/array-delimiter';
+import { GeneralAvailabilityPipe } from '../../../common/pipes/general-availability.pipe';
 
 @Component({
     selector: 'em-staff-list',
     templateUrl: './staff-list.component.html',
     directives: [PaginationComponent],
-    pipes: [Unspecified],
+    pipes: [Unspecified, ArrayDelimiter, GeneralAvailabilityPipe],
     providers: [StaffService]
 })
 export class StaffListComponent implements OnInit, OnDestroy {

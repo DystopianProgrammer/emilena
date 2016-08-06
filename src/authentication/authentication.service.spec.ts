@@ -1,5 +1,5 @@
 import { inject, addProviders } from '@angular/core/testing';
-import { MockBackend, MockConnection } from '@angular/http/testing';
+import { MockBackend } from '@angular/http/testing';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { User } from '../model/model';

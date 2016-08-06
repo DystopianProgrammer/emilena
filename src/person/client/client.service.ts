@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
-import { PersonService } from '../person/person.service';
+import { PersonService } from '../../person/person.service';
 
-import { Client } from '../model/model';
+import { Client } from '../../model/model';
 
 export class ClientService extends PersonService {
 

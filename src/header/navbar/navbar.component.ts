@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { NavBarService } from './navbar.service';
-import { AuthenticationService, AuthenticatedUser, AuthenticationStatus } from '../authentication/authentication.service';
+import { AuthenticationService, AuthenticatedUser, AuthenticationStatus } from '../../authentication/authentication.service';
 
 @Component({
     selector: 'em-nav-bar',

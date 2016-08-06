@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { AuthenticationService } from '../authentication/authentication.service';
 
-import { Person, Staff, Client } from '../model/model';
+import { Person, Staff } from '../model/model';
 
 @Injectable()
 export abstract class PersonService {

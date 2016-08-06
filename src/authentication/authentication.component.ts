@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
 import { User } from '../model/model';
-import { AuthenticationService, AuthenticatedUser, AuthenticationStatus } from './authentication.service';
+import { AuthenticationService } from './authentication.service';
 
 @Component({
     selector: 'em-authentication',

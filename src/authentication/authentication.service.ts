@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { User } from '../model/model';
@@ -62,7 +61,7 @@ export class AuthenticationService {
         let notifySubscribers = (response: Response): any => {
             this.authenticatedUserSource.next(this._authenticatedUser);
             return response.json;
-        }
+        };
 
         let headers = this.secureHeader(this._authenticatedUser.encryptedCredentials);
         let options = new RequestOptions({ headers: headers });

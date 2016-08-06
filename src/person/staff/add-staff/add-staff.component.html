@@ -39,7 +39,7 @@
             <!-- general availability -->
             <div class="spacer"></div>
             <em-badge *ngIf = "staff.generalAvailability" (dismissBadge)="removeGeneralAvailability(index)">
-                <div>{{staff.generalAvailability | generalAvailabilityPipe}}</div>
+                <div>{{ staff.generalAvailability }}</div>
             </em-badge>
 
             <!-- custom availability -->

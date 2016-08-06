@@ -1,10 +1,11 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 
 import { GeneralAvailability, Availability, DayOfWeek} from '../model/model';
 import { CalendarComponent } from '../common/calendar/calendar.component';
 import { Snapshot } from '../common/calendar/calendar.service';
 import { ZeroPadPipe } from '../common/pipes/zero-pad.pipe';
 import { AvailabilityService, Time } from './availability.service';
+import { DayOfWeekSerializer } from '../common/serializers/day-of-week-serializer';
 
 class CheckBoxItem {
     name: string;
@@ -52,7 +53,6 @@ export class AvailabilityComponent implements OnInit {
     constructor(private availabilityService: AvailabilityService) { }
 
     ngOnInit() {
-        let date = new Date();
         this.times = this.availabilityService.availabilityTimes();
         this.initCheckBoxItems();
     }
@@ -76,7 +76,7 @@ export class AvailabilityComponent implements OnInit {
                     }
                 });
             let generalAvailability = new GeneralAvailability();
-            generalAvailability.daysOfWeek = daysOfWeek;
+            generalAvailability.daysOfWeek = DayOfWeekSerializer.getInstance().fromCollection(daysOfWeek);
             this.generalAvailabilityChange.emit(generalAvailability);
         }
     }
@@ -114,7 +114,7 @@ export class AvailabilityComponent implements OnInit {
         // the timeout is for an oddity with event timings
         setTimeout(() => {
             let hasDisabledItems = this.checkBoxItems.filter(item => item.selected === true);
-            this.disableCustom = (hasDisabledItems.length > 0)
+            this.disableCustom = (hasDisabledItems.length > 0);
         }, 100);
     }
 

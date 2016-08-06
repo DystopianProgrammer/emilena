@@ -3,16 +3,15 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { Client, Address, Availability } from '../../model/model';
+import { Client, Address, Availability } from '../../../model/model';
 import { ClientService } from '../client.service';
-import { AddressComponent } from '../../address/address.component';
-import { PersonComponent } from '../../person/person.component';
-import { ValidationComponent } from '../../validation/validation.component';
-import { SupportComponent } from '../../support/support.component';
-import { CollapsibleContentComponent } from '../../common/collapsible-content/collapsible-content.component';
-import { AvailabilityComponent } from '../../availability/availability.component';
-import { GeneralAvailabilityPipe } from '../../availability/general-availability.pipe';
-import { CommonActions } from '../../person/common-actions';
+import { AddressComponent } from '../../../address/address.component';
+import { PersonComponent } from '../../../person/person.component';
+import { ValidationComponent } from '../../../validation/validation.component';
+import { SupportComponent } from '../../../support/support.component';
+import { CollapsibleContentComponent } from '../../../common/collapsible-content/collapsible-content.component';
+import { AvailabilityComponent } from '../../../availability/availability.component';
+import { CommonActions } from '../../../person/common-actions';
 
 
 @Component({
@@ -27,7 +26,7 @@ import { CommonActions } from '../../person/common-actions';
         AvailabilityComponent,
         SupportComponent
     ],
-    pipes: [GeneralAvailabilityPipe],
+    pipes: [],
     providers: [ClientService]
 })
 export class AddClientComponent extends CommonActions {

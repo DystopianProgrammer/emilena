@@ -3,8 +3,8 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Staff } from '../model/model';
-import { StaffService } from '../staff/staff.service';
-import { ClientService } from '../client/client.service';
+import { StaffService } from '../person/staff/staff.service';
+import { ClientService } from '../person/client/client.service';
 
 @Component({
     selector: 'em-support',

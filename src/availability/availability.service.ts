@@ -30,14 +30,6 @@ export class AvailabilityService {
 
         let formattedSelectableTimes = new Array<Time>();
 
-        let rounder = (value: number) => {
-            if (value === 0) {
-                return value = 5;
-            } else {
-                return value = 5 * Math.ceil(value / 5);
-            }
-        }
-
         for (let i = 0; i <= MAX_HOURS; i++) {
             for (let j = 0; j <= MAX_MINUTES; j += 5) {
                 let time = new Time();

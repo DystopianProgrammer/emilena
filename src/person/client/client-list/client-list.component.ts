@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { Client, Address } from '../../model/model';
+import { Client, Address } from '../../../model/model';
 import { ClientService } from '../client.service';
-import { PaginationComponent } from '../../pagination/pagination.component';
-import { PopOverComponent } from '../../common/pop-over/pop-over.component';
-import { Unspecified } from '../../common/pipes/unspecified.pipe';
+import { PaginationComponent } from '../../../pagination/pagination.component';
+import { PopOverComponent } from '../../../common/pop-over/pop-over.component';
+import { Unspecified } from '../../../common/pipes/unspecified.pipe';
 
 @Component({
     selector: 'em-client-list',
