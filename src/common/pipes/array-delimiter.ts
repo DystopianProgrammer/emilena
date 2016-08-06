@@ -6,9 +6,8 @@ export class ArrayDelimiter implements PipeTransform {
         if (separator && value) {
             return value.join(separator);
         } else if(value) {
-            return value.join(' ,');
+            return value.join(', ');
         } else {
-            console.log(value);
             return '';
         }
     }
