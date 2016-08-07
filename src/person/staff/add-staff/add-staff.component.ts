@@ -1,18 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
-
-import { Subscription } from 'rxjs/Subscription';
+import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 
 import { Staff, Address, Availability, GeneralAvailability } from '../../../model/model';
 import { StaffService } from '../staff.service';
 import { AddressComponent } from '../../../address/address.component';
 import { PersonComponent } from '../../../person/person.component';
 import { ValidationComponent } from '../../../validation/validation.component';
+import { AvailabilityService } from '../../../availability/availability.service';
 import { AvailabilityComponent } from '../../../availability/availability.component';
 import { BadgeComponent } from '../../../common/badge/badge.component';
 import { CollapsibleContentComponent } from '../../../common/collapsible-content/collapsible-content.component';
 import { CommonActions } from '../../../person/common-actions';
 import { ArrayDelimiter } from '../../../common/pipes/array-delimiter';
+import { GeneralAvailabilityPipe } from '../../../common/pipes/general-availability.pipe';
 
 
 @Component({
@@ -25,36 +25,30 @@ import { ArrayDelimiter } from '../../../common/pipes/array-delimiter';
         AvailabilityComponent,
         CollapsibleContentComponent,
         BadgeComponent],
-    pipes: [ArrayDelimiter],
+    pipes: [GeneralAvailabilityPipe, ArrayDelimiter],
     providers: [StaffService]
 })
 export class AddStaffComponent extends CommonActions {
 
-    staff: Staff;
     errors: any;
     successMsg: string;
     contractTypes: string[] = ['CONTRACT', 'BANK'];
 
-    private staffAdd$: Subscription;
 
-    constructor(private staffService: StaffService) {
+    constructor(private staffService: StaffService,
+                private availabilityService: AvailabilityService,
+                private router: Router) {
+
         super(new Staff());
 
-        this.staff = <Staff>super.person();
+        this.availabilityService.cancelAvailabilityForm$.subscribe(event => super.cancelAvailability(event));
     }
 
     addStaff(staff: Staff) {
-        this.staffAdd$ = this.staffService.add(staff)
-            .subscribe(res => this.successMsg = `Staff ${res} successfully created`, error => this.errors = error);
+        this.staffService.add(staff)
+            .subscribe(res => {
+                this.successMsg = `Staff ${res} successfully created`;
+                this.router.navigate(['/staff']);
+            }, error => this.errors = error);
     }
-
-    ngOnDestroy() {
-        if (this.staffAdd$) {
-            this.staffAdd$.unsubscribe();
-        }
-    }
-
-    cancel(): void {
-    }
-
 }

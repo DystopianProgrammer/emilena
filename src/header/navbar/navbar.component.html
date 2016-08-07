@@ -14,7 +14,7 @@
         <div class="navbar-collapse" [ngClass]="{collapse: isCollapsed}" *ngIf="authenticatedUser.authenticationStatus === 0">
             <ul class="nav navbar-nav">
 
-                <li [routerLink]="['/']"><a><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a></li>
+                <li (click)="sendNoticationToCloseNavBar()" [routerLink]="['/']"><a><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a></li>
 
                 <li class="dropdown" [ngClass]="{open: isStaffMenuOpen}" (click)="openStaffMenu()">
                     <a aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-plus" aria-hidden="true"></i>

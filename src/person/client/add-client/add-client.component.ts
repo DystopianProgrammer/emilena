@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -12,7 +12,6 @@ import { SupportComponent } from '../../../support/support.component';
 import { CollapsibleContentComponent } from '../../../common/collapsible-content/collapsible-content.component';
 import { AvailabilityComponent } from '../../../availability/availability.component';
 import { CommonActions } from '../../../person/common-actions';
-
 
 @Component({
     selector: 'em-client',
@@ -31,30 +30,19 @@ import { CommonActions } from '../../../person/common-actions';
 })
 export class AddClientComponent extends CommonActions {
 
-    client: Client;
     errors: any;
     successMsg: string;
     active = true;
 
-    private clientAdd$: Subscription;
-
-    constructor(private clientService: ClientService) {
+    constructor(private clientService: ClientService, private router: Router) {
         super(new Client());
-
-        this.client = <Client>super.person();
     }
 
     addClient(client: Client) {
-        this.clientAdd$ = this.clientService.add(client)
-            .subscribe(res => this.successMsg = `Client ${res} successfully created`, error => this.errors = error);
-    }
-
-    ngOnDestroy() {
-        if (this.clientAdd$) {
-            this.clientAdd$.unsubscribe();
-        }
-    }
-
-    cancel(): void {
+        this.clientService.add(client)
+            .subscribe(res => {
+                this.successMsg = `Client ${res} successfully created`;
+                this.router.navigate(['/client']);
+            }, error => this.errors = error);
     }
 }

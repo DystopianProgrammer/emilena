@@ -22,7 +22,7 @@
                     <td>{{staff.surname}}, {{staff.forename}}</td>
                     <td>{{staff.address.town}}, {{staff.address.postCode}}</td>
                     <td>{{staff.telephoneNumber}}</td>
-                    <td>{{staff.contractType}}</td>
+                    <td>{{staff.contractType | footCase}}</td>
                     <td>{{staff.generalAvailability | generalAvailability | arrayDelimiter | unspecified}}</td>
                 </tr>
             </tbody>

@@ -8,12 +8,13 @@ import { PaginationComponent } from '../../../pagination/pagination.component';
 import { Unspecified } from '../../../common/pipes/unspecified.pipe';
 import { ArrayDelimiter } from '../../../common/pipes/array-delimiter';
 import { GeneralAvailabilityPipe } from '../../../common/pipes/general-availability.pipe';
+import { FootCasePipe } from '../../../common/pipes/foot-case.ts'
 
 @Component({
     selector: 'em-staff-list',
     templateUrl: './staff-list.component.html',
     directives: [PaginationComponent],
-    pipes: [Unspecified, ArrayDelimiter, GeneralAvailabilityPipe],
+    pipes: [Unspecified, ArrayDelimiter, GeneralAvailabilityPipe, FootCasePipe],
     providers: [StaffService]
 })
 export class StaffListComponent implements OnInit, OnDestroy {
@@ -43,7 +44,7 @@ export class StaffListComponent implements OnInit, OnDestroy {
             this.staffFetchAll$.unsubscribe();
         }
 
-        if(this.listClientsForStaff$) {}
+        if (this.listClientsForStaff$) { }
     }
 
     listClients(staff: Staff) {

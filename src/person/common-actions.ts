@@ -1,37 +1,36 @@
-import { Person, Address, Availability, GeneralAvailability } from '../model/model';
+import { Person, Staff, Client, Address, Availability, GeneralAvailability } from '../model/model';
 
 export abstract class CommonActions {
 
-    private _person: Person;
+    _person: Person;
 
     constructor(person: Person) {
         this._person = person;
         this._person.address = new Address();
-        this._person.availabilities = [];
     }
 
-    availabilities: Availability[];
     showAvailabilityForm: boolean = false;
     active = true;
 
+    // Availability
     addAvailability() {
         this.showAvailabilityForm = true;
     }
 
     availabilityUpdated(availability: Availability) {
-        if (availability.date) {
-            this._person.availabilities.push(availability);
-        }
         this.showAvailabilityForm = false;
-    }
-
-    generalAvailabilityUpdated(generalAvailability: GeneralAvailability) {
-        this.showAvailabilityForm = false;
-        this._person.generalAvailability = generalAvailability;
+        this._person.availabilities = [];
+        this._person.availabilities.push(availability);
     }
 
     removeAvailability(index: number) {
         this._person.availabilities.splice(index, 1);
+    }
+
+    // General Availability
+    generalAvailabilityUpdated(generalAvailability: GeneralAvailability) {
+        this.showAvailabilityForm = false;
+        this._person.generalAvailability = generalAvailability;
     }
 
     removeGeneralAvailability() {
@@ -40,5 +39,20 @@ export abstract class CommonActions {
 
     person(): Person {
         return this._person;
+    }
+
+    // this includes general availability as well as custom availability
+    cancelAvailability(cancel: boolean) {
+        this.showAvailabilityForm = false;
+    }
+
+    clear(): void {
+        if (this._person instanceof Staff) {
+            this._person = new Staff();
+        } else if (this._person instanceof Client) {
+            this._person = new Client();
+        } else {
+            console.error('common-actions: Unknown person type: ' + this._person);
+        }
     }
 }

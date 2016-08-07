@@ -11,12 +11,14 @@ import { AuthenticationService } from '../authentication/authentication.service'
 import { AppointmentComponent } from '../appointments/appointment.component';
 import { AddAppointmentComponent } from '../appointments/add/add-appointment.component';
 import { EditAppointmentComponent } from '../appointments/edit/edit-appointment.component';
+import { AppointmentService } from '../appointments/appointment.service';
+import { AvailabilityService } from '../availability/availability.service';
 
 @Component({
     selector: 'emilena',
     templateUrl: './app.component.html',
     directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent],
-    providers: [AuthenticationService],
+    providers: [AuthenticationService, AppointmentService, AvailabilityService],
     precompile: [
         HeaderComponent,
         HomeComponent,
@@ -34,7 +36,7 @@ import { EditAppointmentComponent } from '../appointments/edit/edit-appointment.
 export class AppComponent {
 
     constructor(private router: Router, private authenticationService: AuthenticationService) {
-        if(!authenticationService.authenticatedUser) {
+        if (!authenticationService.authenticatedUser) {
             this.router.navigate(['/']);
         }
     }

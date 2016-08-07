@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Snapshot } from '../common/calendar/calendar.service';
 import { Availability } from '../model/model';
 
+import { Subject } from 'rxjs/Subject';
+
 export class Time {
     hours: number;
     minutes: number;
@@ -9,6 +11,14 @@ export class Time {
 
 @Injectable()
 export class AvailabilityService {
+
+    private cancelAvailabilityForm = new Subject<boolean>();
+
+    cancelAvailabilityForm$ = this.cancelAvailabilityForm.asObservable();
+
+    cancel(): void {
+        this.cancelAvailabilityForm.next(false);
+    }
 
     transform(snapshot: Snapshot): Availability {
 

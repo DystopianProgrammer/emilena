@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions } from '@angular/http';
+import { Http } from '@angular/http';
 
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
@@ -15,25 +15,15 @@ export class AppointmentService {
 
     constructor(private http: Http, private authenticationService: AuthenticationService) { }
 
-    fetchActiveClients(): Observable<Client> {
-        let user = this.authenticationService.authenticatedUser;
-        let headers = this.authenticationService.secureHeader(user.encryptedCredentials);
-        headers.append('Content-Type', 'application/json');
-        let options = new RequestOptions({ headers: headers });
-
-        return this.http.get('/client/active', options)
-                .map(res => res.json())
-                .catch(err => (Observable.throw(err._body)));
+    fetchActiveClients(): Observable<Client[]> {
+        return this.http.get('/client/active')
+            .map(res => res.json() || [])
+            .catch(error => Observable.throw(error._body));
     }
 
-    fetchActiveStaff(): Observable<Staff> {
-        let user = this.authenticationService.authenticatedUser;
-        let headers = this.authenticationService.secureHeader(user.encryptedCredentials);
-        headers.append('Content-Type', 'application/json');
-        let options = new RequestOptions({ headers: headers });
-
-        return this.http.get('/staff/active', options)
-                .map(res => res.json())
+    fetchActiveStaff(): Observable<Staff[]> {
+        return this.http.get('/staff/active')
+                .map(res => res.json() || [])
                 .catch(err => (Observable.throw(err._body)));
     }
 

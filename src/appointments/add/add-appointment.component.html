@@ -1,38 +1,55 @@
-<form>
+<div class="col-xs-12 info-section">
+    <h2>Appointment <small>Create</small></h2>
+</div>
+
+<form *ngIf="active" (ngSubmit)="create(appointment)" #apptForm="ngForm">
     <div class="col-xs-12 col-sm-6">
-        <div class="form-group">
-            <label for="staff-select">Select staff:</label>
-            <select name="" id="staff-select" class="form-control">Select Staff</select>
-        </div>
+        <em-collapsible-content [title]="'Appointment details'" [isCollapsed]="false">
+            <div class="form-group">
+                <label for="staff-select">Select staff:</label>
+                <select name="staff-select" id="staff-select" class="form-control">Select Staff
+                    <option *ngFor="let active of activeStaff">{{ active.surname }}, {{ active.forename }}</option>
+                </select>
+            </div>
 
-        <div class="form-group">
-            <label for="select-client">Select client:</label>
-            <select name="" id="" class="form-control">Select Client</select>
-        </div>
+            <div class="form-group">
+                <label for="select-client">Select client:</label>
+                <select name="select-client" id="" class="form-control">Select Client
+                    <option *ngFor="let active of activeClients">{{ active.surname }}, {{ active.forename }}</option>
+                </select>
+            </div>
 
-        <div class="form-group">
-            <label for="date-from">Time from:</label>
-            <input id="date-from" type="text" class="form-control" placeholder="dd/mm/yyyy hh:mm">
-        </div>
+            <div class="form-group">
+                <label for="date-from">Time from:</label>
+                <input id="date-from" type="text" class="form-control" placeholder="dd/mm/yyyy hh:mm">
+            </div>
 
-        <div class="form-group">
-            <label for="date-to">Time to:</label>
-            <input id="date-to" type="text" class="form-control" placeholder="dd/mm/yyyy hh:mm">
-        </div>
+            <div class="form-group">
+                <label for="date-to">Time to:</label>
+                <input id="date-to" type="text" class="form-control" placeholder="dd/mm/yyyy hh:mm">
+            </div>
 
-        <div class="form-group">
-            <label for="notes">Notes:</label>
-            <textarea id="notes" type="text" class="form-control" placeholder="Comments..."></textarea>
-        </div>
-
-        <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="yesOption"> Yes
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="noOption"> No
-        </label>
+            <div class="form-group">
+                <label for="notes">Notes:</label>
+                <textarea id="notes" type="text" class="form-control" placeholder="Comments..."></textarea>
+            </div>
+        </em-collapsible-content>
     </div>
 
     <div class="col-xs-12 col-sm-6">
+        <em-collapsible-content [title]="'Location'" [isCollapsed]="true">
+            <em-address [address]="address"></em-address>
+            <span class="btn btn-default btn-sm">Use staff address</span>
+            <span class="btn btn-default btn-sm">Use client address</span>
+        </em-collapsible-content>
     </div>
+
+    <div class="col-xs-12">
+        <div class="em-form-submit-buttons">
+            <button type="submit" class="btn btn-success" [disabled]="!apptForm.form.valid">Create</button>
+            <button type="button" class="btn btn-default" (click)="cancel()">Clear</button>
+            <button type="button" class="btn btn-default" [routerLink]="['/']">Cancel</button>
+        </div>
+    </div>
+
 </form>
