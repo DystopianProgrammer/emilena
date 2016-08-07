@@ -13,6 +13,7 @@ import { CollapsibleContentComponent } from '../../../common/collapsible-content
 import { CommonActions } from '../../../person/common-actions';
 import { ArrayDelimiter } from '../../../common/pipes/array-delimiter';
 import { GeneralAvailabilityPipe } from '../../../common/pipes/general-availability.pipe';
+import { SupportComponent } from '../../../support/support.component';
 
 @Component({
     selector: 'em-edit-client',
@@ -22,6 +23,7 @@ import { GeneralAvailabilityPipe } from '../../../common/pipes/general-availabil
         ROUTER_DIRECTIVES,
         ValidationComponent,
         AvailabilityComponent,
+        SupportComponent,
         CollapsibleContentComponent,
         BadgeComponent],
     pipes: [GeneralAvailabilityPipe, ArrayDelimiter],

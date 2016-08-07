@@ -17,14 +17,14 @@
     </div>
     <div class="col-xs-12 col-sm-4">
         <em-collapsible-content [title]="'Availability/Type'" [isCollapsed]="true">
-            <!--
+
             <div class="form-group">
                 <label for="contract-type">Contract Type</label>
                 <select id="contract-type" class="form-control" name="contract-type" [(ngModel)]="_person.contractType" required>
                     <option *ngFor="let contractType of contractTypes">{{contractType}}</option>
                 </select>
             </div>
-            -->
+
             <div class="form-group">
                 <label for="contractedHours">Contracted hours</label>
                 <input type="number" id="contractedHours" name="contractedHours" class="form-control" placeholder="e.g. 37.5" [(ngModel)]="_person.contractedHours">
@@ -41,7 +41,7 @@
             <!-- general availability -->
             <div class="spacer"></div>
             <em-badge *ngIf = "_person.generalAvailability" (dismissBadge)="removeGeneralAvailability(index)">
-                <div>{{ _person.generalAvailability | generalAvailability | arrayDelimiter }}</div>
+                <div>Days available: {{ _person.generalAvailability | generalAvailability | arrayDelimiter }}</div>
             </em-badge>
 
             <!-- custom availability -->
@@ -60,7 +60,7 @@
     <div class="col-xs-12">
         <div class="em-form-submit-buttons">
             <button type="submit" class="btn btn-success" [disabled]="!staffForm.form.valid">Update</button>
-            <button type="button" class="btn btn-default" [routerLink]="['/']">Cancel</button>
+            <button type="button" class="btn btn-default" [routerLink]="['/staff']">Cancel</button>
         </div>
     </div>
 </form>

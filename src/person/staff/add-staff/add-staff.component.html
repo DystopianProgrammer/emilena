@@ -39,7 +39,7 @@
             <!-- general availability -->
             <div class="spacer"></div>
             <em-badge *ngIf = "_person.generalAvailability" (dismissBadge)="removeGeneralAvailability(index)">
-                <div>{{ _person.generalAvailability | generalAvailability | arrayDelimiter }}</div>
+                <div>Days available: {{ _person.generalAvailability | generalAvailability | arrayDelimiter }}</div>
             </em-badge>
 
             <!-- custom availability -->

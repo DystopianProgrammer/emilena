@@ -29,6 +29,8 @@ import { GeneralAvailabilityPipe } from '../../../common/pipes/general-availabil
 })
 export class EditStaffComponent extends CommonActions implements OnInit, OnDestroy {
 
+    contractTypes: string[] = ['CONTRACT', 'BANK'];
+
     private subStaffService: any;
     private subRoute: any;
 
