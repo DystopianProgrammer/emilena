@@ -5,6 +5,10 @@ import { AuthenticationService } from '../authentication/authentication.service'
 
 import { Person, Staff } from '../model/model';
 
+enum OperationType {
+    ADD, UPDATE
+}
+
 @Injectable()
 export abstract class PersonService {
 
@@ -17,6 +21,15 @@ export abstract class PersonService {
     }
 
     add(person: Person): Observable<Person> {
+        return this.operation(person, OperationType.ADD);
+    }
+
+    update(person: Person) {
+        return this.operation(person, OperationType.UPDATE);
+    }
+
+    private operation(person: Person, type: OperationType): Observable<Person> {
+
         let body = JSON.stringify(person);
 
         let user = this.authenticationService.authenticatedUser;
@@ -25,7 +38,14 @@ export abstract class PersonService {
 
         let options = new RequestOptions({ headers: headers });
 
-        let url = (person instanceof Staff) ? '/staff/add' : '/client/add';
+        let url: string = undefined;
+        if (type === OperationType.UPDATE) {
+            url = (person instanceof Staff) ? '/staff/update' : '/staff/update';
+        } else if (type === OperationType.ADD) {
+            url = (person instanceof Staff) ? '/staff/add' : '/client/add';
+        } else {
+            Observable.throw('Unknown operation type');
+        }
 
         return this.http.post(url, body, options)
             .map(res => res.json() || {})

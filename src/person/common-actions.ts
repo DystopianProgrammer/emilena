@@ -37,6 +37,10 @@ export abstract class CommonActions {
         this._person.generalAvailability = undefined;
     }
 
+    setPerson(person: Person) {
+        this._person = person;
+    }
+
     person(): Person {
         return this._person;
     }

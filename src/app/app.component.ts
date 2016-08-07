@@ -5,6 +5,7 @@ import { HomeComponent } from '../home/home.component';
 import { StaffComponent } from '../person/staff/staff.component';
 import { ClientComponent } from '../person/client/client.component';
 import { AddStaffComponent } from '../person/staff/add-staff/add-staff.component';
+import { EditStaffComponent } from '../person/staff/edit-staff/edit-staff.component';
 import { AddClientComponent } from '../person/client/add-client/add-client.component';
 import { FooterComponent } from '../footer/footer.component';
 import { AuthenticationService } from '../authentication/authentication.service';
@@ -24,6 +25,7 @@ import { AvailabilityService } from '../availability/availability.service';
         HomeComponent,
         StaffComponent,
         AddStaffComponent,
+        EditStaffComponent,
         ClientComponent,
         AddClientComponent,
         FooterComponent,

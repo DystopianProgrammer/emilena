@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { ROUTER_DIRECTIVES, ActivatedRoute, Router } from '@angular/router';
 
 import { Staff, Address, Availability, GeneralAvailability } from '../../../model/model';
 import { StaffService } from '../staff.service';
@@ -15,8 +15,8 @@ import { ArrayDelimiter } from '../../../common/pipes/array-delimiter';
 import { GeneralAvailabilityPipe } from '../../../common/pipes/general-availability.pipe';
 
 @Component({
-    selector: 'em-staff',
-    templateUrl: './add-staff.component.html',
+    selector: 'em-edit-staff',
+    templateUrl: './edit-staff.component.html',
     directives: [PersonComponent,
         AddressComponent,
         ROUTER_DIRECTIVES,
@@ -27,27 +27,37 @@ import { GeneralAvailabilityPipe } from '../../../common/pipes/general-availabil
     pipes: [GeneralAvailabilityPipe, ArrayDelimiter],
     providers: [StaffService]
 })
-export class AddStaffComponent extends CommonActions {
+export class EditStaffComponent extends CommonActions implements OnInit, OnDestroy {
 
-    errors: any;
-    successMsg: string;
-    contractTypes: string[] = ['CONTRACT', 'BANK'];
-
+    private subStaffService: any;
+    private subRoute: any;
 
     constructor(private staffService: StaffService,
-                private availabilityService: AvailabilityService,
-                private router: Router) {
+        private route: ActivatedRoute,
+        private router: Router) {
 
         super(new Staff());
-
-        this.availabilityService.cancelAvailabilityForm$.subscribe(event => super.cancelAvailability(event));
     }
 
-    addStaff(staff: Staff) {
-        this.staffService.add(staff)
+    ngOnInit() {
+        this.subRoute = this.route.params.subscribe(params => {
+            let id = +params['id']; // (+) converts string 'id' to a number
+            this.subStaffService = this.staffService.findById(id).subscribe(staff => {
+                super.setPerson(staff);
+            }, error => console.error(error));
+        });
+    }
+
+    ngOnDestroy() {
+        this.subRoute.unsubscribe();
+        this.subStaffService.unsubscribe();
+    }
+
+    update(staff: Staff) {
+        this.subStaffService = this.staffService.update(staff)
             .subscribe(res => {
-                this.successMsg = `Staff ${res} successfully created`;
                 this.router.navigate(['/staff']);
-            }, error => this.errors = error);
+            }, error => console.error(error));
     }
+
 }

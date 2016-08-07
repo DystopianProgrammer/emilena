@@ -23,4 +23,13 @@ export class StaffService extends PersonService {
             .map(res => res.json() || {})
             .catch(error => Observable.throw(error._body));
     }
+
+    /**
+     * Find staff member by id
+     */
+    findById(id: number): Observable<Staff> {
+        return super.getHttp().get(`/staff/${id}`)
+            .map(res => res.json() || {})
+            .catch(error => Observable.throw(error._body));
+    }
 }

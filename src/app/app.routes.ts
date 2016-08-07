@@ -4,6 +4,7 @@ import { HomeComponent } from '../home/home.component';
 import { StaffComponent } from '../person/staff/staff.component';
 import { ClientComponent } from '../person/client/client.component';
 import { AddStaffComponent } from '../person/staff/add-staff/add-staff.component';
+import { EditStaffComponent } from '../person/staff/edit-staff/edit-staff.component';
 import { AddClientComponent } from '../person/client/add-client/add-client.component';
 import { AppointmentComponent } from '../appointments/appointment.component';
 import { AddAppointmentComponent } from '../appointments/add/add-appointment.component';
@@ -14,6 +15,7 @@ export const routes: RouterConfig = [
   { path: 'staff', component: StaffComponent },
   { path: 'client', component: ClientComponent },
   { path: 'add-staff', component: AddStaffComponent },
+  { path: 'edit-staff/:id', component: EditStaffComponent },
   { path: 'add-client', component: AddClientComponent },
   { path: 'appointment', component: AppointmentComponent },
   { path: 'add-appointment', component: AddAppointmentComponent },
