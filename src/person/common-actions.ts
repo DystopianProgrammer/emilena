@@ -53,8 +53,10 @@ export abstract class CommonActions {
     clear(): void {
         if (this._person instanceof Staff) {
             this._person = new Staff();
+            this._person.address = new Address();
         } else if (this._person instanceof Client) {
             this._person = new Client();
+            this._person.address = new Address();
         } else {
             console.error('common-actions: Unknown person type: ' + this._person);
         }
