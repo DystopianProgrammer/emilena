@@ -7,6 +7,7 @@ import { ClientComponent } from '../person/client/client.component';
 import { AddStaffComponent } from '../person/staff/add-staff/add-staff.component';
 import { EditStaffComponent } from '../person/staff/edit-staff/edit-staff.component';
 import { AddClientComponent } from '../person/client/add-client/add-client.component';
+import { EditClientComponent } from '../person/client/edit-client/edit-client.component';
 import { FooterComponent } from '../footer/footer.component';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { AppointmentComponent } from '../appointments/appointment.component';
@@ -28,6 +29,7 @@ import { AvailabilityService } from '../availability/availability.service';
         EditStaffComponent,
         ClientComponent,
         AddClientComponent,
+        EditClientComponent,
         FooterComponent,
         AppointmentComponent,
         AddAppointmentComponent,

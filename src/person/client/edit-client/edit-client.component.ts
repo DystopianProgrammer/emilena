@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ROUTER_DIRECTIVES, ActivatedRoute, Router } from '@angular/router';
 
-import { Staff, Address, Availability, GeneralAvailability } from '../../../model/model';
-import { StaffService } from '../staff.service';
+import { Client, Address, Availability, GeneralAvailability } from '../../../model/model';
+import { ClientService } from '../client.service';
 import { AddressComponent } from '../../../address/address.component';
 import { PersonComponent } from '../../../person/person.component';
 import { ValidationComponent } from '../../../validation/validation.component';
@@ -15,8 +15,8 @@ import { ArrayDelimiter } from '../../../common/pipes/array-delimiter';
 import { GeneralAvailabilityPipe } from '../../../common/pipes/general-availability.pipe';
 
 @Component({
-    selector: 'em-edit-staff',
-    templateUrl: './edit-staff.component.html',
+    selector: 'em-edit-client',
+    templateUrl: './edit-client.component.html',
     directives: [PersonComponent,
         AddressComponent,
         ROUTER_DIRECTIVES,
@@ -25,38 +25,38 @@ import { GeneralAvailabilityPipe } from '../../../common/pipes/general-availabil
         CollapsibleContentComponent,
         BadgeComponent],
     pipes: [GeneralAvailabilityPipe, ArrayDelimiter],
-    providers: [StaffService]
+    providers: [ClientService]
 })
-export class EditStaffComponent extends CommonActions implements OnInit, OnDestroy {
+export class EditClientComponent extends CommonActions implements OnInit, OnDestroy {
 
-    private subStaffService: any;
+    private subClientService: any;
     private subRoute: any;
 
-    constructor(private staffService: StaffService,
+    constructor(private clientService: ClientService,
         private route: ActivatedRoute,
         private router: Router) {
 
-        super(new Staff());
+        super(new Client());
     }
 
     ngOnInit() {
         this.subRoute = this.route.params.subscribe(params => {
             let id = +params['id']; // (+) converts string 'id' to a number
-            this.subStaffService = this.staffService.findById(id).subscribe(staff => {
-                super.setPerson(staff);
+            this.subClientService = this.clientService.findById(id).subscribe(client => {
+                super.setPerson(client);
             }, error => console.error(error));
         });
     }
 
     ngOnDestroy() {
         this.subRoute.unsubscribe();
-        this.subStaffService.unsubscribe();
+        this.subClientService.unsubscribe();
     }
 
-    update(staff: Staff) {
-        this.subStaffService = this.staffService.update(staff)
+    update(client: Client) {
+        this.subClientService = this.clientService.update(client)
             .subscribe(res => {
-                this.router.navigate(['/staff']);
+                this.router.navigate(['/client']);
             }, error => console.error(error));
     }
 }

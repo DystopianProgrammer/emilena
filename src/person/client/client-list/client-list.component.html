@@ -14,7 +14,7 @@
             <tbody>
                 <tr *ngFor="let client of clientList, let i = index">
                     <td class="action-icons">
-                        <span><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></span>
+                        <span [routerLink]="['/edit-client', client.id]"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></span>
                         <i *ngIf="!displaySupportWorkers" class="fa fa-binoculars fa-lg" aria-hidden="true" (click)="toggle(client, i)"></i>
                         <i *ngIf="displaySupportWorkers" class="fa fa-times-circle fa-lg" aria-hidden="true" (click)="toggle(client, i)"></i>
                         <div *ngIf="displaySupportWorkers && indexed === i">

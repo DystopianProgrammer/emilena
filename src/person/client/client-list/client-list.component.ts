@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -11,7 +12,7 @@ import { Unspecified } from '../../../common/pipes/unspecified.pipe';
 @Component({
     selector: 'em-client-list',
     templateUrl: './client-list.component.html',
-    directives: [PaginationComponent, PopOverComponent],
+    directives: [PaginationComponent, PopOverComponent, ROUTER_DIRECTIVES],
     pipes: [Unspecified],
     providers: [ClientService]
 })
