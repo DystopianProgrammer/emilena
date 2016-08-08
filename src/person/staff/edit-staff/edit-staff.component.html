@@ -19,6 +19,10 @@
         <em-collapsible-content [title]="'Availability/Type'" [isCollapsed]="true">
 
             <div class="form-group">
+                <label for="staff-type">Staff Type</label>
+                <select id="staff-type" class="form-control" name="staff-type" [(ngModel)]="_person.staffType" required>
+                    <option *ngFor="let staffType of staffTypes">{{ staffType }}</option>
+                </select>
                 <label for="contract-type">Contract Type</label>
                 <select id="contract-type" class="form-control" name="contract-type" [(ngModel)]="_person.contractType" required>
                     <option *ngFor="let contractType of contractTypes">{{contractType}}</option>

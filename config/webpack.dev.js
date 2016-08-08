@@ -27,6 +27,7 @@ module.exports = webpackMerge(commonConfig, {
         proxy: {
             '/staff*': 'http://localhost:9090',
             '/client*': 'http://localhost:9090',
+            '/appointment*': 'http://localhost:9090',
             '/staff/clients*': 'http://localhost:9090',
             '/user/login': 'http://localhost:9090'
         }

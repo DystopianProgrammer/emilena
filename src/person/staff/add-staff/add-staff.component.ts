@@ -32,7 +32,7 @@ export class AddStaffComponent extends CommonActions {
     errors: any;
     successMsg: string;
     contractTypes: string[] = ['CONTRACT', 'BANK'];
-
+    staffTypes: string[] = ['SENIOR', 'SUPPORT'];
 
     constructor(private staffService: StaffService,
                 private availabilityService: AvailabilityService,

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -28,13 +28,14 @@ export class AddAppointmentComponent implements OnInit, OnDestroy {
     subAppointmentStaff: Subscription;
     hasErrors: string[] = [];
     showAvailabilityForm: boolean = false;
+    completionMessage: string;
 
     /**
      * model vars
      */
     appointment: Appointment;
 
-    constructor(private appointmentService: AppointmentService) { }
+    constructor(private appointmentService: AppointmentService, private router: Router) { }
 
     ngOnInit() {
         this.subAppointmentClients =
@@ -61,6 +62,12 @@ export class AddAppointmentComponent implements OnInit, OnDestroy {
     }
 
     create(appointment: Appointment): void {
+        this.appointmentService.create(appointment).subscribe(res => {
+            this.completionMessage = `Successfully created appointment: ${res.id}`;
+            this.router.navigate(['/appointment']);
+        }, error => {
+            this.completionMessage = `Unable to create appointment: ${error}`;
+        });
     }
 
     useStaffAddress(): void {

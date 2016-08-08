@@ -21,16 +21,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let staff of staffList">
+                <tr *ngFor="let appt of appointments">
                     <td class="action-icons">
                         <span><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></span>
                     </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ appt.id }}</td>
+                    <td>{{ appt.client.forename }} {{ appt.client.surname }}</td>
+                    <td>{{ appt.staff.forename }} {{ appt.staff.surname }}</td>
+                    <td>{{ appt.location | emAddress }}</td>
+                    <td>{{ appt.fromDate | date:'medium' }}</td>
+                    <td>{{ appt.toDate | date:'medium' }}</td>
                 </tr>
             </tbody>
         </table>
