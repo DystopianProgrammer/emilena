@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { Snapshot } from '../common/calendar/calendar.service';
 import { Availability } from '../model/model';
 
@@ -28,7 +29,10 @@ export class AvailabilityService {
         date.setDate(snapshot.date);
 
         let availability = new Availability();
+
         availability.date = date;
+        availability.fromDate = date;
+        availability.toDate = date;
 
         return availability;
     }
@@ -40,8 +44,8 @@ export class AvailabilityService {
 
         let formattedSelectableTimes = new Array<Time>();
 
-        for (let i = 0; i <= MAX_HOURS; i++) {
-            for (let j = 0; j <= MAX_MINUTES; j += 5) {
+        for (let i = 7; i <= MAX_HOURS; i++) {
+            for (let j = 0; j <= MAX_MINUTES; j += 15) {
                 let time = new Time();
                 time.hours = i;
                 time.minutes = j;

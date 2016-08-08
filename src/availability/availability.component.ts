@@ -33,9 +33,12 @@ export class AvailabilityComponent implements OnInit {
 
     calendarActive: boolean = false;
 
+    // for the form display
     date: string = '';
-    dateFrom: string = '';
-    dateTo: string = '';
+
+    // These are only specific to availabilities - NOT general availability
+    fromTime: Time;
+    toTime: Time;
 
     times: Time[];
     daysOfWeek: DayOfWeek[];
@@ -65,6 +68,18 @@ export class AvailabilityComponent implements OnInit {
 
     update() {
         if (this.availabilities.length > 0) {
+            this.availabilities.map(a => {
+                let tFrom = new Date(a.date.toDateString());
+                tFrom.setHours(this.fromTime.hours);
+                tFrom.setMinutes(this.fromTime.minutes);
+
+                let tTo = new Date(a.date.toDateString());
+                tTo.setHours(this.toTime.hours);
+                tTo.setMinutes(this.toTime.minutes);
+
+                a.fromDate = tFrom;
+                a.toDate = tTo;
+            });
             this.availabilityChange.emit(this.availabilities);
         }
 
