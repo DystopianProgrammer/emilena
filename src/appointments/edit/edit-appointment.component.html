@@ -6,25 +6,33 @@
     <div *ngFor="let error of hasErrors">{{error}}</div>
 </div>
 
-<form *ngIf="active && hasErrors.length === 0 && appointment" (ngSubmit)="create(appointment)" #apptForm="ngForm">
+<form *ngIf="active && hasErrors.length === 0 && appointment" (ngSubmit)="create(appointment)" #apptForm="ngForm" class="spacer appointment">
     <div class="col-xs-12 col-sm-6">
-        <em-collapsible-content [title]="'Appointment details'" [isCollapsed]="false">
-            <div class="form-group">
+        <em-collapsible-content [title]="'Details'" [isCollapsed]="false">
+            <div class="editselect">
+                <span><strong>Staff:&nbsp;</strong>{{ appointment.staff.forename }} {{ appointment.staff.surname }}&nbsp;</span>
+                <a (click)="showStaffSelect()">Edit</a>
+            </div>
+            <div class="form-group" *ngIf="updateStaff">
                 <label for="staff-select">Select staff:</label>
                 <select name="staff-select" id="staff-select" class="form-control" [(ngModel)]="appointment.staff" required>Select Staff
-                <option *ngFor="let active of activeStaff" [ngValue]="appointment.staff">{{ active.surname }}, {{ active.forename }}</option>
+                <option *ngFor="let active of activeStaff" [ngValue]="active">{{ active.surname }}, {{ active.forename }}</option>
             </select>
             </div>
-            <div class="form-group">
+            <div class="editselect">
+                <span><strong>Client:&nbsp;</strong>{{ appointment.client.forename }} {{ appointment.client.surname }}&nbsp;</span>
+                <a (click)="showClientSelect()">Edit</a>
+            </div>
+            <div class="form-group" *ngIf="updateClient">
                 <label for="select-client">Select client:</label>
                 <select name="select-client" id="select-client" class="form-control" [(ngModel)]="appointment.client" required>Select Client
-                <option *ngFor="let active of activeClients" [ngValue]="appointment.client">{{ active.surname }}, {{ active.forename }}</option>
+                <option *ngFor="let active of activeClients" [ngValue]="active">{{ active.surname }}, {{ active.forename }}</option>
             </select>
             </div>
 
-            <a class="btn btn-default spacer" (click)="addAvailability()">Add Time</a>
+            <a class="btn btn-default addavailability" (click)="addAvailability()">Update Time</a>
             <em-badge *ngIf="appointment.fromDate && appointment.toDate">
-                <div><strong>Appointment time:</strong></div>
+                <div class="spacer"><strong>Appointment date &amp; time:</strong></div>
                 <div><strong>From:</strong> {{ appointment.fromDate | date:'medium' }}</div>
                 <div><strong>Until:</strong> {{ appointment.toDate | date:'medium' }}</div>
             </em-badge>
@@ -37,16 +45,18 @@
 
             <div class="form-group">
                 <label for="notes">Notes:</label>
-                <textarea id="notes" type="text" class="form-control" placeholder="Comments..."></textarea>
+                <textarea name="notes" id="notes" type="text" class="form-control" [(ngModel)]="appointment.notes" placeholder="Comments..."></textarea>
             </div>
         </em-collapsible-content>
     </div>
 
     <div class="col-xs-12 col-sm-6">
         <em-collapsible-content [title]="'Location'" [isCollapsed]="true">
-            <em-address [address]="appointment.location"></em-address>
-            <span (click)="useStaffAddress()" class="btn btn-default btn-sm">Use staff address</span>
-            <span (click)="useClientAddress()" class="btn btn-default btn-sm">Use client address</span>
+            <div>
+                <em-address [address]="appointment.location"></em-address>
+                <span (click)="useStaffAddress()" class="btn btn-default btn-sm">Use staff address</span>
+                <span (click)="useClientAddress()" class="btn btn-default btn-sm">Use client address</span>
+            </div>
         </em-collapsible-content>
     </div>
 

@@ -27,6 +27,8 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
     hasErrors: string[] = [];
     showAvailabilityForm: boolean = false;
     completionMessage: string;
+    updateStaff: boolean = false;
+    updateClient: boolean = false;
 
     /**
      * Unsubscribales
@@ -35,13 +37,18 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
     private subApptService: Subscription;
     private subAppointmentClients: Subscription;
     private subAppointmentStaff: Subscription;
+    private subAvailabilityDismiss: Subscription;
 
     /**
      * model
      */
     appointment: Appointment;
 
-    constructor(private appointmentService: AppointmentService, private route: ActivatedRoute, private router: Router) {
+    constructor(private appointmentService: AppointmentService,
+        private route: ActivatedRoute,
+        private availabilityService: AvailabilityService,
+        private router: Router) {
+
         this.subRoute = this.route.params.subscribe(params => {
             let id = +params['id']; // (+) converts string 'id' to a number
             this.subApptService = this.appointmentService.fetchById(id)
@@ -50,7 +57,6 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        console.log(this.appointment);
         this.subAppointmentClients =
             this.appointmentService.fetchActiveClients().subscribe(clients => {
                 this.activeClients = clients;
@@ -66,11 +72,17 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
                     this.hasErrors.push('Please add staff member/s before scheduling an appointment');
                 }
             });
+
+        this.subAvailabilityDismiss =
+            this.availabilityService.cancelAvailabilityForm$.subscribe(dismiss => this.showAvailabilityForm = dismiss);
     }
 
     ngOnDestroy() {
         this.subRoute.unsubscribe();
         this.subApptService.unsubscribe();
+        this.subAvailabilityDismiss.unsubscribe();
+        this.subAppointmentStaff.unsubscribe();
+        this.subAppointmentClients.unsubscribe();
     }
 
     create(appointment: Appointment): void {
@@ -94,6 +106,14 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
         }
     }
 
+    showStaffSelect() {
+        this.updateStaff = !this.updateStaff;
+    }
+
+    showClientSelect() {
+        this.updateClient = !this.updateClient;
+    }
+
     addAvailability() {
         this.showAvailabilityForm = true;
     }
@@ -103,5 +123,4 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
         this.appointment.fromDate = availability[0].fromDate;
         this.appointment.toDate = availability[0].toDate;
     }
-
 }

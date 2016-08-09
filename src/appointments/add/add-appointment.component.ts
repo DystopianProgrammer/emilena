@@ -33,13 +33,16 @@ export class AddAppointmentComponent implements OnInit, OnDestroy {
      */
     private subAppointmentClients: Subscription;
     private subAppointmentStaff: Subscription;
+    private subAvailabilityDismiss: Subscription;
 
     /**
      * model vars
      */
     appointment: Appointment;
 
-    constructor(private appointmentService: AppointmentService, private router: Router) { }
+    constructor(private appointmentService: AppointmentService,
+                private availabilityService: AvailabilityService,
+                private router: Router) { }
 
     ngOnInit() {
         this.subAppointmentClients =
@@ -49,6 +52,7 @@ export class AddAppointmentComponent implements OnInit, OnDestroy {
                     this.hasErrors.push('Please add client/s before scheduling an appointment');
                 }
             });
+
         this.subAppointmentStaff =
             this.appointmentService.fetchActiveStaff().subscribe(staff => {
                 this.activeStaff = staff;
@@ -57,12 +61,16 @@ export class AddAppointmentComponent implements OnInit, OnDestroy {
                 }
             });
 
+        this.subAvailabilityDismiss =
+            this.availabilityService.cancelAvailabilityForm$.subscribe(dismiss => this.showAvailabilityForm = dismiss);
+
         this.initAppt();
     }
 
     ngOnDestroy() {
         this.subAppointmentClients.unsubscribe();
         this.subAppointmentStaff.unsubscribe();
+        this.subAvailabilityDismiss.unsubscribe();
     }
 
     create(appointment: Appointment): void {
