@@ -24,11 +24,15 @@ export class AddAppointmentComponent implements OnInit, OnDestroy {
     activeClients: Client[] = [];
     activeStaff: Staff[] = [];
     active = true;
-    subAppointmentClients: Subscription;
-    subAppointmentStaff: Subscription;
     hasErrors: string[] = [];
     showAvailabilityForm: boolean = false;
     completionMessage: string;
+
+    /**
+     * Unsubscriables
+     */
+    private subAppointmentClients: Subscription;
+    private subAppointmentStaff: Subscription;
 
     /**
      * model vars

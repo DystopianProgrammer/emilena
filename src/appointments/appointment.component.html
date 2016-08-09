@@ -23,7 +23,7 @@
             <tbody>
                 <tr *ngFor="let appt of appointments">
                     <td class="action-icons">
-                        <span><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></span>
+                        <span [routerLink]="['/edit-appointment', appt.id]"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></span>
                     </td>
                     <td>{{ appt.id }}</td>
                     <td>{{ appt.client.forename }} {{ appt.client.surname }}</td>

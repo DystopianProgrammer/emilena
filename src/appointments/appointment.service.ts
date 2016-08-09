@@ -58,4 +58,13 @@ export class AppointmentService {
                 .catch(err => (Observable.throw(err._body)));
     }
 
+    /**
+     * Fetch appointment by id
+     */
+    fetchById(id: number): Observable<Appointment> {
+        return this.http.get(`/appointment/${id}`)
+                .map(res => res.json() || {})
+                .catch(err => Observable.throw(err._body));
+    }
+
 }

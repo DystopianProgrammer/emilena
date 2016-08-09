@@ -21,7 +21,7 @@ export const routes: RouterConfig = [
   { path: 'edit-client/:id', component: EditClientComponent },
   { path: 'appointment', component: AppointmentComponent },
   { path: 'add-appointment', component: AddAppointmentComponent },
-  { path: 'edit-appointment', component: EditAppointmentComponent }
+  { path: 'edit-appointment/:id', component: EditAppointmentComponent }
 ];
 
 export const APP_ROUTER_PROVIDERS = [

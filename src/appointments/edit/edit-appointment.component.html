@@ -1,38 +1,60 @@
-<form>
+<div class="col-xs-12 info-section">
+    <h2>Appointment <small>Edit</small></h2>
+</div>
+
+<div *ngIf="hasErrors.length > 0" class="col-xs-12 col-sm-6">
+    <div *ngFor="let error of hasErrors">{{error}}</div>
+</div>
+
+<form *ngIf="active && hasErrors.length === 0 && appointment" (ngSubmit)="create(appointment)" #apptForm="ngForm">
     <div class="col-xs-12 col-sm-6">
-        <div class="form-group">
-            <label for="staff-select">Select staff:</label>
-            <select name="" id="staff-select" class="form-control">Select Staff</select>
-        </div>
+        <em-collapsible-content [title]="'Appointment details'" [isCollapsed]="false">
+            <div class="form-group">
+                <label for="staff-select">Select staff:</label>
+                <select name="staff-select" id="staff-select" class="form-control" [(ngModel)]="appointment.staff" required>Select Staff
+                <option *ngFor="let active of activeStaff" [ngValue]="appointment.staff">{{ active.surname }}, {{ active.forename }}</option>
+            </select>
+            </div>
+            <div class="form-group">
+                <label for="select-client">Select client:</label>
+                <select name="select-client" id="select-client" class="form-control" [(ngModel)]="appointment.client" required>Select Client
+                <option *ngFor="let active of activeClients" [ngValue]="appointment.client">{{ active.surname }}, {{ active.forename }}</option>
+            </select>
+            </div>
 
-        <div class="form-group">
-            <label for="select-client">Select client:</label>
-            <select name="" id="" class="form-control">Select Client</select>
-        </div>
+            <a class="btn btn-default spacer" (click)="addAvailability()">Add Time</a>
+            <em-badge *ngIf="appointment.fromDate && appointment.toDate">
+                <div><strong>Appointment time:</strong></div>
+                <div><strong>From:</strong> {{ appointment.fromDate | date:'medium' }}</div>
+                <div><strong>Until:</strong> {{ appointment.toDate | date:'medium' }}</div>
+            </em-badge>
 
-        <div class="form-group">
-            <label for="date-from">Time from:</label>
-            <input id="date-from" type="text" class="form-control" placeholder="dd/mm/yyyy hh:mm">
-        </div>
+            <div class="spacer"></div>
 
-        <div class="form-group">
-            <label for="date-to">Time to:</label>
-            <input id="date-to" type="text" class="form-control" placeholder="dd/mm/yyyy hh:mm">
-        </div>
+            <div *ngIf="showAvailabilityForm" class="em-modal">
+                <em-availability (availabilityChange)="availabilityUpdated($event)" [custom]="true"></em-availability>
+            </div>
 
-        <div class="form-group">
-            <label for="notes">Notes:</label>
-            <textarea id="notes" type="text" class="form-control" placeholder="Comments..."></textarea>
-        </div>
-
-        <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="yesOption"> Yes
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="noOption"> No
-        </label>
+            <div class="form-group">
+                <label for="notes">Notes:</label>
+                <textarea id="notes" type="text" class="form-control" placeholder="Comments..."></textarea>
+            </div>
+        </em-collapsible-content>
     </div>
 
     <div class="col-xs-12 col-sm-6">
+        <em-collapsible-content [title]="'Location'" [isCollapsed]="true">
+            <em-address [address]="appointment.location"></em-address>
+            <span (click)="useStaffAddress()" class="btn btn-default btn-sm">Use staff address</span>
+            <span (click)="useClientAddress()" class="btn btn-default btn-sm">Use client address</span>
+        </em-collapsible-content>
     </div>
+
+    <div class="col-xs-12">
+        <div class="em-form-submit-buttons">
+            <button type="submit" class="btn btn-success" [disabled]="!apptForm.form.valid">Update</button>
+            <button type="button" class="btn btn-default" [routerLink]="['/appointment']">Cancel</button>
+        </div>
+    </div>
+
 </form>
