@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
+
 import { Snapshot } from '../common/calendar/calendar.service';
 import { Availability } from '../model/model';
+
+import { Subject } from 'rxjs/Subject';
 
 export class Time {
     hours: number;
@@ -10,6 +13,14 @@ export class Time {
 @Injectable()
 export class AvailabilityService {
 
+    private cancelAvailabilityForm = new Subject<boolean>();
+
+    cancelAvailabilityForm$ = this.cancelAvailabilityForm.asObservable();
+
+    cancel(): void {
+        this.cancelAvailabilityForm.next(false);
+    }
+
     transform(snapshot: Snapshot): Availability {
 
         let date = new Date();
@@ -18,7 +29,10 @@ export class AvailabilityService {
         date.setDate(snapshot.date);
 
         let availability = new Availability();
+
         availability.date = date;
+        availability.fromDate = date;
+        availability.toDate = date;
 
         return availability;
     }
@@ -30,16 +44,8 @@ export class AvailabilityService {
 
         let formattedSelectableTimes = new Array<Time>();
 
-        let rounder = (value: number) => {
-            if (value === 0) {
-                return value = 5;
-            } else {
-                return value = 5 * Math.ceil(value / 5);
-            }
-        }
-
-        for (let i = 0; i <= MAX_HOURS; i++) {
-            for (let j = 0; j <= MAX_MINUTES; j += 5) {
+        for (let i = 7; i <= MAX_HOURS; i++) {
+            for (let j = 0; j <= MAX_MINUTES; j += 15) {
                 let time = new Time();
                 time.hours = i;
                 time.minutes = j;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticationComponent } from '../authentication/authentication.component';
-import { AuthenticationService, AuthenticationStatus, AuthenticatedUser } from '../authentication/authentication.service';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
     selector: 'em-home',
@@ -13,7 +13,7 @@ export class HomeComponent {
 
     constructor(private authenticationService: AuthenticationService) {
         this.authenticationService.authenticatedUserSource$.subscribe(user => {
-            switch(user.authenticationStatus) {
+            switch (user.authenticationStatus) {
                 case 0: this.displayLoginForm = false; break;
                 case 1: this.displayLoginForm = true; break;
                 default: this.displayLoginForm = true;

@@ -2,47 +2,12 @@
     .navbar-brand {
         cursor: pointer;
     }
-    ul > li {
+
+    li {
         cursor: pointer;
     }
-    .dropdown-menu {
-        background: @gray-darker;
-        min-height: 50px;
-        em-navbar-item > li {
-            margin-left: 10px;
-        }
-    }
 
-    .nav {
-        .open > a, .nav .open > a:hover, .nav .open > a:focus {
-            background-color: @gray-darker;
-        }
-        &.navbar-nav {
-            .item-header {
-                margin: 1px;
-                display: block;
-                li {
-                    padding: 15px;
-                    cursor: pointer;
-                    :hover {
-                        color: @white;
-                    }
-                }
-                a {
-                    color: #9d9d9d;
-                    text-decoration: none;
-                }
-            }
-        }
-    }
-
-    @media screen and (min-width: 768px) {
-        .nav {
-            &.navbar-nav {
-                .item-header {
-                    float: left;
-                }
-            }
-        }
+    a {
+        text-decoration: none;
     }
 }

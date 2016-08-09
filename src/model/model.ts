@@ -16,13 +16,14 @@ export class Person {
     surname: string;
     dob: Date;
     email: string;
-    telephoneNumber: number;
+    telephoneNumber: string;
     address: Address;
     availabilities: Availability[];
     absences: Absence[];
     preferences: string;
     generalAvailability: GeneralAvailability;
     appointments: Appointment[];
+    active: boolean;
 }
 
 /**
@@ -68,7 +69,7 @@ export class Availability {
  * One to one with person
  */
 export class GeneralAvailability {
-    daysOfWeek: DayOfWeek[];
+    daysOfWeek: string[];
     person: Person;
 }
 

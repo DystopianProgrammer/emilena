@@ -1,0 +1,70 @@
+<!-- Header -->
+<div class="col-xs-12 info-section">
+    <h2>Staff <small>Edit</small></h2>
+</div>
+
+<!-- form contents -->
+<form *ngIf="active" (ngSubmit)="update(_person)" #staffForm="ngForm">
+    <div class="col-xs-12 col-sm-4">
+        <em-collapsible-content [title]="'Person'">
+            <em-person [person]="_person"></em-person>
+        </em-collapsible-content>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <em-collapsible-content [title]="'Address'" [isCollapsed]="true">
+            <em-address [address]="_person.address"></em-address>
+        </em-collapsible-content>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <em-collapsible-content [title]="'Availability/Type'" [isCollapsed]="true">
+
+            <div class="form-group">
+                <label for="staff-type">Staff Type</label>
+                <select id="staff-type" class="form-control" name="staff-type" [(ngModel)]="_person.staffType" required>
+                    <option *ngFor="let staffType of staffTypes">{{ staffType }}</option>
+                </select>
+                <label for="contract-type">Contract Type</label>
+                <select id="contract-type" class="form-control" name="contract-type" [(ngModel)]="_person.contractType" required>
+                    <option *ngFor="let contractType of contractTypes">{{contractType}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="contractedHours">Contracted hours</label>
+                <input type="number" id="contractedHours" name="contractedHours" class="form-control" placeholder="e.g. 37.5" [(ngModel)]="_person.contractedHours">
+            </div>
+            <div class="form-group">
+                <label for="availabilityBtn" class="sr-only">Availability</label>
+                <a class="btn btn-primary" id="availabilityBtn" (click)="addAvailability()">Add Availability</a>
+            </div>
+            <div *ngIf="showAvailabilityForm" class="em-modal">
+                <em-availability (generalAvailabilityChange)="generalAvailabilityUpdated($event)" (availabilityChange)="availabilityUpdated($event)">
+                </em-availability>
+            </div>
+
+            <!-- general availability -->
+            <div class="spacer"></div>
+            <em-badge *ngIf = "_person.generalAvailability" (dismissBadge)="removeGeneralAvailability(index)">
+                <div>Days available: {{ _person.generalAvailability | generalAvailability | arrayDelimiter }}</div>
+            </em-badge>
+
+            <!-- custom availability -->
+            <span *ngFor="let availability of _person.availabilities; let index=index">
+                <div class="spacer"></div>
+                <em-badge (dismissBadge)="removeAvailability(index)">
+                    <div>Date: {{ availability.date | date: 'fullDate' }}</div>
+                    <div>From: {{ availability.fromDate }}</div>
+                    <div>To: {{ availability.toDate }}</div>
+                </em-badge>
+            </span>
+        </em-collapsible-content>
+    </div>
+
+    <!-- Buttons -->
+    <div class="col-xs-12">
+        <div class="em-form-submit-buttons">
+            <button type="submit" class="btn btn-success" [disabled]="!staffForm.form.valid">Update</button>
+            <button type="button" class="btn btn-default" [routerLink]="['/staff']">Cancel</button>
+        </div>
+    </div>
+</form>

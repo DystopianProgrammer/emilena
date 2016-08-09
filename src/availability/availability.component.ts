@@ -5,6 +5,7 @@ import { CalendarComponent } from '../common/calendar/calendar.component';
 import { Snapshot } from '../common/calendar/calendar.service';
 import { ZeroPadPipe } from '../common/pipes/zero-pad.pipe';
 import { AvailabilityService, Time } from './availability.service';
+import { DayOfWeekSerializer } from '../common/serializers/day-of-week-serializer';
 
 class CheckBoxItem {
     name: string;
@@ -19,29 +20,34 @@ class CheckBoxItem {
 @Component({
     selector: 'em-availability',
     templateUrl: './availability.component.html',
-    providers: [AvailabilityService],
     pipes: [ZeroPadPipe],
     directives: [CalendarComponent]
 })
 export class AvailabilityComponent implements OnInit {
 
-    availability: Availability = new Availability();
-    @Output() availabilityChange = new EventEmitter<Availability>();
+    // indicates whether we want to the general availability, or custom availability display
+    @Input() custom: boolean;
+
+    @Output() availabilityChange = new EventEmitter<Availability[]>();
     @Output() generalAvailabilityChange = new EventEmitter<GeneralAvailability>();
 
     calendarActive: boolean = false;
 
+    // for the form display
     date: string = '';
-    dateFrom: string = '';
-    dateTo: string = '';
+
+    // These are only specific to availabilities - NOT general availability
+    fromTime: Time;
+    toTime: Time;
 
     times: Time[];
     daysOfWeek: DayOfWeek[];
 
-    custom: boolean = false;
     buttonLabel = 'Custom';
     checkBoxItems: CheckBoxItem[];
-    disableCustom: boolean;
+
+    availability: Availability;
+    availabilities: Availability[] = [];
 
     // Reset the form with a new hero AND restore 'pristine' class state
     // by toggling 'active' flag which causes the form
@@ -52,56 +58,47 @@ export class AvailabilityComponent implements OnInit {
     constructor(private availabilityService: AvailabilityService) { }
 
     ngOnInit() {
-        let date = new Date();
         this.times = this.availabilityService.availabilityTimes();
         this.initCheckBoxItems();
+
+        if (this.custom) {
+            this.availability = new Availability();
+        }
     }
 
     update() {
-        if (!this.disableCustom) {
-            this.availabilityChange.emit(this.availability);
-        } else {
-            // transform the checkboxes to GeneralAvailability
-            let daysOfWeek = this.checkBoxItems
-                .filter(item => item.selected === true)
-                .map(item => {
-                    switch (item.id.toUpperCase()) {
-                        case 'MONDAY': return DayOfWeek.MONDAY;
-                        case 'TUESDAY': return DayOfWeek.TUESDAY;
-                        case 'WEDNESDAY': return DayOfWeek.WEDNESDAY;
-                        case 'THURSDAY': return DayOfWeek.THURSDAY;
-                        case 'FRIDAY': return DayOfWeek.FRIDAY;
-                        case 'SATURDAY': return DayOfWeek.SATURDAY;
-                        default: return DayOfWeek.SUNDAY;
-                    }
-                });
-            let generalAvailability = new GeneralAvailability();
-            generalAvailability.daysOfWeek = daysOfWeek;
+        if (this.availabilities.length > 0) {
+            this.availabilities.map(a => {
+                let tFrom = new Date(a.date.toDateString());
+                tFrom.setHours(this.fromTime.hours);
+                tFrom.setMinutes(this.fromTime.minutes);
+
+                let tTo = new Date(a.date.toDateString());
+                tTo.setHours(this.toTime.hours);
+                tTo.setMinutes(this.toTime.minutes);
+
+                a.fromDate = tFrom;
+                a.toDate = tTo;
+            });
+            this.availabilityChange.emit(this.availabilities);
+        }
+
+        let generalAvailability = this.updateGeneralAvailability();
+        if (generalAvailability.daysOfWeek && generalAvailability.daysOfWeek.length > 0) {
             this.generalAvailabilityChange.emit(generalAvailability);
         }
     }
 
     cancel() {
-        this.active = false;
-        // send back the unchanged availability
-        this.availability = new Availability();
-        this.update();
+        this.availabilityService.cancel();
     }
 
-    setDate(snapshot?: Snapshot) {
-        if (snapshot && !this.disableCustom) {
+    updateAvailability(snapshot?: Snapshot) {
+        if (snapshot) {
             this.calendarActive = false;
-            // update the display
             this.date = snapshot.friendlyName;
-            // update the model
-            this.availability = this.availabilityService.transform(snapshot);
-        }
-    }
-
-    toggleFunction() {
-        if (!this.disableCustom) {
-            this.custom = !this.custom;
-            this.buttonLabel = (this.buttonLabel === 'Custom') ? 'General' : 'Custom';
+            let availability = this.availabilityService.transform(snapshot);
+            this.availabilities.push(availability);
         }
     }
 
@@ -109,13 +106,25 @@ export class AvailabilityComponent implements OnInit {
         this.calendarActive = true;
     }
 
-    disableCounterModel() {
-        // if general checkboxes (days) are selected, we have to disable the custom availability model input
-        // the timeout is for an oddity with event timings
-        setTimeout(() => {
-            let hasDisabledItems = this.checkBoxItems.filter(item => item.selected === true);
-            this.disableCustom = (hasDisabledItems.length > 0)
-        }, 100);
+
+    private updateGeneralAvailability(): GeneralAvailability {
+        let daysOfWeek = this.checkBoxItems
+            .filter(item => item.selected === true)
+            .map(item => {
+                switch (item.id.toUpperCase()) {
+                    case 'MONDAY': return DayOfWeek.MONDAY;
+                    case 'TUESDAY': return DayOfWeek.TUESDAY;
+                    case 'WEDNESDAY': return DayOfWeek.WEDNESDAY;
+                    case 'THURSDAY': return DayOfWeek.THURSDAY;
+                    case 'FRIDAY': return DayOfWeek.FRIDAY;
+                    case 'SATURDAY': return DayOfWeek.SATURDAY;
+                    default: return DayOfWeek.SUNDAY;
+                }
+            });
+
+        let generalAvailability = new GeneralAvailability();
+        generalAvailability.daysOfWeek = DayOfWeekSerializer.getInstance().fromCollection(daysOfWeek);
+        return generalAvailability;
     }
 
     private initCheckBoxItems() {

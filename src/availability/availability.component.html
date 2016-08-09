@@ -10,32 +10,31 @@
                     <input type="text" name="datetime" id="datetime" class="form-control" placeholder="22/03/2016" [(ngModel)]="date" (click)="activateCalendar()" required>
                 </div>
                 <div *ngIf="calendarActive">
-                    <em-calendar (dateSelection)="setDate($event)"></em-calendar>
+                    <em-calendar (dateSelection)="updateAvailability($event)"></em-calendar>
                 </div>
                 <div class="form-group col-xs-12 col-sm-4">
                     <label for="timeFrom">Time from:</label>
-                    <select name="timeFrom" id="timeFrom" class="form-control" [(ngModel)]="availability.fromDate" required>
-                        <option *ngFor="let time of times">{{time.hours | zeroPad }}:{{time.minutes | zeroPad}}</option>
+                    <select name="timeFrom" id="timeFrom" class="form-control" [(ngModel)]="fromTime" required>
+                        <option *ngFor="let time of times" [ngValue]="time">{{ time.hours | zeroPad }}:{{time.minutes | zeroPad }}</option>
                     </select>
                 </div>
                 <div class="form-group col-xs-12 col-sm-4">
                     <label for="timeTo">Time to:</label>
-                    <select name="timeTo" id="timeTo" class="form-control" [(ngModel)]="availability.toDate" required>
-                        <option *ngFor="let time of times">{{time.hours | zeroPad }}:{{time.minutes | zeroPad }}</option>
+                    <select name="timeTo" id="timeTo" class="form-control" [(ngModel)]="toTime" required>
+                        <option *ngFor="let time of times" [ngValue]="time">{{ time.hours | zeroPad }}:{{time.minutes | zeroPad }}</option>
                     </select>
                 </div>
             </div>
             <div *ngIf="!custom">
                 <div class="col-xs-12">
                     <label class="checkbox-inline" *ngFor="let checkboxItem of checkBoxItems">
-                        <input type="checkbox" name="checkboxItem.name" [id]="checkboxItem.id" [(ngModel)]="checkboxItem.selected" [value]="checkboxItem" (change)="disableCounterModel()">{{checkboxItem.name}}
+                        <input type="checkbox" name="checkboxItem.name" [id]="checkboxItem.id" [(ngModel)]="checkboxItem.selected" [value]="checkboxItem">{{checkboxItem.name}}
                     </label>
                 </div>
             </div>
             <div class="col-xs-12">
                 <div class="em-form-submit-buttons">
                     <button type="submit" class="btn btn-success" [disabled]="!availabilityForm.form.valid">Add</button>
-                    <button type="button" [ngClass]="{disabled: disableCustom}" class="btn btn-default" (click)="toggleFunction()">{{ buttonLabel }}</button>
                     <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
                 </div>
             </div>

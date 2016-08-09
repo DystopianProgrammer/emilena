@@ -1,0 +1,31 @@
+<!-- Header -->
+<div class="col-xs-12 info-section">
+    <h2>Client <small>Edit</small></h2>
+</div>
+
+<!-- form contents -->
+<form *ngIf="active" (ngSubmit)="update(_person)" #clientForm="ngForm">
+    <div class="col-xs-12 col-sm-4">
+        <em-collapsible-content [title]="'Person'">
+            <em-person [person]="_person"></em-person>
+        </em-collapsible-content>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <em-collapsible-content [title]="'Address'" [isCollapsed]="true">
+            <em-address [address]="_person.address"></em-address>
+        </em-collapsible-content>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <em-collapsible-content [title]="'Support Details'" [isCollapsed]="true">
+            <em-support [client]="_person"></em-support>
+        </em-collapsible-content>
+    </div>
+
+    <!-- Buttons -->
+    <div class="col-xs-12">
+        <div class="em-form-submit-buttons">
+            <button type="submit" class="btn btn-success" [disabled]="!clientForm.form.valid">Update</button>
+            <button type="button" class="btn btn-default" [routerLink]="['/client']">Cancel</button>
+        </div>
+    </div>
+</form>

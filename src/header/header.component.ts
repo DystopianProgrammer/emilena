@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from '../navbar/navbar.component';
+import { NavbarComponent } from '../header/navbar/navbar.component';
 
 @Component({
     selector: 'em-header',
