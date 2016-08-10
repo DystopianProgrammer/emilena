@@ -5,14 +5,14 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { Client, Address } from '../../../model/model';
 import { ClientService } from '../client.service';
-import { PaginationComponent } from '../../../pagination/pagination.component';
 import { PopOverComponent } from '../../../common/pop-over/pop-over.component';
 import { Unspecified } from '../../../common/pipes/unspecified.pipe';
+import { LoaderService } from '../../../common/loader/loader.service';
 
 @Component({
     selector: 'em-client-list',
     templateUrl: './client-list.component.html',
-    directives: [PaginationComponent, PopOverComponent, ROUTER_DIRECTIVES],
+    directives: [PopOverComponent, ROUTER_DIRECTIVES],
     pipes: [Unspecified],
     providers: [ClientService]
 })
@@ -25,18 +25,15 @@ export class ClientListComponent implements OnInit, OnDestroy {
 
     private staffFetchAll$: Subscription;
 
-    constructor(private clientService: ClientService) { }
+    constructor(private clientService: ClientService, private loaderService: LoaderService) { }
 
     ngOnInit() {
+        this.loaderService.notifyIsLoaded(false);
         this.staffFetchAll$ = this.clientService.findAll()
-            .subscribe(clientList => {
-                this.clientList = clientList.map(client => {
-                    return client;
-                });
-            },
-            error => {
-                this.errorMessage = <any>error
-            });
+            .subscribe(res => {
+                this.clientList = res;
+                this.loaderService.notifyIsLoaded(true);
+            }, error => this.errorMessage = error);
     }
 
     ngOnDestroy() {

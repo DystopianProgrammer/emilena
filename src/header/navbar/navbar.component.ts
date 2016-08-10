@@ -3,6 +3,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { NavBarService } from './navbar.service';
 import { AuthenticationService, AuthenticatedUser, AuthenticationStatus } from '../../authentication/authentication.service';
+import { LoaderService } from '../../common/loader/loader.service';
 
 @Component({
     selector: 'em-nav-bar',
@@ -17,7 +18,10 @@ export class NavbarComponent {
     isClientMenuOpen: boolean = false;
     isStaffMenuOpen: boolean = false;
 
-    constructor(private navbarService: NavBarService, private authenticationService: AuthenticationService) {
+    constructor(private navbarService: NavBarService,
+                private loaderService: LoaderService,
+                private authenticationService: AuthenticationService) {
+
         this.navbarService.toggleNavBar$.subscribe(toggle => this.isCollapsed = !toggle);
         this.authenticationService.authenticatedUserSource$.subscribe(authenticatedUser => {
             this.authenticatedUser = authenticatedUser;
@@ -29,8 +33,13 @@ export class NavbarComponent {
     }
 
     logout(): void {
+        setTimeout(() => {
+            this.loaderService.notifyIsLoaded(true);
+        }, 1000);
+        this.loaderService.notifyIsLoaded(false);
+
         this.sendNoticationToCloseNavBar();
-        this.authenticatedUser = new AuthenticatedUser();
+        this.authenticatedUser = new AuthenticatedUser(null, 1, null);
         this.authenticationService.notify(this.authenticatedUser);
     }
 

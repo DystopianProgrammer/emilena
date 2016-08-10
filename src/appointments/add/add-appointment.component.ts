@@ -10,6 +10,7 @@ import { CollapsibleContentComponent } from '../../common/collapsible-content/co
 import { AvailabilityService } from '../../availability/availability.service';
 import { AvailabilityComponent } from '../../availability/availability.component';
 import { BadgeComponent } from '../../common/badge/badge.component';
+import { LoaderService } from '../../common/loader/loader.service';
 
 @Component({
     selector: 'em-add-appointment',
@@ -41,10 +42,14 @@ export class AddAppointmentComponent implements OnInit, OnDestroy {
     appointment: Appointment;
 
     constructor(private appointmentService: AppointmentService,
+                private loaderService: LoaderService,
                 private availabilityService: AvailabilityService,
                 private router: Router) { }
 
     ngOnInit() {
+
+        this.loaderService.notifyIsLoaded(false);
+
         this.subAppointmentClients =
             this.appointmentService.fetchActiveClients().subscribe(clients => {
                 this.activeClients = clients;
@@ -56,6 +61,7 @@ export class AddAppointmentComponent implements OnInit, OnDestroy {
         this.subAppointmentStaff =
             this.appointmentService.fetchActiveStaff().subscribe(staff => {
                 this.activeStaff = staff;
+                this.loaderService.notifyIsLoaded(true);
                 if (staff.length < 1) {
                     this.hasErrors.push('Please add staff member/s before scheduling an appointment');
                 }

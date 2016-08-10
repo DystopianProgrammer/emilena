@@ -15,12 +15,14 @@ import { AddAppointmentComponent } from '../appointments/add/add-appointment.com
 import { EditAppointmentComponent } from '../appointments/edit/edit-appointment.component';
 import { AppointmentService } from '../appointments/appointment.service';
 import { AvailabilityService } from '../availability/availability.service';
+import { LoaderService } from '../common/loader/loader.service';
+import { LoaderComponent } from '../common/loader/loader.component';
 
 @Component({
     selector: 'emilena',
     templateUrl: './app.component.html',
-    directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent],
-    providers: [AuthenticationService, AppointmentService, AvailabilityService],
+    directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent, LoaderComponent],
+    providers: [AuthenticationService, AppointmentService, AvailabilityService, LoaderService],
     precompile: [
         HeaderComponent,
         HomeComponent,
