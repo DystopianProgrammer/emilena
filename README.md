@@ -1,8 +1,16 @@
 #Emilena
 
+## Technical
+
+* Node.js v6.1.0
+* npm v3.9.2
+* webpack
+* Angular 2 RC4
+* TypeScript
+
 ##Engineering debt
 
-Contract types should be provided
+Angular 2 requires updating to final release.
 
 ##Release v1.0
 
@@ -18,6 +26,7 @@ Contract types should be provided
 1. Expenses
 2. E-mail alerts
 3. Text messaging alerts
+4. Configurable options for staff and contract types.
 
 ##Security
 
