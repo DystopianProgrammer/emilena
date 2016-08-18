@@ -1,27 +1,98 @@
-#Frances Taylor Foundation Rota
+#Emilena
+
+##Engineering debt
+
+Contract types should be provided
+
+##Release v1.0
+
+1. Appointments - staff to client (check for overlaps) - Do this on the backend!
+2. Edit functions - staff & client
+3. Absences
+4. Alerts
+5. Then polish - favicon, bug fixing (validations etc)
+6. deployment!
+
+##Release v2.0
+
+1. Expenses
+2. E-mail alerts
+3. Text messaging alerts
+
+##Security
+
+2 types of Roles
+
+1. ADMIN
+2. SYSTEM
+
+###ADMIN
+
+1. Grants system wide access
+2. This includes adding, deleting staff members
+3. This includes adding, deleting clients
+4. This includes setting up new users of the system with both ADMIN and SYSTEM roles
+5. Access to updating appointments, and the calendar
+
+###SYSTEM
+
+1. Grants read-only access
+2. This includes read-only access to client information
+3. This includes read-only access to appointments and the calendar
+
+##PSQL Cheat Sheet:
+
+https://www.postgresql.org/docs/9.3/static/app-psql.html
+
+dropdb emilena
+createdb emilena
+psql emilena
+
+psql -d emilena -a -f admin.sql
+
+##Notes for documentation and presentation
+
+1. Background
+2. Purpose/Overview/Benefits
+3. Use cases
+4. Validation
+5. Security
+6. Quality
+7. Data compliancy
+8. Technical concerns
+9. Summary
+
+##AWS
+
+Access Key ID:
+AKIAIN4FBHJBZOP77X7Q
+
+Secret Access Key:
+BPtNDRctcuwQffG7Qy08qXBb6Zc7N9trxj7l0cFj
 
 
-Requirements:
-------------
+For the db connection (ADD THIS TO THE YML):
 
-##rota
+  driverClass: org.postgresql.Driver
+  url: jdbc:postgresql://emilena.cyzjmm8gvb01.eu-west-1.rds.amazonaws.com:5432/emilena
 
-+ staff availability
-+ support hours per day (per person per day)
-+ people who only like stagnant days
- - stagnant days are limited fixed hourly support per week (days)
-+ intermmitent custom support (e.g. fortnightly support)
-+ Match carers with clients (perference of support worker - from the clients point of view)
-+ Adhoc appointments
- - These need to be logged
-+ Auditable
-+ Each client have appointed weekly hours
-+ Clients have time preferences e.g. morning or afternoon
-+ Support workers confined to areas ( this is constrained by point 5)
-+ Sickness/ holidays / absence of client
-+ Sickness/ holidays / absence of staff
-+ Contractual staff obtain preference over bank staff
-+ Senior staff have to be rota'd for office hours
+##Jenkins
+
+http://52.51.232.117:2030  - AWS EC2 - note the port
+
+
+##Docker
+
+####Emilena-API
+
+* docker build -t emilena-api .
+* docker run -p 9090:9090 emilena-api
+
+#####Emilena-WEB
+
+* docker build -t emilena-web .
+* docker run -p 80:80 emilena-web
+
 
 ##design
 
@@ -30,21 +101,3 @@ Requirements:
 ##backend
 
 The backend repository is at https://github.com/DystopianProgrammer/emilena-api
-
-
-Implementation:
---------------
-
-##finer details
-
-+ Client and Support worker have a many to many relationhip.
-+ There is a support component and a relationhip component.
- - The support component assigns support workers to a client
- - The relationhip component lists the currently assigned support workers to the clients
-
-TODOs
-------
-
-1. Update operations
-2. Hours/Days
-3. Availability
