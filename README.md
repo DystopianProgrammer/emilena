@@ -73,13 +73,6 @@ psql -d emilena -a -f admin.sql
 
 ##AWS
 
-Access Key ID:
-AKIAIN4FBHJBZOP77X7Q
-
-Secret Access Key:
-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
-
-
 For the db connection (ADD THIS TO THE YML):
 
   driverClass: org.postgresql.Driver
