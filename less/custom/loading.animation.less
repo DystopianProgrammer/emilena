@@ -1,20 +1,17 @@
 .loader {
+  position: absolute;
+  top: 25%;
+  left: 50%;
   .inner-loader {
     display: none;
   }
-  .outer-loaded {
-    background: red;
-    color: green;
-    display: block;
-  }
 
-  color: #000000;
+  color: @gray-dark;
   font-size: 10px;
   margin: 100px auto;
   width: 1em;
   height: 1em;
   border-radius: 50%;
-  position: relative;
   text-indent: -9999em;
   z-index: 9999;
   -webkit-animation: load4 1.3s infinite linear;
