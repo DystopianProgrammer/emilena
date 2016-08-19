@@ -11,10 +11,12 @@ import { AvailabilityService } from '../../availability/availability.service';
 import { AvailabilityComponent } from '../../availability/availability.component';
 import { BadgeComponent } from '../../common/badge/badge.component';
 import { LoaderService } from '../../common/loader/loader.service';
+import { DatePipe } from '../../common/pipes/date.pipe.ts'
 
 @Component({
     selector: 'em-add-appointment',
     directives: [AddressComponent, CollapsibleContentComponent, ROUTER_DIRECTIVES, AvailabilityComponent, BadgeComponent],
+    pipes: [DatePipe],
     templateUrl: './add-appointment.component.html'
 })
 export class AddAppointmentComponent implements OnInit, OnDestroy {

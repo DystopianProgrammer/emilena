@@ -7,11 +7,12 @@ import { Appointment } from '../model/model';
 import { AppointmentService } from './appointment.service';
 import { AddressPipe } from '../common/pipes/address.pipe';
 import { LoaderService } from '../common/loader/loader.service';
+import { DatePipe } from '../common/pipes/date.pipe.ts'
 
 @Component({
     selector: 'em-appointment',
     templateUrl: './appointment.component.html',
-    pipes: [AddressPipe],
+    pipes: [AddressPipe, DatePipe],
     directives: [ROUTER_DIRECTIVES]
 })
 export class AppointmentComponent implements OnInit, OnDestroy {

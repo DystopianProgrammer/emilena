@@ -26,8 +26,8 @@
             <a class="btn btn-default spacer" (click)="addAvailability()">Add Time</a>
             <em-badge *ngIf="appointment.fromDate && appointment.toDate">
                 <div><strong>Appointment time:</strong></div>
-                <div><strong>From:</strong> {{ appointment.fromDate | date:'medium' }}</div>
-                <div><strong>Until:</strong> {{ appointment.toDate | date:'medium' }}</div>
+                <div><strong>From:</strong> {{ appointment.fromDate | emDate }}</div>
+                <div><strong>Until:</strong> {{ appointment.toDate | emDate }}</div>
             </em-badge>
 
             <div class="spacer"></div>

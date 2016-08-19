@@ -30,8 +30,8 @@
                     <td>{{ appt.client.forename }} {{ appt.client.surname }}</td>
                     <td>{{ appt.staff.forename }} {{ appt.staff.surname }}</td>
                     <td>{{ appt.location | emAddress }}</td>
-                    <td>{{ appt.fromDate | date:'medium' }}</td>
-                    <td>{{ appt.toDate | date:'medium' }}</td>
+                    <td>{{ appt.fromDate | emDate }}</td>
+                    <td>{{ appt.toDate | emDate }}</td>
                 </tr>
             </tbody>
         </table>
