@@ -4,6 +4,7 @@
 export class User {
     userName: string;
     password: string;
+    staff: Staff;
 }
 
 
@@ -33,6 +34,7 @@ export class Staff extends Person {
     contractType: string;
     staffType: string;
     contractedHours: number;
+    user: User;
 }
 
 /**

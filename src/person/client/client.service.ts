@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { AuthenticationService } from '../../authentication/authentication.service';
-import { Http, RequestOptions } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 
 import { Client } from '../../model/model';
 
@@ -46,8 +46,7 @@ export class ClientService {
     private operation(person: Client, url: string): Observable<Client> {
         let body = JSON.stringify(person);
 
-        let user = this.authenticationService.authenticatedUser;
-        let headers = this.authenticationService.secureHeader(user.encryptedCredentials);
+        let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
         let options = new RequestOptions({ headers: headers });

@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { NavBarService } from './navbar.service';
-import { AuthenticationService, AuthenticatedUser, AuthenticationStatus } from '../../authentication/authentication.service';
+import { AuthenticationService } from '../../authentication/authentication.service';
 import { LoaderService } from '../../common/loader/loader.service';
+import { User } from '../../model/model';
 
 @Component({
     selector: 'em-nav-bar',
@@ -14,17 +15,17 @@ import { LoaderService } from '../../common/loader/loader.service';
 export class NavbarComponent {
 
     isCollapsed: boolean = true;
-    authenticatedUser: AuthenticatedUser;
     isClientMenuOpen: boolean = false;
     isStaffMenuOpen: boolean = false;
+    user: User;
 
     constructor(private navbarService: NavBarService,
                 private loaderService: LoaderService,
                 private authenticationService: AuthenticationService) {
 
         this.navbarService.toggleNavBar$.subscribe(toggle => this.isCollapsed = !toggle);
-        this.authenticationService.authenticatedUserSource$.subscribe(authenticatedUser => {
-            this.authenticatedUser = authenticatedUser;
+        this.authenticationService.userObservable$.subscribe(usr => {
+            this.user = usr;
         });
     }
 
@@ -33,14 +34,11 @@ export class NavbarComponent {
     }
 
     logout(): void {
-        setTimeout(() => {
-            this.loaderService.notifyIsLoaded(true);
-        }, 1000);
+        setTimeout(() => this.loaderService.notifyIsLoaded(true), 1000);
         this.loaderService.notifyIsLoaded(false);
-
         this.sendNoticationToCloseNavBar();
-        this.authenticatedUser = new AuthenticatedUser(null, 1, null);
-        this.authenticationService.notify(this.authenticatedUser);
+        this.authenticationService.removeSessionToken();
+        this.authenticationService.notify(this.user);
     }
 
     sendNoticationToCloseNavBar() {

@@ -2,14 +2,18 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { AuthenticationService } from '../../authentication/authentication.service';
-import { Http, RequestOptions } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 
-import { Staff, Client } from '../../model/model';
+import { Staff, Client, User } from '../../model/model';
 
 @Injectable()
 export class StaffService {
 
-    constructor(private http: Http, private authenticationService: AuthenticationService) { }
+    private user: User;
+
+    constructor(private http: Http, private authenticationService: AuthenticationService) {
+        this.authenticationService.userObservable$.subscribe(user => this.user = user);
+    }
 
     /**
      * List all staff
@@ -55,8 +59,7 @@ export class StaffService {
     private operation(person: Staff, url: string): Observable<Staff> {
         let body = JSON.stringify(person);
 
-        let user = this.authenticationService.authenticatedUser;
-        let headers = this.authenticationService.secureHeader(user.encryptedCredentials);
+        let headers = this.authenticationService.secureHeader(this.user);
         headers.append('Content-Type', 'application/json');
 
         let options = new RequestOptions({ headers: headers });

@@ -39,14 +39,4 @@ export class SupportComponent implements OnInit, OnDestroy {
             this.clientSub$.unsubscribe();
         }
     }
-
-    // TODO - update row with staff client relationship i.e. assigned support worker/s
-    link(staff: Staff) {
-        this.client.staff = new Array(staff);
-        this.clientSub$ = this.clientService.add(this.client).subscribe(res => {
-            console.log(res);
-        }, err => {
-            console.log(err);
-        });
-    }
 }

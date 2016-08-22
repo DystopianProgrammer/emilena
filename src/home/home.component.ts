@@ -8,29 +8,13 @@ import { LoaderService } from '../common/loader/loader.service';
     templateUrl: './home.component.html',
     directives: [AuthenticationComponent]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
     displayLoginForm: boolean = true;
 
-    constructor(private authenticationService: AuthenticationService, private loaderService: LoaderService) {
-    }
-
-    ngOnInit() {
-        this.authenticationService.authenticatedUserSource$.subscribe(user => {
-            if (user.authenticationStatus === 0) {
-                this.displayLoginForm = false;
-            } else {
-                this.displayLoginForm = true;
-            }
+    constructor(private authenticationService: AuthenticationService) {
+        this.authenticationService.userObservable$.subscribe(user => {
+            this.displayLoginForm = false;
         });
-        this.loaderService.notifyIsLoaded(true);
-    }
-
-    hideLoginForm(hide: boolean): void {
-        setTimeout(() => {
-            this.loaderService.notifyIsLoaded(true);
-        }, 1000);
-        this.loaderService.notifyIsLoaded(false);
-        this.displayLoginForm = hide;
     }
 }

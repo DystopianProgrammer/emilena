@@ -1,5 +1,10 @@
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule }   from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
+import { routing } from './app.routes';
+import { AppComponent } from './app.component';
 import { HomeComponent } from '../home/home.component';
 import { StaffComponent } from '../person/staff/staff.component';
 import { ClientComponent } from '../person/client/client.component';
@@ -11,17 +16,27 @@ import { AppointmentComponent } from '../appointments/appointment.component';
 import { AddAppointmentComponent } from '../appointments/add/add-appointment.component';
 import { EditAppointmentComponent } from '../appointments/edit/edit-appointment.component';
 
-const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'staff', component: StaffComponent },
-  { path: 'client', component: ClientComponent },
-  { path: 'add-staff', component: AddStaffComponent },
-  { path: 'edit-staff/:id', component: EditStaffComponent },
-  { path: 'add-client', component: AddClientComponent },
-  { path: 'edit-client/:id', component: EditClientComponent },
-  { path: 'appointment', component: AppointmentComponent },
-  { path: 'add-appointment', component: AddAppointmentComponent },
-  { path: 'edit-appointment/:id', component: EditAppointmentComponent }
-];
-
-export const routing = RouterModule.forRoot(appRoutes);
+@NgModule({
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    routing
+  ],
+  declarations: [
+      AppComponent,
+      HomeComponent,
+      StaffComponent,
+      ClientComponent,
+      AddStaffComponent,
+      EditStaffComponent,
+      AddClientComponent,
+      EditClientComponent,
+      AppointmentComponent,
+      AddAppointmentComponent,
+      EditAppointmentComponent,
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+}

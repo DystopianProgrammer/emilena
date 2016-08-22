@@ -22,28 +22,13 @@ import { LoaderComponent } from '../common/loader/loader.component';
     selector: 'emilena',
     templateUrl: './app.component.html',
     directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent, LoaderComponent],
-    providers: [AuthenticationService, AppointmentService, AvailabilityService, LoaderService],
-    precompile: [
-        HeaderComponent,
-        HomeComponent,
-        StaffComponent,
-        AddStaffComponent,
-        EditStaffComponent,
-        ClientComponent,
-        AddClientComponent,
-        EditClientComponent,
-        FooterComponent,
-        AppointmentComponent,
-        AddAppointmentComponent,
-        EditAppointmentComponent
-
-    ]
+    providers: [AuthenticationService, AppointmentService, AvailabilityService, LoaderService]
 })
 export class AppComponent {
 
-    constructor(private router: Router, private authenticationService: AuthenticationService) {
-        if (!authenticationService.authenticatedUser) {
-            this.router.navigate(['/']);
-        }
+    constructor(
+        private router: Router,
+        private loaderService: LoaderService,
+        private authenticationService: AuthenticationService ) {
     }
 }

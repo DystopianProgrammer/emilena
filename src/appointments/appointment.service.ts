@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
@@ -38,8 +38,7 @@ export class AppointmentService {
      */
     create(appointment: Appointment) {
         let body = JSON.stringify(appointment);
-        let user = this.authenticationService.authenticatedUser;
-        let headers = this.authenticationService.secureHeader(user.encryptedCredentials);
+        let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
         let options = new RequestOptions({ headers: headers });

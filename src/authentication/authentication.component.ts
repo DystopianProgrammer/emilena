@@ -12,15 +12,12 @@ export class AuthenticationComponent {
     user: User = new User();
     hasAuthenticationFailure: boolean;
 
-    @Output() displayLoginForm = new EventEmitter<boolean>();
-
-    constructor(private authenticationService: AuthenticationService) {
-        this.hasAuthenticationFailure = false;
-    }
+    constructor(private authenticationService: AuthenticationService) {}
 
     submit() {
-        this.authenticationService.authenticate(this.user).subscribe(response => {
-            this.displayLoginForm.emit(false);
-        }, err => this.hasAuthenticationFailure = true);
+        this.authenticationService.authenticate(this.user).subscribe(usr => {
+            this.user = usr;
+        });
+        this.authenticationService.notify(this.user);
     }
 }

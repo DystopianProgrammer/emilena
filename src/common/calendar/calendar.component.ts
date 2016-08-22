@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CalendarService, Snapshot, Days } from './calendar.service';
-import * as moment from 'moment';
 import { PaddedDatePipe } from './calendar.pipe';
 
 @Component({
