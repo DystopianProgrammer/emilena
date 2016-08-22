@@ -47,7 +47,6 @@ export class AuthenticationService {
      * Notify the application of the user in session
      */
     notify(user: User): void {
-        console.log(user);
         this.userSubject.next(user);
     }
 
@@ -56,6 +55,7 @@ export class AuthenticationService {
      */
     removeSessionToken(): void {
         window.sessionStorage.removeItem(TOKEN);
+        this.userSubject.next(null);
     }
 
     /**

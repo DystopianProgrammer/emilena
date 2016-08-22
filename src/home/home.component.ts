@@ -14,7 +14,7 @@ export class HomeComponent {
 
     constructor(private authenticationService: AuthenticationService) {
         this.authenticationService.userObservable$.subscribe(user => {
-            this.displayLoginForm = false;
+            this.displayLoginForm = (user) ? false : true;
         });
     }
 }

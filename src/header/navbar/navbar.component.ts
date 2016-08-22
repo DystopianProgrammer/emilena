@@ -20,8 +20,8 @@ export class NavbarComponent {
     user: User;
 
     constructor(private navbarService: NavBarService,
-                private loaderService: LoaderService,
-                private authenticationService: AuthenticationService) {
+        private loaderService: LoaderService,
+        private authenticationService: AuthenticationService) {
 
         this.navbarService.toggleNavBar$.subscribe(toggle => this.isCollapsed = !toggle);
         this.authenticationService.userObservable$.subscribe(usr => {
@@ -30,7 +30,9 @@ export class NavbarComponent {
     }
 
     toggle(): void {
-        this.isCollapsed = !this.isCollapsed;
+        if (this.user) {
+            this.isCollapsed = !this.isCollapsed;
+        }
     }
 
     logout(): void {
@@ -38,7 +40,6 @@ export class NavbarComponent {
         this.loaderService.notifyIsLoaded(false);
         this.sendNoticationToCloseNavBar();
         this.authenticationService.removeSessionToken();
-        this.authenticationService.notify(this.user);
     }
 
     sendNoticationToCloseNavBar() {
