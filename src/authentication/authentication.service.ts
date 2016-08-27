@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { User } from '../model/model';
 
-const TOKEN: string = 'token';
+const TOKEN: string = 'em-session-token';
 
 /**
  * Authentication is handled server-side, meaning that the authorisation neither relies on oauth or cookies, as each request
@@ -16,7 +16,7 @@ const TOKEN: string = 'token';
 @Injectable()
 export class AuthenticationService {
 
-    private userSubject = new Subject<User>();
+    private userSubject = new BehaviorSubject<User>(new User());
     userObservable$ = this.userSubject.asObservable();
 
     constructor(private http: Http) { }
@@ -31,7 +31,7 @@ export class AuthenticationService {
                 let credentials = user.userName + ':' + user.password;
                 window.sessionStorage.setItem(TOKEN, btoa(credentials));
             }
-        }
+        };
 
         let headers = this.secureHeader(user);
         let options = new RequestOptions({ headers: headers });
@@ -41,6 +41,20 @@ export class AuthenticationService {
                 return res.json() || {};
             })
             .catch(error => Observable.throw(error._body));
+    }
+
+    /**
+     * Attempts to initialise the session from the session store
+     */
+    restoreSession(): void {
+        let token = window.sessionStorage.getItem(TOKEN);
+        if (token) {
+            let user = new User();
+            let decoded = atob(token);
+            user.userName = decoded.split(':')[0];
+            user.password = decoded.split(':')[1];
+            this.userSubject.next(user);
+        }
     }
 
     /**
@@ -59,6 +73,7 @@ export class AuthenticationService {
     }
 
     /**
+     * @deprecated - use Session instead - see ../session/session
      * This is requred for any http request for authentication.
      */
     secureHeader(user: User): Headers {

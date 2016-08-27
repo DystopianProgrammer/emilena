@@ -24,8 +24,10 @@ export class NavbarComponent {
         private authenticationService: AuthenticationService) {
 
         this.navbarService.toggleNavBar$.subscribe(toggle => this.isCollapsed = !toggle);
-        this.authenticationService.userObservable$.subscribe(usr => {
-            this.user = usr;
+        this.authenticationService.userObservable$.subscribe(user => {
+            if (user && user.userName && user.password) {
+                this.user = user
+            }
         });
     }
 
@@ -40,6 +42,7 @@ export class NavbarComponent {
         this.loaderService.notifyIsLoaded(false);
         this.sendNoticationToCloseNavBar();
         this.authenticationService.removeSessionToken();
+        this.user = undefined;
     }
 
     sendNoticationToCloseNavBar() {

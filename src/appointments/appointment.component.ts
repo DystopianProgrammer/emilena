@@ -7,7 +7,7 @@ import { Appointment } from '../model/model';
 import { AppointmentService } from './appointment.service';
 import { AddressPipe } from '../common/pipes/address.pipe';
 import { LoaderService } from '../common/loader/loader.service';
-import { DatePipe } from '../common/pipes/date.pipe.ts'
+import { DatePipe } from '../common/pipes/date.pipe.ts';
 
 @Component({
     selector: 'em-appointment',

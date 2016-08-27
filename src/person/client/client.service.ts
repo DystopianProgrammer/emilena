@@ -5,17 +5,20 @@ import { AuthenticationService } from '../../authentication/authentication.servi
 import { Http, RequestOptions, Headers } from '@angular/http';
 
 import { Client } from '../../model/model';
+import { Session } from '../../session/session';
 
 @Injectable()
 export class ClientService {
 
-    constructor(private http: Http, private authenticationService: AuthenticationService) { }
+    constructor(private http: Http, private session: Session) { }
 
     /**
      * Find all clients (both active and inactive)
      */
     findAll(): Observable<Client[]> {
-        return this.http.get('/client/all')
+        let headers = this.session.secureHeaders();
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get('/client/all', options)
             .map(res => res.json() || {})
             .catch(error => Observable.throw(error._body));
     }
@@ -24,7 +27,9 @@ export class ClientService {
      * Find client by id
      */
     findById(id: number): Observable<Client> {
-        return this.http.get(`/client/${id}`)
+        let headers = this.session.secureHeaders();
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(`/client/${id}`, options)
             .map(res => res.json() || {})
             .catch(error => Observable.throw(error._body));
     }
@@ -45,12 +50,9 @@ export class ClientService {
 
     private operation(person: Client, url: string): Observable<Client> {
         let body = JSON.stringify(person);
-
-        let headers = new Headers();
+        let headers = this.session.secureHeaders();
         headers.append('Content-Type', 'application/json');
-
         let options = new RequestOptions({ headers: headers });
-
         return this.http.post(url, body, options)
             .map(res => res.json() || {})
             .catch(error => Observable.throw(error._body));

@@ -5,21 +5,23 @@ import { AuthenticationService } from '../../authentication/authentication.servi
 import { Http, RequestOptions, Headers } from '@angular/http';
 
 import { Staff, Client, User } from '../../model/model';
+import { Session } from '../../session/session';
 
 @Injectable()
 export class StaffService {
 
     private user: User;
 
-    constructor(private http: Http, private authenticationService: AuthenticationService) {
-        this.authenticationService.userObservable$.subscribe(user => this.user = user);
+    constructor(private http: Http, private session: Session) {
     }
 
     /**
      * List all staff
      */
     findAll(): Observable<Staff[]> {
-        return this.http.get('/staff/all')
+        let headers = this.session.secureHeaders();
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get('/staff/all', options)
             .map(res => res.json() || {})
             .catch(error => Observable.throw(error._body));
     }
@@ -28,7 +30,9 @@ export class StaffService {
      * List clients by staff
      */
     listClientsByStaff(staff: Staff): Observable<Client[]> {
-        return this.http.get(`/staff/clients/${staff.id}`)
+        let headers = this.session.secureHeaders();
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(`/staff/clients/${staff.id}`, options)
             .map(res => res.json() || {})
             .catch(error => Observable.throw(error._body));
     }
@@ -37,7 +41,9 @@ export class StaffService {
      * Find staff member by id
      */
     findById(id: number): Observable<Staff> {
-        return this.http.get(`/staff/${id}`)
+        let headers = this.session.secureHeaders();
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(`/staff/${id}`, options)
             .map(res => res.json() || {})
             .catch(error => Observable.throw(error._body));
     }
@@ -58,12 +64,9 @@ export class StaffService {
 
     private operation(person: Staff, url: string): Observable<Staff> {
         let body = JSON.stringify(person);
-
-        let headers = this.authenticationService.secureHeader(this.user);
+        let headers = this.session.secureHeaders();
         headers.append('Content-Type', 'application/json');
-
         let options = new RequestOptions({ headers: headers });
-
         return this.http.post(url, body, options)
             .map(res => res.json() || {})
             .catch(error => Observable.throw(error._body));

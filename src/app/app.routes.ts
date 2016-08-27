@@ -24,4 +24,4 @@ const appRoutes: Routes = [
   { path: 'edit-appointment/:id', component: EditAppointmentComponent }
 ];
 
-export const routing = RouterModule.forRoot(appRoutes);
+export const routing = RouterModule.forRoot(appRoutes, { useHash: true });
