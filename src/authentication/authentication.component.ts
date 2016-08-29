@@ -15,9 +15,13 @@ export class AuthenticationComponent {
     constructor(private authenticationService: AuthenticationService) {}
 
     submit() {
-        this.authenticationService.authenticate(this.user).subscribe(usr => {
-            this.user = usr;
-        });
-        this.authenticationService.notify(this.user);
+        this.authenticationService.authenticate(this.user)
+            .subscribe(usr => {
+                this.user = usr;
+                this.hasAuthenticationFailure = false;
+                this.authenticationService.notify(this.user);
+            }, err => {
+                this.hasAuthenticationFailure = true;
+            });
     }
 }

@@ -25,7 +25,7 @@ export class NavbarComponent {
 
         this.navbarService.toggleNavBar$.subscribe(toggle => this.isCollapsed = !toggle);
         this.authenticationService.userObservable$.subscribe(user => {
-            if (user && user.userName && user.password) {
+            if (user && user.userName) {
                 this.user = user
             }
         });

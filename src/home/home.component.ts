@@ -9,13 +9,13 @@ import { AuthenticationService } from '../authentication/authentication.service'
 })
 export class HomeComponent implements AfterViewInit {
 
-    displayLoginForm: boolean = true;
+    displayLoginForm: boolean;
 
     constructor(private authenticationService: AuthenticationService) { }
 
     ngAfterViewInit() {
         this.authenticationService.userObservable$.subscribe(user => {
-            if (user && user.userName && user.password) {
+            if (user && user.userName) {
                 this.displayLoginForm = false;
             } else {
                 this.displayLoginForm = true;
