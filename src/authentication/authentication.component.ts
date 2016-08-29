@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { User } from '../model/model';
 import { AuthenticationService } from './authentication.service';
+import { LoaderService } from '../common/loader/loader.service';
 
 @Component({
     selector: 'em-authentication',
@@ -12,9 +13,11 @@ export class AuthenticationComponent {
     user: User = new User();
     hasAuthenticationFailure: boolean;
 
-    constructor(private authenticationService: AuthenticationService) {}
+    constructor(private authenticationService: AuthenticationService, private loaderService: LoaderService) { }
 
     submit() {
+        setTimeout(() => this.loaderService.notifyIsLoaded(true), 1000);
+        this.loaderService.notifyIsLoaded(false);
         this.authenticationService.authenticate(this.user)
             .subscribe(usr => {
                 this.user = usr;
