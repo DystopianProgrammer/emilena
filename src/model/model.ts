@@ -1,10 +1,12 @@
 /**
  * User of the system
  */
-export class User {
+export class SystemUser {
+    id: number;
     userName: string;
     password: string;
     staff: Staff;
+    roleTypes: string;
 }
 
 
@@ -34,7 +36,7 @@ export class Staff extends Person {
     contractType: string;
     staffType: string;
     contractedHours: number;
-    user: User;
+    user: SystemUser;
 }
 
 /**

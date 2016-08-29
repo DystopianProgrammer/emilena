@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers } from '@angular/http';
 
 import { AuthenticationService } from '../authentication/authentication.service';
-import { User } from '../model/model';
+import { SystemUser } from '../model/model';
 
 /**
  * Service for holding the application state
@@ -10,17 +10,17 @@ import { User } from '../model/model';
 @Injectable()
 export class Session {
 
-    private _sessionUser: User;
+    private _sessionUser: SystemUser;
 
     constructor(private authenticationService: AuthenticationService) {
         this.authenticationService.userObservable$.subscribe(user => {
-            if (user && user.userName && user.password) {
+            if (user && user.userName) {
                 this._sessionUser = user;
             }
         });
     }
 
-    sessionUser(): User {
+    sessionUser(): SystemUser {
         return this._sessionUser;
     }
 

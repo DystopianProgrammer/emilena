@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { User } from '../model/model';
+import { SystemUser } from '../model/model';
 import { AuthenticationService } from './authentication.service';
 import { LoaderService } from '../common/loader/loader.service';
 
@@ -10,7 +10,7 @@ import { LoaderService } from '../common/loader/loader.service';
 })
 export class AuthenticationComponent {
 
-    user: User = new User();
+    user: SystemUser = new SystemUser();
     hasAuthenticationFailure: boolean;
 
     constructor(private authenticationService: AuthenticationService, private loaderService: LoaderService) { }

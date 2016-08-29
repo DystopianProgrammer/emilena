@@ -4,7 +4,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 import { NavBarService } from './navbar.service';
 import { AuthenticationService } from '../../authentication/authentication.service';
 import { LoaderService } from '../../common/loader/loader.service';
-import { User } from '../../model/model';
+import { SystemUser } from '../../model/model';
 
 @Component({
     selector: 'em-nav-bar',
@@ -17,7 +17,7 @@ export class NavbarComponent {
     isCollapsed: boolean = true;
     isClientMenuOpen: boolean = false;
     isStaffMenuOpen: boolean = false;
-    user: User;
+    user: SystemUser;
 
     constructor(private navbarService: NavBarService,
         private loaderService: LoaderService,

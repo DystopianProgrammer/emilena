@@ -4,13 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import { AuthenticationService } from '../../authentication/authentication.service';
 import { Http, RequestOptions, Headers } from '@angular/http';
 
-import { Staff, Client, User } from '../../model/model';
+import { Staff, Client } from '../../model/model';
 import { Session } from '../../session/session';
 
 @Injectable()
 export class StaffService {
-
-    private user: User;
 
     constructor(private http: Http, private session: Session) {
     }

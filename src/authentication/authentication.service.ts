@@ -4,7 +4,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { User } from '../model/model';
+import { SystemUser } from '../model/model';
 
 const TOKEN: string = 'em-session-token';
 
@@ -16,7 +16,7 @@ const TOKEN: string = 'em-session-token';
 @Injectable()
 export class AuthenticationService {
 
-    private userSubject = new BehaviorSubject<User>(new User());
+    private userSubject = new BehaviorSubject<SystemUser>(new SystemUser());
     userObservable$ = this.userSubject.asObservable();
 
     constructor(private http: Http) { }
@@ -24,7 +24,7 @@ export class AuthenticationService {
     /**
      * Submit method for the login form. This requests authentication using the basic method.
      */
-    authenticate(user: User): Observable<User> {
+    authenticate(user: SystemUser): Observable<SystemUser> {
 
         let storeSessionAuth = (response: Response): any => {
             if (response.status === 200) {
@@ -49,7 +49,7 @@ export class AuthenticationService {
     restoreSession(): void {
         let token = window.sessionStorage.getItem(TOKEN);
         if (token) {
-            let user = new User();
+            let user = new SystemUser();
             let decoded = atob(token);
             user.userName = decoded.split(':')[0];
             user.password = decoded.split(':')[1];
@@ -60,7 +60,7 @@ export class AuthenticationService {
     /**
      * Notify the application of the user in session
      */
-    notify(user: User): void {
+    notify(user: SystemUser): void {
         this.userSubject.next(user);
     }
 
@@ -76,7 +76,7 @@ export class AuthenticationService {
      * @deprecated - use Session instead - see ../session/session
      * This is requred for any http request for authentication.
      */
-    secureHeader(user: User): Headers {
+    secureHeader(user: SystemUser): Headers {
         let headers = new Headers();
         let credentials = user.userName + ':' + user.password;
         headers.append('Authorization', 'Basic ' + btoa(credentials));
