@@ -1,5 +1,5 @@
 /**
- * User of the system
+ * systemUser of the system
  */
 export class SystemUser {
     id: number;
@@ -36,7 +36,7 @@ export class Staff extends Person {
     contractType: string;
     staffType: string;
     contractedHours: number;
-    user: SystemUser;
+    systemUser: SystemUser;
 }
 
 /**
