@@ -6,7 +6,7 @@ export class SystemUser {
     userName: string;
     password: string;
     staff: Staff;
-    roleTypes: string;
+    roleTypes: string[];
 }
 
 

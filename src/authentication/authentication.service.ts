@@ -29,7 +29,11 @@ export class AuthenticationService {
         let storeSessionAuth = (response: Response): any => {
             if (response.status === 200) {
                 let credentials = user.userName + ':' + user.password;
-                window.sessionStorage.setItem(TOKEN, btoa(credentials));
+                let storageItems = {
+                    'credentials': btoa(credentials),
+                    'roles': response.json().roleTypes
+                };
+                window.sessionStorage.setItem(TOKEN, JSON.stringify(storageItems));
             }
         };
 
@@ -49,10 +53,12 @@ export class AuthenticationService {
     restoreSession(): void {
         let token = window.sessionStorage.getItem(TOKEN);
         if (token) {
+            let parsed = JSON.parse(token);
+            let credentials = atob(parsed.credentials);
             let user = new SystemUser();
-            let decoded = atob(token);
-            user.userName = decoded.split(':')[0];
-            user.password = decoded.split(':')[1];
+            user.userName = credentials.split(':')[0];
+            user.password = credentials.split(':')[1];
+            user.roleTypes = parsed.roles;
             this.userSubject.next(user);
         }
     }
