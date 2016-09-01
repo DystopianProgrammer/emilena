@@ -14,9 +14,12 @@ import { SystemUser } from '../../model/model';
 })
 export class NavbarComponent {
 
+    // For menu toggling
     isCollapsed: boolean = true;
     isClientMenuOpen: boolean = false;
     isStaffMenuOpen: boolean = false;
+    isAppointmentMenuOpen: boolean = false;
+
     user: SystemUser;
 
     constructor(private navbarService: NavBarService,
@@ -51,11 +54,19 @@ export class NavbarComponent {
 
     openClientMenu() {
         this.isStaffMenuOpen = false;
+        this.isAppointmentMenuOpen = false;
         this.isClientMenuOpen = !this.isClientMenuOpen;
     }
 
     openStaffMenu() {
         this.isClientMenuOpen = false;
+        this.isAppointmentMenuOpen = false;
         this.isStaffMenuOpen = !this.isStaffMenuOpen;
+    }
+
+    openAppointmentMenu() {
+        this.isStaffMenuOpen = false;
+        this.isClientMenuOpen = false;
+        this.isAppointmentMenuOpen = !this.isAppointmentMenuOpen;
     }
 }

@@ -15,6 +15,7 @@ import { EditClientComponent } from '../person/client/edit-client/edit-client.co
 import { AppointmentComponent } from '../appointments/appointment.component';
 import { AddAppointmentComponent } from '../appointments/add/add-appointment.component';
 import { EditAppointmentComponent } from '../appointments/edit/edit-appointment.component';
+import { AlertsComponent } from '../alerts/alerts.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { EditAppointmentComponent } from '../appointments/edit/edit-appointment.
       AppointmentComponent,
       AddAppointmentComponent,
       EditAppointmentComponent,
+      AlertsComponent
   ],
   bootstrap: [AppComponent]
 })

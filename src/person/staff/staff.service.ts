@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-
-import { Observable } from 'rxjs/Observable';
-import { AuthenticationService } from '../../authentication/authentication.service';
 import { Http, RequestOptions, Headers } from '@angular/http';
 
+import { Observable } from 'rxjs/Observable';
+
+import { AuthenticationService } from '../../authentication/authentication.service';
 import { Staff, Client } from '../../model/model';
 import { Session } from '../../session/session';
 

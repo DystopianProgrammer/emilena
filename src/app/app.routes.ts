@@ -10,6 +10,7 @@ import { EditClientComponent } from '../person/client/edit-client/edit-client.co
 import { AppointmentComponent } from '../appointments/appointment.component';
 import { AddAppointmentComponent } from '../appointments/add/add-appointment.component';
 import { EditAppointmentComponent } from '../appointments/edit/edit-appointment.component';
+import { AlertsComponent } from '../alerts/alerts.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,7 +22,8 @@ const appRoutes: Routes = [
   { path: 'edit-client/:id', component: EditClientComponent },
   { path: 'appointment', component: AppointmentComponent },
   { path: 'add-appointment', component: AddAppointmentComponent },
-  { path: 'edit-appointment/:id', component: EditAppointmentComponent }
+  { path: 'edit-appointment/:id', component: EditAppointmentComponent },
+  { path: 'alerts', component: AlertsComponent }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes, { useHash: true });
