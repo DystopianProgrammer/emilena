@@ -50,6 +50,7 @@ export class AuthenticationService {
                     'staff': staff
                 };
 
+                systemUser.staff = staff;
                 window.sessionStorage.setItem(TOKEN, JSON.stringify(sessionStorageItem));
             }
             return systemUser;
@@ -74,6 +75,7 @@ export class AuthenticationService {
             user.userName = credentials.split(':')[0];
             user.password = credentials.split(':')[1];
             user.roleTypes = parsed.roles;
+            user.staff = parsed.staff;
             this.userSubject.next(user);
         }
     }
