@@ -4,7 +4,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { SystemUser } from '../model/model';
+import { SystemUser, Staff } from '../model/model';
 
 const TOKEN: string = 'em-session-token';
 
@@ -26,24 +26,39 @@ export class AuthenticationService {
      */
     authenticate(user: SystemUser): Observable<SystemUser> {
 
-        let storeSessionAuth = (response: Response): any => {
+        let storeSessionAuth = (response: Response): SystemUser => {
+            let systemUser = response.json();
+
             if (response.status === 200) {
-                let credentials = user.userName + ':' + user.password;
-                let storageItems = {
+                // minimise the association so we don't bloat the session storage
+                let credentials = systemUser.userName + ':' + systemUser.password;
+                let staff = new Staff();
+                if (systemUser.staff) {
+                    staff.id = systemUser.staff.id;
+                    staff.forename = systemUser.staff.forename;
+                    staff.surname = systemUser.staff.surname;
+                    staff.email = systemUser.staff.email;
+                } else {
+                    // we have no staff association, assume admin
+                    staff.forename = 'Admin';
+                    staff.surname = 'Admin';
+                }
+
+                let sessionStorageItem = {
                     'credentials': btoa(credentials),
-                    'roles': response.json().roleTypes
+                    'roles': systemUser.roleTypes,
+                    'staff': staff
                 };
-                window.sessionStorage.setItem(TOKEN, JSON.stringify(storageItems));
+
+                window.sessionStorage.setItem(TOKEN, JSON.stringify(sessionStorageItem));
             }
+            return systemUser;
         };
 
         let headers = this.secureHeader(user);
         let options = new RequestOptions({ headers: headers });
         return this.http.get('/user/login', options)
-            .map(res => {
-                storeSessionAuth(res);
-                return res.json() || {};
-            })
+            .map(res => storeSessionAuth(res))
             .catch(error => Observable.throw(error._body));
     }
 
