@@ -13,13 +13,13 @@
                     <em-calendar (dateSelection)="updateAvailability($event)"></em-calendar>
                 </div>
                 <div class="form-group col-xs-12 col-sm-4">
-                    <label for="timeFrom">Time from:</label>
+                    <label for="timeFrom">From:</label>
                     <select name="timeFrom" id="timeFrom" class="form-control" [(ngModel)]="fromTime" required>
                         <option *ngFor="let time of times" [ngValue]="time">{{ time.hours | zeroPad }}:{{time.minutes | zeroPad }}</option>
                     </select>
                 </div>
                 <div class="form-group col-xs-12 col-sm-4">
-                    <label for="timeTo">Time to:</label>
+                    <label for="timeTo">To:</label>
                     <select name="timeTo" id="timeTo" class="form-control" [(ngModel)]="toTime" required>
                         <option *ngFor="let time of times" [ngValue]="time">{{ time.hours | zeroPad }}:{{time.minutes | zeroPad }}</option>
                     </select>

@@ -73,4 +73,9 @@ export class AppointmentService {
             .catch(err => Observable.throw(err._body));
     }
 
+    validate(appointment: Appointment): string {
+        if(!appointment.fromDate || !appointment.toDate) {
+            return 'Appointment time is required';
+        }
+    }
 }

@@ -21,9 +21,6 @@ import { DatePipe } from '../../common/pipes/date.pipe.ts'
 })
 export class EditAppointmentComponent implements OnInit, OnDestroy {
 
-    /**
-     * init vars
-     */
     activeClients: Client[] = [];
     activeStaff: Staff[] = [];
     active = true;
@@ -32,19 +29,14 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
     completionMessage: string;
     updateStaff: boolean = false;
     updateClient: boolean = false;
+    dateValidationMsg: string;
 
-    /**
-     * Unsubscribales
-     */
     private subRoute: Subscription;
     private subApptService: Subscription;
     private subAppointmentClients: Subscription;
     private subAppointmentStaff: Subscription;
     private subAvailabilityDismiss: Subscription;
 
-    /**
-     * model
-     */
     appointment: Appointment;
 
     constructor(private appointmentService: AppointmentService,
@@ -61,9 +53,7 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-
         this.loaderService.notifyIsLoaded(false);
-
         this.subAppointmentClients =
             this.appointmentService.fetchActiveClients().subscribe(clients => {
                 this.activeClients = clients;
@@ -94,6 +84,7 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
     }
 
     create(appointment: Appointment): void {
+        this.dateValidationMsg = this.appointmentService.validate(appointment);
         this.appointmentService.create(appointment).subscribe(res => {
             this.completionMessage = `Successfully created appointment: ${res.id}`;
             this.router.navigate(['/appointment']);
@@ -124,6 +115,11 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
 
     addAvailability() {
         this.showAvailabilityForm = true;
+    }
+
+    removeTime() {
+        this.appointment.fromDate = null;
+        this.appointment.toDate = null;
     }
 
     availabilityUpdated(availability: Availability[]): void {

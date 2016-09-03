@@ -11,7 +11,7 @@ import { AvailabilityService } from '../../availability/availability.service';
 import { AvailabilityComponent } from '../../availability/availability.component';
 import { BadgeComponent } from '../../common/badge/badge.component';
 import { LoaderService } from '../../common/loader/loader.service';
-import { DatePipe } from '../../common/pipes/date.pipe.ts'
+import { DatePipe } from '../../common/pipes/date.pipe.ts';
 
 @Component({
     selector: 'em-add-appointment',
@@ -21,27 +21,18 @@ import { DatePipe } from '../../common/pipes/date.pipe.ts'
 })
 export class AddAppointmentComponent implements OnInit, OnDestroy {
 
-    /**
-     * init vars
-     */
+    appointment: Appointment;
     activeClients: Client[] = [];
     activeStaff: Staff[] = [];
     active = true;
     hasErrors: string[] = [];
     showAvailabilityForm: boolean = false;
     completionMessage: string;
+    dateValidationMsg: string;
 
-    /**
-     * Unsubscriables
-     */
     private subAppointmentClients: Subscription;
     private subAppointmentStaff: Subscription;
     private subAvailabilityDismiss: Subscription;
-
-    /**
-     * model vars
-     */
-    appointment: Appointment;
 
     constructor(private appointmentService: AppointmentService,
                 private loaderService: LoaderService,
@@ -49,7 +40,6 @@ export class AddAppointmentComponent implements OnInit, OnDestroy {
                 private router: Router) { }
 
     ngOnInit() {
-
         this.loaderService.notifyIsLoaded(false);
 
         this.subAppointmentClients =
@@ -82,6 +72,7 @@ export class AddAppointmentComponent implements OnInit, OnDestroy {
     }
 
     create(appointment: Appointment): void {
+        this.dateValidationMsg = this.appointmentService.validate(appointment);
         this.appointmentService.create(appointment).subscribe(res => {
             this.completionMessage = `Successfully created appointment: ${res.id}`;
             this.router.navigate(['/appointment']);
@@ -114,6 +105,11 @@ export class AddAppointmentComponent implements OnInit, OnDestroy {
         this.showAvailabilityForm = false;
         this.appointment.fromDate = availability[0].fromDate;
         this.appointment.toDate = availability[0].toDate;
+    }
+
+    removeTime() {
+        this.appointment.fromDate = null;
+        this.appointment.toDate = null;
     }
 
     private initAppt() {
