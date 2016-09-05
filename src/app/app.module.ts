@@ -16,6 +16,7 @@ import { AppointmentComponent } from '../appointments/appointment.component';
 import { AddAppointmentComponent } from '../appointments/add/add-appointment.component';
 import { EditAppointmentComponent } from '../appointments/edit/edit-appointment.component';
 import { AlertsComponent } from '../alerts/alerts.component';
+import { ErrorPageComponent } from '../common/error/error.page.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { AlertsComponent } from '../alerts/alerts.component';
       AppointmentComponent,
       AddAppointmentComponent,
       EditAppointmentComponent,
-      AlertsComponent
+      AlertsComponent,
+      ErrorPageComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -8,12 +8,14 @@ import { AvailabilityService } from '../availability/availability.service';
 import { LoaderService } from '../common/loader/loader.service';
 import { LoaderComponent } from '../common/loader/loader.component';
 import { Session } from '../session/session';
+import { AlertsService } from '../alerts/alerts.service';
+import { HttpMethods } from '../common/http/http.methods';
 
 @Component({
     selector: 'emilena',
     templateUrl: './app.component.html',
     directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent, LoaderComponent],
-    providers: [AuthenticationService, AppointmentService, AvailabilityService, LoaderService, Session]
+    providers: [AuthenticationService, AppointmentService, AvailabilityService, LoaderService, Session, AlertsService, HttpMethods]
 })
 export class AppComponent {
 

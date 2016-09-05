@@ -66,7 +66,7 @@ export class AuthenticationService {
     /**
      * Attempts to initialise the session from the session store
      */
-    restoreSession(): void {
+    restoreSession(): SystemUser {
         let token = window.sessionStorage.getItem(TOKEN);
         if (token) {
             let parsed = JSON.parse(token);
@@ -77,6 +77,7 @@ export class AuthenticationService {
             user.roleTypes = parsed.roles;
             user.staff = parsed.staff;
             this.userSubject.next(user);
+            return user;
         }
     }
 

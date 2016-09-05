@@ -106,3 +106,8 @@ export enum DayOfWeek {
     SATURDAY,
     SUNDAY
 }
+
+export class Alerts {
+    pendingAlerts: Appointment[];
+    futureAlerts: Appointment[];
+}

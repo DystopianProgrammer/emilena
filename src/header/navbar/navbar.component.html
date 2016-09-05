@@ -51,8 +51,10 @@
                     </ul>
                 </li>
                 <!-- Alerts -->
-                <li (click)="sendNoticationToCloseNavBar()" [routerLink]="['/alerts']">
-                    <a><i class="fa fa-bell-o" aria-hidden="true"></i>&nbsp;Alerts</a>
+                <li class="alerts-item" (click)="sendNoticationToCloseNavBar()" [routerLink]="['/alerts']">
+                    <a><i class="fa fa-bell-o" aria-hidden="true"></i>&nbsp;Alerts
+                        <span [ngClass]="{hasAlerts: hasAlerts}"><strong>{{alerts}}</strong></span>
+                    </a>
                 </li>
                 <!-- Invoices -->
                 <li (click)="sendNoticationToCloseNavBar()">

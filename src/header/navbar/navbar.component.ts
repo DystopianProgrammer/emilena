@@ -5,6 +5,7 @@ import { NavBarService } from './navbar.service';
 import { AuthenticationService } from '../../authentication/authentication.service';
 import { LoaderService } from '../../common/loader/loader.service';
 import { SystemUser } from '../../model/model';
+import { AlertsService } from '../../alerts/alerts.service';
 
 @Component({
     selector: 'em-nav-bar',
@@ -21,15 +22,26 @@ export class NavbarComponent {
     isAppointmentMenuOpen: boolean = false;
 
     user: SystemUser;
+    alerts: string;
+    hasAlerts: boolean = false;
 
     constructor(private navbarService: NavBarService,
         private loaderService: LoaderService,
+        private alertsService: AlertsService,
         private authenticationService: AuthenticationService) {
 
         this.navbarService.toggleNavBar$.subscribe(toggle => this.isCollapsed = !toggle);
         this.authenticationService.userObservable$.subscribe(user => {
             if (user && user.userName) {
-                this.user = user
+                this.user = user;
+                if (user.staff) {
+                    this.alertsService.pendingAppointmentsByStaffId(user.staff.id).subscribe(alerts => {
+                        if(alerts) {
+                            this.hasAlerts = true;
+                            this.alerts = '1+'; // FIXME - provide the exact number
+                        }
+                    });
+                }
             }
         });
     }

@@ -34,4 +34,15 @@ export class Session {
         return headers;
     }
 
+    /**
+     * This is requred for any http request for authentication with appended json content type
+     */
+    secureJSONHeaders(): Headers {
+        let headers = new Headers();
+        let credentials = this._sessionUser.userName + ':' + this._sessionUser.password;
+        headers.append('Authorization', 'Basic ' + btoa(credentials));
+        headers.append('Content-Type', 'application/json');
+        return headers;
+    }
+
 }

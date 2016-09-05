@@ -11,6 +11,7 @@ import { AppointmentComponent } from '../appointments/appointment.component';
 import { AddAppointmentComponent } from '../appointments/add/add-appointment.component';
 import { EditAppointmentComponent } from '../appointments/edit/edit-appointment.component';
 import { AlertsComponent } from '../alerts/alerts.component';
+import { ErrorPageComponent } from '../common/error/error.page.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
   { path: 'appointment', component: AppointmentComponent },
   { path: 'add-appointment', component: AddAppointmentComponent },
   { path: 'edit-appointment/:id', component: EditAppointmentComponent },
-  { path: 'alerts', component: AlertsComponent }
+  { path: 'alerts', component: AlertsComponent },
+  { path: 'error/:id', component: ErrorPageComponent }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes, { useHash: true });
