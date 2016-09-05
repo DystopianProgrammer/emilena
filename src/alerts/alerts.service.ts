@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { Alerts } from '../model/model';
-import { HttpMethods } from '../common/http/http.methods'
+import { HttpMethods } from '../common/http/http.methods';
 
 @Injectable()
 export class AlertsService {
