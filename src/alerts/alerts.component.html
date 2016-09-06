@@ -2,36 +2,66 @@
     <h2>Alerts <small>{{user}}</small></h2>
 </div>
 
-<div class="col-xs-12 appointment-alerts">
+<div class="appointment-alerts">
 
-    <div class="row">
-        <div class="appointment-alerts col-xs-12">
-            <p>Appointments requiring action:</p>
+    <div class="col-xs-12">
+        <div class="appointment-alerts spacer">
+            <p><strong>Appointments requiring action:</strong></p>
         </div>
     </div>
-    <div class="col-xs-12 col-sm-4" *ngIf="!alerts.pendingAlerts">There are no appointments requiring action</div>
+    <div class="col-xs-12 spacer" *ngIf="!alerts.pendingAlerts"><em>There are no appointments requiring action</em></div>
 
-    <div *ngFor="let pending of alerts.pendingAlerts bg-danger">
-        <div class="row">
-            <div class="col-xs-12">
-                <div>
-                    <span class="appointment-alert-title">Client:</span>
-                    <span class="appointment-alert-value"><strong>{{pending.client.surname}}, {{pending.client.forename}}</strong></span>
-                </div>
-                <div>
-                    <span class="appointment-alert-title">When:</span>
-                    <span class="appointment-alert-value"><strong>{{pending.fromDate | emDate}}</strong></span>
-                </div>
-                <div class="spacer">
-                    <span class="appointment-alert-title">Where:</span>
-                    <span class="appointment-alert-value"><strong>{{pending.location | emAddress}}</strong></span>
-                </div>
+    <div class="col-xs-12 col-sm-4 spacer" *ngFor="let pending of alerts.pendingAlerts">
+        <div class="appointment-alert-box appointment-pending-action">
+            <div>
+                <span class="appointment-alert-title">Client:</span>
+                <span class="appointment-alert-value"><strong>{{pending.client.surname}}, {{pending.client.forename}}</strong></span>
             </div>
+            <div>
+                <span class="appointment-alert-title">When:</span>
+                <span class="appointment-alert-value"><strong>{{pending.fromDate | emDate}}</strong></span>
+            </div>
+            <div class="spacer">
+                <span class="appointment-alert-title">Where:</span>
+                <span class="appointment-alert-value"><strong>{{pending.location | emAddress}}</strong></span>
+            </div>
+            <div class="radio">
+            <label>
+                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                Appointment completed - chargeable
+            </label>
+            </div>
+            <div class="radio">
+            <label>
+                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                Appointment incomplete - specify
+            </label>
+            </div>
+            <button (click)="complete(pending)" class="btn btn-danger btn-small">Complete</button>
         </div>
-        <div class="row">
-           <div class="col-xs-4 col-sm-3">
-            <select name="" id="" class="form-control input-sm"></select>
-           </div>
+    </div>
+
+    <div class="col-xs-12">
+        <div class="appointment-alerts spacer">
+            <p><strong>Upcoming appointments:</strong></p>
+        </div>
+    </div>
+    <div class="col-xs-12 spacer" *ngIf="!alerts.futureAlerts"><em>There are no upcoming appointments</em></div>
+
+    <div class="col-xs-12 col-sm-4 spacer" *ngFor="let future of alerts.futureAlerts">
+        <div class="appointment-alert-box appointment-future">
+            <div>
+                <span class="appointment-alert-title">Client:</span>
+                <span class="appointment-alert-value"><strong>{{future.client.surname}}, {{future.client.forename}}</strong></span>
+            </div>
+            <div>
+                <span class="appointment-alert-title">When:</span>
+                <span class="appointment-alert-value"><strong>{{future.fromDate | emDate}}</strong></span>
+            </div>
+            <div class="spacer">
+                <span class="appointment-alert-title">Where:</span>
+                <span class="appointment-alert-value"><strong>{{future.location | emAddress}}</strong></span>
+            </div>
         </div>
     </div>
 

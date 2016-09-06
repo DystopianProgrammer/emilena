@@ -18,6 +18,15 @@ import { EditAppointmentComponent } from '../appointments/edit/edit-appointment.
 import { AlertsComponent } from '../alerts/alerts.component';
 import { ErrorPageComponent } from '../common/error/error.page.component';
 
+// providers
+import { Session } from '../session/session';
+import { AuthenticationService } from '../authentication/authentication.service';
+import { AlertsService } from '../alerts/alerts.service';
+import { AppointmentService } from '../appointments/appointment.service';
+import { AvailabilityService } from '../availability/availability.service';
+import { LoaderService } from '../common/loader/loader.service';
+import { HttpMethods } from '../common/http/http.methods';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -40,7 +49,16 @@ import { ErrorPageComponent } from '../common/error/error.page.component';
       AlertsComponent,
       ErrorPageComponent
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+    providers: [
+        Session,
+        AuthenticationService,
+        AppointmentService,
+        AvailabilityService,
+        LoaderService,
+        AlertsService,
+        HttpMethods
+    ]
 })
 export class AppModule {
 }

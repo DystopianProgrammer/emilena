@@ -36,9 +36,9 @@ export class NavbarComponent {
                 this.user = user;
                 if (user.staff) {
                     this.alertsService.pendingAppointmentsByStaffId(user.staff.id).subscribe(alerts => {
-                        if(alerts) {
+                        if(alerts && alerts.pendingAlerts && alerts.pendingAlerts.length > 0) {
                             this.hasAlerts = true;
-                            this.alerts = '1+'; // FIXME - provide the exact number
+                            this.alerts = alerts.pendingAlerts.length.toString();
                         }
                     });
                 }

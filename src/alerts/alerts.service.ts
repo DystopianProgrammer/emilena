@@ -15,7 +15,11 @@ export class AlertsService {
     constructor(private httpMethods: HttpMethods) { }
 
     pendingAppointmentsByStaffId(id: number): Observable<Alerts> {
-        return this.httpMethods.httpGET(`/alerts/staff/${id}/appointments`);
+        if (id) {
+            return this.httpMethods.httpGET(`/alerts/staff/${id}/appointments`);
+        } else {
+            return Observable.of(new Alerts());
+        }
     }
 
     notify(alerts: Alerts): void {
