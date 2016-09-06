@@ -40,6 +40,8 @@ export class StaffListComponent implements OnInit, OnDestroy {
             this.staffFetchAll$.unsubscribe();
         }
 
-        if (this.listClientsForStaff$) { }
+        if (this.listClientsForStaff$) {
+            this.listClientsForStaff$.unsubscribe();
+        }
     }
 }
