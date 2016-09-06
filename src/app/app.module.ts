@@ -28,37 +28,37 @@ import { LoaderService } from '../common/loader/loader.service';
 import { HttpMethods } from '../common/http/http.methods';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    routing
-  ],
-  declarations: [
-      AppComponent,
-      HomeComponent,
-      StaffComponent,
-      ClientComponent,
-      AddStaffComponent,
-      EditStaffComponent,
-      AddClientComponent,
-      EditClientComponent,
-      AppointmentComponent,
-      AddAppointmentComponent,
-      EditAppointmentComponent,
-      AlertsComponent,
-      ErrorPageComponent
-  ],
-  bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        routing
+    ],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        StaffComponent,
+        ClientComponent,
+        AddStaffComponent,
+        EditStaffComponent,
+        AddClientComponent,
+        EditClientComponent,
+        AppointmentComponent,
+        AddAppointmentComponent,
+        EditAppointmentComponent,
+        AlertsComponent,
+        ErrorPageComponent
+    ],
     providers: [
         Session,
         AuthenticationService,
+        HttpMethods,
         AppointmentService,
         AvailabilityService,
         LoaderService,
-        AlertsService,
-        HttpMethods
-    ]
+        AlertsService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

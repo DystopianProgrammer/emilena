@@ -26,7 +26,7 @@ const appRoutes: Routes = [
   { path: 'add-appointment', component: AddAppointmentComponent },
   { path: 'edit-appointment/:id', component: EditAppointmentComponent },
   { path: 'alerts', component: AlertsComponent },
-  { path: 'error/:id', component: ErrorPageComponent }
+  { path: 'error', component: ErrorPageComponent }
 ];
 
 export const appRoutingProviders: any[] = [];
