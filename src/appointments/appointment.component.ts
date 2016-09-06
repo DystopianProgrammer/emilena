@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -12,8 +11,7 @@ import { DatePipe } from '../common/pipes/date.pipe.ts';
 @Component({
     selector: 'em-appointment',
     templateUrl: './appointment.component.html',
-    pipes: [AddressPipe, DatePipe],
-    directives: [ROUTER_DIRECTIVES]
+    pipes: [AddressPipe, DatePipe]
 })
 export class AppointmentComponent implements OnInit, OnDestroy {
 

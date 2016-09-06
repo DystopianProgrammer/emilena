@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ROUTER_DIRECTIVES, ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Client, Address, Availability, GeneralAvailability } from '../../../model/model';
 import { ClientService } from '../client.service';
@@ -20,7 +20,6 @@ import { SupportComponent } from '../../../support/support.component';
     templateUrl: './edit-client.component.html',
     directives: [PersonComponent,
         AddressComponent,
-        ROUTER_DIRECTIVES,
         ValidationComponent,
         AvailabilityComponent,
         SupportComponent,

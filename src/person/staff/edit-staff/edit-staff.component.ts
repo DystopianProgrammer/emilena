@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ROUTER_DIRECTIVES, ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Staff, Address, Availability, GeneralAvailability } from '../../../model/model';
 import { StaffService } from '../staff.service';
@@ -19,7 +19,6 @@ import { GeneralAvailabilityPipe } from '../../../common/pipes/general-availabil
     templateUrl: './edit-staff.component.html',
     directives: [PersonComponent,
         AddressComponent,
-        ROUTER_DIRECTIVES,
         ValidationComponent,
         AvailabilityComponent,
         CollapsibleContentComponent,

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -15,7 +15,7 @@ import { DatePipe } from '../../common/pipes/date.pipe.ts';
 
 @Component({
     selector: 'em-add-appointment',
-    directives: [AddressComponent, CollapsibleContentComponent, ROUTER_DIRECTIVES, AvailabilityComponent, BadgeComponent],
+    directives: [AddressComponent, CollapsibleContentComponent, AvailabilityComponent, BadgeComponent],
     pipes: [DatePipe],
     templateUrl: './add-appointment.component.html'
 })

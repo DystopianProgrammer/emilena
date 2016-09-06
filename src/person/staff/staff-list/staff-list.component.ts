@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -14,7 +13,6 @@ import { LoaderService } from '../../../common/loader/loader.service';
 @Component({
     selector: 'em-staff-list',
     templateUrl: './staff-list.component.html',
-    directives: [ROUTER_DIRECTIVES],
     pipes: [Unspecified, ArrayDelimiter, GeneralAvailabilityPipe, FootCasePipe],
     providers: [StaffService]
 })

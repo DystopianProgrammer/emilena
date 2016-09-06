@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -19,7 +19,6 @@ import { CommonActions } from '../../../person/common-actions';
     directives: [
         PersonComponent,
         AddressComponent,
-        ROUTER_DIRECTIVES,
         ValidationComponent,
         CollapsibleContentComponent,
         AvailabilityComponent,

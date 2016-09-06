@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { NavBarService } from './navbar.service';
 import { AuthenticationService } from '../../authentication/authentication.service';
@@ -10,7 +9,6 @@ import { AlertsService } from '../../alerts/alerts.service';
 @Component({
     selector: 'em-nav-bar',
     templateUrl: './navbar.component.html',
-    directives: [ROUTER_DIRECTIVES],
     providers: [NavBarService]
 })
 export class NavbarComponent {
