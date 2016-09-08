@@ -3,9 +3,12 @@
 </div>
 
 <div class="col-xs-12 spacer">
-    <button [routerLink]="['/add-appointment']" class="btn btn-primary btn-lg">New Appointment</button>
+    <div class="pull-right">
+        <label for="filter">Filter&nbsp;<i class="fa fa-filter" aria-hidden="true"></i>
+            <input type="text" id="filter" class="form-control">
+        </label>
+    </div>
 </div>
-
 
 <div class="col-xs-12">
     <div class="table-responsive">

@@ -8,7 +8,6 @@
                     <th>Name</th>
                     <th>Address</th>
                     <th>Telephone</th>
-                    <th>Days</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,7 +19,6 @@
                     <td>{{staff.surname}}, {{staff.forename}}</td>
                     <td>{{staff.address.town}}, {{staff.address.postCode}}</td>
                     <td>{{staff.telephoneNumber}}</td>
-                    <td>{{staff.generalAvailability | generalAvailability | arrayDelimiter | unspecified}}</td>
                 </tr>
             </tbody>
         </table>

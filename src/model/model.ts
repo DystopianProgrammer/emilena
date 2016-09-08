@@ -24,7 +24,6 @@ export class Person {
     availabilities: Availability[];
     absences: Absence[];
     preferences: string;
-    generalAvailability: GeneralAvailability;
     appointments: Appointment[];
     active: boolean;
 }
@@ -66,14 +65,6 @@ export class Availability {
     date: Date;
     fromDate: Date;
     toDate: Date;
-    person: Person;
-}
-
-/**
- * One to one with person
- */
-export class GeneralAvailability {
-    daysOfWeek: string[];
     person: Person;
 }
 

@@ -6,14 +6,13 @@ import { Staff, Address } from '../../../model/model';
 import { StaffService } from '../staff.service';
 import { Unspecified } from '../../../common/pipes/unspecified.pipe';
 import { ArrayDelimiter } from '../../../common/pipes/array-delimiter';
-import { GeneralAvailabilityPipe } from '../../../common/pipes/general-availability.pipe';
 import { FootCasePipe } from '../../../common/pipes/foot-case';
 import { LoaderService } from '../../../common/loader/loader.service';
 
 @Component({
     selector: 'em-staff-list',
     templateUrl: './staff-list.component.html',
-    pipes: [Unspecified, ArrayDelimiter, GeneralAvailabilityPipe, FootCasePipe],
+    pipes: [Unspecified, ArrayDelimiter, FootCasePipe],
     providers: [StaffService]
 })
 export class StaffListComponent implements OnInit, OnDestroy {

@@ -30,7 +30,8 @@ module.exports = webpackMerge(commonConfig, {
             '/appointment': 'http://localhost:9090',
             '/user': 'http://localhost:9090',
             '/invoice': 'http://localhost:9090',
-            '/alerts': 'http://localhost:9090'
+            '/alerts': 'http://localhost:9090',
+            '/rota': 'http://localhost:9090'
         }
     }
 });

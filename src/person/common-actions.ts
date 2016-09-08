@@ -1,4 +1,4 @@
-import { Person, Staff, Client, Address, Availability, GeneralAvailability } from '../model/model';
+import { Person, Staff, Client, Address, Availability } from '../model/model';
 
 export abstract class CommonActions {
 
@@ -25,16 +25,6 @@ export abstract class CommonActions {
 
     removeAvailability(index: number) {
         this._person.availabilities.splice(index, 1);
-    }
-
-    // General Availability
-    generalAvailabilityUpdated(generalAvailability: GeneralAvailability) {
-        this.showAvailabilityForm = false;
-        this._person.generalAvailability = generalAvailability;
-    }
-
-    removeGeneralAvailability() {
-        this._person.generalAvailability = undefined;
     }
 
     setPerson(person: Person) {

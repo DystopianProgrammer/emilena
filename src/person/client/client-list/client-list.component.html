@@ -8,7 +8,6 @@
                     <th>Name</th>
                     <th>Address</th>
                     <th>Telephone</th>
-                    <th>Days</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +31,6 @@
                     <td>{{client.surname}}, {{client.forename}}</td>
                     <td>{{client.address.town}}, {{client.address.postCode}}</td>
                     <td>{{client.telephoneNumber | unspecified}}</td>
-                    <td>{{client.generalAvailability | unspecified}}</td>
                 </tr>
             </tbody>
         </table>

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
-import { GeneralAvailability, Availability, DayOfWeek} from '../model/model';
+import { Availability, DayOfWeek} from '../model/model';
 import { CalendarComponent } from '../common/calendar/calendar.component';
 import { Snapshot } from '../common/calendar/calendar.service';
 import { ZeroPadPipe } from '../common/pipes/zero-pad.pipe';
@@ -29,7 +29,6 @@ export class AvailabilityComponent implements OnInit {
     @Input() custom: boolean;
 
     @Output() availabilityChange = new EventEmitter<Availability[]>();
-    @Output() generalAvailabilityChange = new EventEmitter<GeneralAvailability>();
 
     calendarActive: boolean = false;
 
@@ -82,11 +81,6 @@ export class AvailabilityComponent implements OnInit {
             });
             this.availabilityChange.emit(this.availabilities);
         }
-
-        let generalAvailability = this.updateGeneralAvailability();
-        if (generalAvailability.daysOfWeek && generalAvailability.daysOfWeek.length > 0) {
-            this.generalAvailabilityChange.emit(generalAvailability);
-        }
     }
 
     cancel() {
@@ -104,27 +98,6 @@ export class AvailabilityComponent implements OnInit {
 
     activateCalendar() {
         this.calendarActive = true;
-    }
-
-
-    private updateGeneralAvailability(): GeneralAvailability {
-        let daysOfWeek = this.checkBoxItems
-            .filter(item => item.selected === true)
-            .map(item => {
-                switch (item.id.toUpperCase()) {
-                    case 'MONDAY': return DayOfWeek.MONDAY;
-                    case 'TUESDAY': return DayOfWeek.TUESDAY;
-                    case 'WEDNESDAY': return DayOfWeek.WEDNESDAY;
-                    case 'THURSDAY': return DayOfWeek.THURSDAY;
-                    case 'FRIDAY': return DayOfWeek.FRIDAY;
-                    case 'SATURDAY': return DayOfWeek.SATURDAY;
-                    default: return DayOfWeek.SUNDAY;
-                }
-            });
-
-        let generalAvailability = new GeneralAvailability();
-        generalAvailability.daysOfWeek = DayOfWeekSerializer.getInstance().fromCollection(daysOfWeek);
-        return generalAvailability;
     }
 
     private initCheckBoxItems() {

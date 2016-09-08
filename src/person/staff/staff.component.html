@@ -2,7 +2,10 @@
     <h2>Staff <small>View</small></h2>
 </div>
 <div class="col-xs-12 spacer">
-    <a class="btn btn-primary btn-lg" [routerLink]="['/add-staff']">Add Staff</a>
+    <div class="pull-right">
+        <label for="filter">Filter&nbsp;<i class="fa fa-filter" aria-hidden="true"></i>
+            <input type="text" id="filter" class="form-control">
+        </label>
+    </div>
 </div>
 <em-staff-list></em-staff-list>
-

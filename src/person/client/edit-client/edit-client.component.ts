@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Client, Address, Availability, GeneralAvailability } from '../../../model/model';
+import { Client, Address, Availability } from '../../../model/model';
 import { ClientService } from '../client.service';
 import { AddressComponent } from '../../../address/address.component';
 import { PersonComponent } from '../../../person/person.component';
@@ -12,7 +12,6 @@ import { BadgeComponent } from '../../../common/badge/badge.component';
 import { CollapsibleContentComponent } from '../../../common/collapsible-content/collapsible-content.component';
 import { CommonActions } from '../../../person/common-actions';
 import { ArrayDelimiter } from '../../../common/pipes/array-delimiter';
-import { GeneralAvailabilityPipe } from '../../../common/pipes/general-availability.pipe';
 import { SupportComponent } from '../../../support/support.component';
 
 @Component({
@@ -25,7 +24,7 @@ import { SupportComponent } from '../../../support/support.component';
         SupportComponent,
         CollapsibleContentComponent,
         BadgeComponent],
-    pipes: [GeneralAvailabilityPipe, ArrayDelimiter],
+    pipes: [ArrayDelimiter],
     providers: [ClientService]
 })
 export class EditClientComponent extends CommonActions implements OnInit, OnDestroy {
