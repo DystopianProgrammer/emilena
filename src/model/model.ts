@@ -9,7 +9,6 @@ export class SystemUser {
     roleTypes: string[];
 }
 
-
 /**
  * Person - abstract class for client and staff
  */
@@ -78,6 +77,9 @@ export class Absence {
     person: Person;
 }
 
+/**
+ * Appointment
+ */
 export class Appointment {
     staff: Staff;
     client: Client;
@@ -88,6 +90,9 @@ export class Appointment {
     isComplete: boolean;
 }
 
+/**
+ * DayOfWeek
+ */
 export enum DayOfWeek {
     MONDAY,
     TUESDAY,
@@ -98,7 +103,38 @@ export enum DayOfWeek {
     SUNDAY
 }
 
+/**
+ * Alerts
+ */
 export class Alerts {
     pendingAlerts: Appointment[];
     futureAlerts: Appointment[];
+}
+
+/**
+ * Assignment
+ */
+export class Assignment {
+    id: number;
+    staff: Staff;
+    client: Client;
+    dayOfWeek: DayOfWeek;
+    timeFrom: string;
+    timeTo: string;
+    hours: number;
+}
+
+/**
+ * Rota
+ */
+export class Rota {
+    id: number;
+    weekCommencing: Date;
+    monday: Assignment[];
+    tuesday: Assignment[];
+    wednesday: Assignment[];
+    thursday: Assignment[];
+    friday: Assignment[];
+    saturday: Assignment[];
+    sunday: Assignment[];
 }

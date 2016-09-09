@@ -9,7 +9,11 @@
             <p><strong>Appointments requiring action:</strong></p>
         </div>
     </div>
-    <div class="col-xs-12 spacer" *ngIf="!alerts.pendingAlerts"><em>There are no appointments requiring action</em></div>
+    <div class="col-xs-12 spacer" *ngIf="!alerts.pendingAlerts">
+        <ul>
+            <li>There are no appointments requiring action</li>
+        </ul>
+    </div>
 
     <div class="col-xs-12 col-sm-4 spacer" *ngFor="let pending of alerts.pendingAlerts">
         <div class="appointment-alert-box appointment-pending-action">
@@ -46,7 +50,11 @@
             <p><strong>Upcoming appointments:</strong></p>
         </div>
     </div>
-    <div class="col-xs-12 spacer" *ngIf="!alerts.futureAlerts"><em>There are no upcoming appointments</em></div>
+    <div class="col-xs-12 spacer" *ngIf="!alerts.futureAlerts">
+        <ul>
+            <li>There are no upcoming appointments</li>
+        </ul>
+    </div>
 
     <div class="col-xs-12 col-sm-4 spacer" *ngFor="let future of alerts.futureAlerts">
         <div class="appointment-alert-box appointment-future">

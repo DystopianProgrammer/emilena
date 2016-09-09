@@ -5,7 +5,6 @@ import { CalendarComponent } from '../common/calendar/calendar.component';
 import { Snapshot } from '../common/calendar/calendar.service';
 import { ZeroPadPipe } from '../common/pipes/zero-pad.pipe';
 import { AvailabilityService, Time } from './availability.service';
-import { DayOfWeekSerializer } from '../common/serializers/day-of-week-serializer';
 
 class CheckBoxItem {
     name: string;

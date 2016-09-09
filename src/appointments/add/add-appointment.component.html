@@ -3,7 +3,9 @@
 </div>
 
 <div *ngIf="hasErrors.length > 0" class="col-xs-12 col-sm-6">
-    <div *ngFor="let error of hasErrors">{{error}}</div>
+    <ul>
+        <li *ngFor="let error of hasErrors">{{error}}</li>
+    </ul>
 </div>
 
 <form *ngIf="active && hasErrors.length === 0" (ngSubmit)="create(appointment)" #apptForm="ngForm">
