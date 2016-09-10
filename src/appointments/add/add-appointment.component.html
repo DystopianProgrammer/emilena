@@ -29,6 +29,8 @@
             <span *ngIf="dateValidationMsg">{{dateValidationMsg}}</span>
 
             <em-badge *ngIf="appointment.startTime && appointment.endTime" (dismissBadge)="removeTime()">
+                <div><strong>Appointment date:</strong></div>
+                <div><strong>Date:</strong> {{ appointment.appointmentDate | emDate }}</div>
                 <div><strong>Appointment time:</strong></div>
                 <div><strong>Start:</strong> {{ appointment.startTime }}</div>
                 <div><strong>End:</strong> {{ appointment.endTime }}</div>

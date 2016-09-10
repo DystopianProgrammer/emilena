@@ -26,20 +26,17 @@
                 </div>
             </div>
             <div *ngIf="!custom">
-                <div *ngIf="timeActive">
-                    <em-time (timeSelection)="updateTimeSelection($event)" [selectedDay]="selectedDay"></em-time>
+                <div class="form-group col-xs-12 col-sm-4">
+                    <label for="timeFrom">From:</label>
+                    <select name="timeFrom" id="timeFrom" class="form-control" [(ngModel)]="fromTime" required>
+                        <option *ngFor="let time of times" [ngValue]="time">{{ time.hours | zeroPad }}:{{ time.minutes | zeroPad }}</option>
+                    </select>
                 </div>
-                <div class="col-xs-12">
-                    <div class="day-selection">
-                        <label class="checkbox-inline" *ngFor="let checkboxItem of checkBoxItems">
-                            <input type="checkbox"
-                                    name="checkboxItem.name"
-                                    [id]="checkboxItem.id"
-                                    (click)="selectDay(checkboxItem)"
-                                    [(ngModel)]="checkboxItem.selected"
-                                    [value]="checkboxItem">{{checkboxItem.name}}
-                        </label>
-                    </div>
+                <div class="form-group col-xs-12 col-sm-4">
+                    <label for="timeTo">To:</label>
+                    <select name="timeTo" id="timeTo" class="form-control" [(ngModel)]="toTime" required>
+                        <option *ngFor="let time of times" [ngValue]="time">{{ time.hours | zeroPad }}:{{ time.minutes | zeroPad }}</option>
+                    </select>
                 </div>
             </div>
             <div class="col-xs-12">

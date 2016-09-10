@@ -2,7 +2,6 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 import { Availability, DayOfWeek} from '../model/model';
 import { CalendarComponent } from '../common/calendar/calendar.component';
-import { TimeComponent } from '../common/time/time.component';
 import { Snapshot } from '../common/calendar/calendar.service';
 import { ZeroPadPipe } from '../common/pipes/zero-pad.pipe';
 import { AvailabilityService, Time } from './availability.service';
@@ -15,7 +14,7 @@ const FRIDAY: string = 'Fri';
 const SATURDAY: string = 'Sat';
 const SUNDAY: string = 'Sun';
 
-class CheckBoxItem {
+class DaySelector {
     name: string;
     id: string;
     selected: boolean;
@@ -44,7 +43,7 @@ class CheckBoxItem {
     selector: 'em-availability',
     templateUrl: './availability.component.html',
     pipes: [ZeroPadPipe],
-    directives: [CalendarComponent, TimeComponent]
+    directives: [CalendarComponent]
 })
 export class AvailabilityComponent implements OnInit {
 
@@ -60,18 +59,15 @@ export class AvailabilityComponent implements OnInit {
     times: Time[];
     daysOfWeek: DayOfWeek[];
     buttonLabel = 'Custom';
-    checkBoxItems: CheckBoxItem[];
     availability: Availability;
     availabilities: Availability[] = [];
     active: boolean = true;
-    checkBoxItem: CheckBoxItem = new CheckBoxItem();
     selectedDay: DayOfWeek;
 
     constructor(private availabilityService: AvailabilityService) { }
 
     ngOnInit() {
         this.times = this.availabilityService.availabilityTimes();
-        this.initCheckBoxItems();
     }
 
     update() {
@@ -109,7 +105,7 @@ export class AvailabilityComponent implements OnInit {
         this.calendarActive = true;
     }
 
-    selectDay(selection: CheckBoxItem) {
+    selectDay(selection: DaySelector) {
         if (!selection.selected) {
             this.selectedDay = selection.dayOfWeekByName();
             this.timeActive = true;
@@ -118,25 +114,5 @@ export class AvailabilityComponent implements OnInit {
 
     cancel() {
         this.availabilityService.cancel();
-    }
-
-    private initCheckBoxItems() {
-        this.checkBoxItems = [
-            this.builder(SUNDAY, 'sunday', false),
-            this.builder(MONDAY, 'monday', false),
-            this.builder(TUESDAY, 'tuesday', false),
-            this.builder(WEDNESDAY, 'wednesday', false),
-            this.builder(THURSDAY, 'thursday', false),
-            this.builder(FRIDAY, 'friday', false),
-            this.builder(SATURDAY, 'saturday', false)
-        ];
-    }
-
-    private builder(name: string, id: string, selected: boolean): CheckBoxItem {
-        let checkBoxItem = new CheckBoxItem();
-        checkBoxItem.name = name;
-        checkBoxItem.id = id;
-        checkBoxItem.selected = selected;
-        return checkBoxItem;
     }
 }
