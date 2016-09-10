@@ -9,7 +9,8 @@ export class DatePipe implements PipeTransform {
     transform(value: number): string {
         if(value) {
             let date = new Date(value);
-            return moment(date).format('do MMMM YYYY');
+            console.log(date);
+            return moment(date).format('DD MMMM YYYY');
         } else {
             return '';
         }

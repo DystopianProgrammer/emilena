@@ -75,7 +75,6 @@ export class AvailabilityComponent implements OnInit {
     }
 
     update() {
-        console.log('Update called');
         if (this.availabilities.length > 0) {
             this.availabilities.map(a => {
                 let tFrom = new Date(a.date.toDateString());
