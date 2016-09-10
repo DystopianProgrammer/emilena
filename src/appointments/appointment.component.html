@@ -20,8 +20,9 @@
                     <th>Client</th>
                     <th>Staff</th>
                     <th>Address</th>
-                    <th>Time from</th>
-                    <th>Time to</th>
+                    <th>Date</th>
+                    <th>Start</th>
+                    <th>End</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,8 +34,9 @@
                     <td>{{ appt.client.forename }} {{ appt.client.surname }}</td>
                     <td>{{ appt.staff.forename }} {{ appt.staff.surname }}</td>
                     <td>{{ appt.location | emAddress }}</td>
-                    <td>{{ appt.fromDate | emDate }}</td>
-                    <td>{{ appt.toDate | emDate }}</td>
+                    <td>{{ appt.appointmentDate | emDate }}</td>
+                    <td>{{ appt.startTime | localTime }}</td>
+                    <td>{{ appt.endTime | localTime }}</td>
                 </tr>
             </tbody>
         </table>

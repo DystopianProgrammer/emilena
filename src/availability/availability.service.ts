@@ -31,8 +31,8 @@ export class AvailabilityService {
         let availability = new Availability();
 
         availability.date = date;
-        availability.fromDate = date;
-        availability.toDate = date;
+        availability.fromTime = date;
+        availability.toTime = date;
 
         return availability;
     }

@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 import { Subscription } from 'rxjs/Subscription';
+import * as moment from 'moment';
 
 import { Client, Staff, Address, Appointment, Availability } from '../../model/model';
 import { AppointmentService } from '../appointment.service';
@@ -12,6 +14,7 @@ import { AvailabilityComponent } from '../../availability/availability.component
 import { BadgeComponent } from '../../common/badge/badge.component';
 import { LoaderService } from '../../common/loader/loader.service';
 import { DatePipe } from '../../common/pipes/date.pipe.ts';
+import { AbstractAppointment } from '../appointment.abstract';
 
 @Component({
     selector: 'em-add-appointment',
@@ -19,97 +22,21 @@ import { DatePipe } from '../../common/pipes/date.pipe.ts';
     pipes: [DatePipe],
     templateUrl: './add-appointment.component.html'
 })
-export class AddAppointmentComponent implements OnInit, OnDestroy {
+export class AddAppointmentComponent extends AbstractAppointment {
 
-    appointment: Appointment;
-    activeClients: Client[] = [];
-    activeStaff: Staff[] = [];
-    active = true;
-    hasErrors: string[] = [];
-    showAvailabilityForm: boolean = false;
-    completionMessage: string;
-    dateValidationMsg: string;
-
-    private subAppointmentClients: Subscription;
-    private subAppointmentStaff: Subscription;
-    private subAvailabilityDismiss: Subscription;
-
-    constructor(private appointmentService: AppointmentService,
-                private loaderService: LoaderService,
-                private availabilityService: AvailabilityService,
-                private router: Router) { }
-
-    ngOnInit() {
-        this.loaderService.notifyIsLoaded(false);
-
-        this.subAppointmentClients =
-            this.appointmentService.fetchActiveClients().subscribe(clients => {
-                this.activeClients = clients;
-                if (clients.length < 1) {
-                    this.hasErrors.push('Please add client/s before scheduling an appointment');
-                }
-            });
-
-        this.subAppointmentStaff =
-            this.appointmentService.fetchActiveStaff().subscribe(staff => {
-                this.activeStaff = staff;
-                this.loaderService.notifyIsLoaded(true);
-                if (staff.length < 1) {
-                    this.hasErrors.push('Please add staff member/s before scheduling an appointment');
-                }
-            });
-
-        this.subAvailabilityDismiss =
-            this.availabilityService.cancelAvailabilityForm$.subscribe(dismiss => this.showAvailabilityForm = dismiss);
+    constructor(
+        appointmentService: AppointmentService,
+        route: ActivatedRoute,
+        loaderService: LoaderService,
+        availabilityService: AvailabilityService,
+        router: Router) {
+        super(appointmentService, route, loaderService, availabilityService, router);
 
         this.initAppt();
-    }
-
-    ngOnDestroy() {
-        this.subAppointmentClients.unsubscribe();
-        this.subAppointmentStaff.unsubscribe();
-        this.subAvailabilityDismiss.unsubscribe();
-    }
-
-    create(appointment: Appointment): void {
-        this.dateValidationMsg = this.appointmentService.validate(appointment);
-        this.appointmentService.create(appointment).subscribe(res => {
-            this.completionMessage = `Successfully created appointment: ${res.id}`;
-            this.router.navigate(['/appointment']);
-        }, error => {
-            this.completionMessage = `Unable to create appointment: ${error}`;
-        });
-    }
-
-    useStaffAddress(): void {
-        if(this.appointment.staff) {
-            this.appointment.location = this.appointment.staff.address;
-        }
-    }
-
-    useClientAddress(): void {
-        if(this.appointment.client) {
-            this.appointment.location = this.appointment.client.address;
-        }
     }
 
     clear(): void {
         this.initAppt();
-    }
-
-    addAvailability() {
-        this.showAvailabilityForm = true;
-    }
-
-    availabilityUpdated(availability: Availability[]): void {
-        this.showAvailabilityForm = false;
-        this.appointment.fromDate = availability[0].fromDate;
-        this.appointment.toDate = availability[0].toDate;
-    }
-
-    removeTime() {
-        this.appointment.fromDate = null;
-        this.appointment.toDate = null;
     }
 
     private initAppt() {

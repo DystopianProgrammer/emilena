@@ -2,69 +2,80 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 import { Availability, DayOfWeek} from '../model/model';
 import { CalendarComponent } from '../common/calendar/calendar.component';
+import { TimeComponent } from '../common/time/time.component';
 import { Snapshot } from '../common/calendar/calendar.service';
 import { ZeroPadPipe } from '../common/pipes/zero-pad.pipe';
 import { AvailabilityService, Time } from './availability.service';
+
+const MONDAY: string = 'Mon';
+const TUESDAY: string = 'Tues';
+const WEDNESDAY: string = 'Weds';
+const THURSDAY: string = 'Thurs';
+const FRIDAY: string = 'Fri';
+const SATURDAY: string = 'Sat';
+const SUNDAY: string = 'Sun';
 
 class CheckBoxItem {
     name: string;
     id: string;
     selected: boolean;
+
+    dayOfWeekByName(): DayOfWeek {
+        if (this.name) {
+            switch (this.name) {
+                case MONDAY: return DayOfWeek.MONDAY;
+                case TUESDAY: return DayOfWeek.TUESDAY;
+                case WEDNESDAY: return DayOfWeek.WEDNESDAY;
+                case THURSDAY: return DayOfWeek.THURSDAY;
+                case FRIDAY: return DayOfWeek.FRIDAY;
+                case SATURDAY: return DayOfWeek.SATURDAY;
+                case SUNDAY: return DayOfWeek.SUNDAY;
+            }
+        }
+        return undefined;
+    }
 }
 
 /**
  * This is a many to one in that a Person can have many availabilities. Note that this is a snapshot in time
- * for a given date - NOT A DURATION.
+ * for a given date
  */
 @Component({
     selector: 'em-availability',
     templateUrl: './availability.component.html',
     pipes: [ZeroPadPipe],
-    directives: [CalendarComponent]
+    directives: [CalendarComponent, TimeComponent]
 })
 export class AvailabilityComponent implements OnInit {
 
     // indicates whether we want to the general availability, or custom availability display
     @Input() custom: boolean;
-
     @Output() availabilityChange = new EventEmitter<Availability[]>();
 
     calendarActive: boolean = false;
-
-    // for the form display
+    timeActive: boolean = false;
     date: string = '';
-
-    // These are only specific to availabilities - NOT general availability
     fromTime: Time;
     toTime: Time;
-
     times: Time[];
     daysOfWeek: DayOfWeek[];
-
     buttonLabel = 'Custom';
     checkBoxItems: CheckBoxItem[];
-
     availability: Availability;
     availabilities: Availability[] = [];
-
-    // Reset the form with a new hero AND restore 'pristine' class state
-    // by toggling 'active' flag which causes the form
-    // to be removed/re-added in a tick via NgIf
-    // TODO: Workaround until NgForm has a reset method (#6822)
     active: boolean = true;
+    checkBoxItem: CheckBoxItem = new CheckBoxItem();
+    selectedDay: DayOfWeek;
 
     constructor(private availabilityService: AvailabilityService) { }
 
     ngOnInit() {
         this.times = this.availabilityService.availabilityTimes();
         this.initCheckBoxItems();
-
-        if (this.custom) {
-            this.availability = new Availability();
-        }
     }
 
     update() {
+        console.log('Update called');
         if (this.availabilities.length > 0) {
             this.availabilities.map(a => {
                 let tFrom = new Date(a.date.toDateString());
@@ -75,15 +86,11 @@ export class AvailabilityComponent implements OnInit {
                 tTo.setHours(this.toTime.hours);
                 tTo.setMinutes(this.toTime.minutes);
 
-                a.fromDate = tFrom;
-                a.toDate = tTo;
+                a.fromTime = tFrom;
+                a.toTime = tTo;
             });
             this.availabilityChange.emit(this.availabilities);
         }
-    }
-
-    cancel() {
-        this.availabilityService.cancel();
     }
 
     updateAvailability(snapshot?: Snapshot) {
@@ -95,19 +102,34 @@ export class AvailabilityComponent implements OnInit {
         }
     }
 
+    updateTimeSelection(event: any) {
+        this.timeActive = false;
+    }
+
     activateCalendar() {
         this.calendarActive = true;
     }
 
+    selectDay(selection: CheckBoxItem) {
+        if (!selection.selected) {
+            this.selectedDay = selection.dayOfWeekByName();
+            this.timeActive = true;
+        }
+    }
+
+    cancel() {
+        this.availabilityService.cancel();
+    }
+
     private initCheckBoxItems() {
         this.checkBoxItems = [
-            this.builder('Sun', 'sunday', false),
-            this.builder('Mon', 'monday', false),
-            this.builder('Tues', 'tuesday', false),
-            this.builder('Weds', 'wednesday', false),
-            this.builder('Thurs', 'thursday', false),
-            this.builder('Fri', 'friday', false),
-            this.builder('Sat', 'saturday', false)
+            this.builder(SUNDAY, 'sunday', false),
+            this.builder(MONDAY, 'monday', false),
+            this.builder(TUESDAY, 'tuesday', false),
+            this.builder(WEDNESDAY, 'wednesday', false),
+            this.builder(THURSDAY, 'thursday', false),
+            this.builder(FRIDAY, 'friday', false),
+            this.builder(SATURDAY, 'saturday', false)
         ];
     }
 

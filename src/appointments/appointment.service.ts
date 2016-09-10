@@ -51,7 +51,7 @@ export class AppointmentService {
     }
 
     validate(appointment: Appointment): string {
-        if (!appointment.fromDate || !appointment.toDate) {
+        if (!appointment.startTime || !appointment.endTime) {
             return 'Appointment time is required';
         }
     }

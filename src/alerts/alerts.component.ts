@@ -32,7 +32,7 @@ export class AlertsComponent implements OnInit {
     }
 
     complete(appointment: Appointment) {
-        appointment.isComplete = true;
+        appointment.complete = true;
         this.appointmentService.create(appointment).subscribe(res => {
             this.alertsService.notify(this.alerts);
         });

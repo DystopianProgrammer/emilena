@@ -40,14 +40,6 @@
                 </em-availability>
             </div>
 
-            <!-- general availability -->
-            <!-- TODO
-            <div class="spacer"></div>
-            <em-badge *ngIf = "_person.generalAvailability" (dismissBadge)="removeGeneralAvailability(index)">
-                <div>Days available: {{ _person.generalAvailability | generalAvailability | arrayDelimiter }}</div>
-            </em-badge>
-            -->
-
             <!-- custom availability -->
             <span *ngFor="let availability of _person.availabilities; let index=index">
                 <div class="spacer"></div>

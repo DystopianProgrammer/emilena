@@ -62,8 +62,8 @@ export class Address {
  */
 export class Availability {
     date: Date;
-    fromDate: Date;
-    toDate: Date;
+    fromTime: Date;
+    toTime: Date;
     person: Person;
 }
 
@@ -83,11 +83,12 @@ export class Absence {
 export class Appointment {
     staff: Staff;
     client: Client;
-    fromDate: Date;
-    toDate: Date;
+    appointmentDate: Date;
+    startTime: any;
+    endTime: any;
     location: Address;
     notes: string;
-    isComplete: boolean;
+    complete: boolean;
 }
 
 /**

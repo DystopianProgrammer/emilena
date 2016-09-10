@@ -28,10 +28,10 @@
             <a class="btn btn-default spacer" (click)="addAvailability()">Add Time</a>
             <span *ngIf="dateValidationMsg">{{dateValidationMsg}}</span>
 
-            <em-badge *ngIf="appointment.fromDate && appointment.toDate" (dismissBadge)="removeTime()">
+            <em-badge *ngIf="appointment.startTime && appointment.endTime" (dismissBadge)="removeTime()">
                 <div><strong>Appointment time:</strong></div>
-                <div><strong>From:</strong> {{ appointment.fromDate | emDate }}</div>
-                <div><strong>Until:</strong> {{ appointment.toDate | emDate }}</div>
+                <div><strong>Start:</strong> {{ appointment.startTime }}</div>
+                <div><strong>End:</strong> {{ appointment.endTime }}</div>
             </em-badge>
 
             <div class="spacer"></div>
