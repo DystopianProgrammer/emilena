@@ -1,39 +1,12 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
+import * as moment from 'moment';
+
 import { Availability, DayOfWeek} from '../model/model';
 import { CalendarComponent } from '../common/calendar/calendar.component';
 import { Snapshot } from '../common/calendar/calendar.service';
 import { ZeroPadPipe } from '../common/pipes/zero-pad.pipe';
-import { AvailabilityService, Time } from './availability.service';
-
-const MONDAY: string = 'Mon';
-const TUESDAY: string = 'Tues';
-const WEDNESDAY: string = 'Weds';
-const THURSDAY: string = 'Thurs';
-const FRIDAY: string = 'Fri';
-const SATURDAY: string = 'Sat';
-const SUNDAY: string = 'Sun';
-
-class DaySelector {
-    name: string;
-    id: string;
-    selected: boolean;
-
-    dayOfWeekByName(): DayOfWeek {
-        if (this.name) {
-            switch (this.name) {
-                case MONDAY: return DayOfWeek.MONDAY;
-                case TUESDAY: return DayOfWeek.TUESDAY;
-                case WEDNESDAY: return DayOfWeek.WEDNESDAY;
-                case THURSDAY: return DayOfWeek.THURSDAY;
-                case FRIDAY: return DayOfWeek.FRIDAY;
-                case SATURDAY: return DayOfWeek.SATURDAY;
-                case SUNDAY: return DayOfWeek.SUNDAY;
-            }
-        }
-        return undefined;
-    }
-}
+import { AvailabilityService } from './availability.service';
 
 /**
  * This is a many to one in that a Person can have many availabilities. Note that this is a snapshot in time
@@ -47,43 +20,50 @@ class DaySelector {
 })
 export class AvailabilityComponent implements OnInit {
 
-    // indicates whether we want to the general availability, or custom availability display
+    // custom gives us day selection with times.
+    // if this is undefined, we get the calendar with times
     @Input() custom: boolean;
     @Output() availabilityChange = new EventEmitter<Availability[]>();
 
+    /**
+     * Calendar options
+     */
     calendarActive: boolean = false;
     timeActive: boolean = false;
     date: string = '';
-    fromTime: Time;
-    toTime: Time;
-    times: Time[];
     daysOfWeek: DayOfWeek[];
-    buttonLabel = 'Custom';
-    availability: Availability;
+
+    /**
+     * Shared
+     */
     availabilities: Availability[] = [];
-    active: boolean = true;
+    times: string[];
+    startTime: string;
+    finishTime: string;
+
+    /**
+     * Day (non-custom) options
+     */
     selectedDay: DayOfWeek;
+    selectedDaysAndTimes: string[] = [];
 
     constructor(private availabilityService: AvailabilityService) { }
 
     ngOnInit() {
-        this.times = this.availabilityService.availabilityTimes();
+        this.times = this.availabilityService.selectableTimesOfDay();
+        this.daysOfWeek = [
+            DayOfWeek.MONDAY,
+            DayOfWeek.TUESDAY,
+            DayOfWeek.WEDNESDAY,
+            DayOfWeek.THURSDAY,
+            DayOfWeek.FRIDAY,
+            DayOfWeek.SATURDAY,
+            DayOfWeek.SUNDAY
+        ]
     }
 
     update() {
         if (this.availabilities.length > 0) {
-            this.availabilities.map(a => {
-                let tFrom = new Date(a.date.toDateString());
-                tFrom.setHours(this.fromTime.hours);
-                tFrom.setMinutes(this.fromTime.minutes);
-
-                let tTo = new Date(a.date.toDateString());
-                tTo.setHours(this.toTime.hours);
-                tTo.setMinutes(this.toTime.minutes);
-
-                a.fromTime = tFrom;
-                a.toTime = tTo;
-            });
             this.availabilityChange.emit(this.availabilities);
         }
     }
@@ -92,8 +72,7 @@ export class AvailabilityComponent implements OnInit {
         if (snapshot) {
             this.calendarActive = false;
             this.date = snapshot.friendlyName;
-            let availability = this.availabilityService.transform(snapshot);
-            this.availabilities.push(availability);
+            console.warn('FIXME!');
         }
     }
 
@@ -105,14 +84,22 @@ export class AvailabilityComponent implements OnInit {
         this.calendarActive = true;
     }
 
-    selectDay(selection: DaySelector) {
-        if (!selection.selected) {
-            this.selectedDay = selection.dayOfWeekByName();
-            this.timeActive = true;
-        }
-    }
-
     cancel() {
         this.availabilityService.cancel();
+    }
+
+    addSelectedDayAndTimes() {
+
+        if (this.selectedDay && this.startTime && this.finishTime) {
+            let availability = new Availability();
+            availability.dayOfWeek = this.selectedDay;
+            availability.fromTime = this.startTime;
+            availability.toTime = this.finishTime;
+            this.availabilities.push(availability);
+        }
+
+        this.selectedDay = undefined;
+        this.startTime = undefined;
+        this.finishTime = undefined;
     }
 }

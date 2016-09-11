@@ -20,11 +20,11 @@
             <div class="form-group">
                 <label for="staff-type">Staff Type</label>
                 <select id="staff-type" class="form-control" name="staff-type" [(ngModel)]="_person.staffType" required>
-                    <option *ngFor="let staffType of staffTypes">{{ staffType }}</option>
+                    <option *ngFor="let staffType of staffTypes">{{ staffType | capitalizeFirst }}</option>
                 </select>
                 <label for="contract-type">Contract Type</label>
                 <select id="contract-type" class="form-control" name="contract-type" [(ngModel)]="_person.contractType" required>
-                    <option *ngFor="let contractType of contractTypes">{{ contractType }}</option>
+                    <option *ngFor="let contractType of contractTypes">{{ contractType | capitalizeFirst }}</option>
                 </select>
             </div>
             <div class="form-group">
@@ -36,17 +36,16 @@
                 <a class="btn btn-primary" id="availabilityBtn" (click)="addAvailability()">Add Availability</a>
             </div>
             <div *ngIf="showAvailabilityForm" class="em-modal">
-                <em-availability (generalAvailabilityChange)="generalAvailabilityUpdated($event)" (availabilityChange)="availabilityUpdated($event)">
-                </em-availability>
+                <em-availability (availabilityChange)="availabilityUpdated($event)"></em-availability>
             </div>
 
             <!-- custom availability -->
             <span *ngFor="let availability of _person.availabilities; let index=index">
                 <div class="spacer"></div>
                 <em-badge (dismissBadge)="removeAvailability(index)">
-                    <div>Date: {{ availability.date | date: 'fullDate' }}</div>
-                    <div>From: {{ availability.fromDate }}</div>
-                    <div>To: {{ availability.toDate }}</div>
+                    <div>Day: {{ availability.dayOfWeek | capitalizeFirst }}</div>
+                    <div>Start: {{ availability.fromTime }}</div>
+                    <div>Finish: {{ availability.toTime }}</div>
                 </em-badge>
             </span>
         </em-collapsible-content>

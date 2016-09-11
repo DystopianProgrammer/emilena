@@ -17,10 +17,9 @@ export abstract class CommonActions {
         this.showAvailabilityForm = true;
     }
 
-    availabilityUpdated(availability: Availability) {
+    availabilityUpdated(availabilities: Availability[]) {
         this.showAvailabilityForm = false;
-        this._person.availabilities = [];
-        this._person.availabilities.push(availability);
+        this._person.availabilities = availabilities;
     }
 
     removeAvailability(index: number) {

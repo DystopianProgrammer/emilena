@@ -114,7 +114,6 @@ export abstract class AbstractAppointment implements OnInit, OnDestroy {
 
     availabilityUpdated(availability: Availability[]): void {
         this.showAvailabilityForm = false;
-        this.appointment.appointmentDate = availability[0].date;
         this.appointment.startTime = moment(availability[0].fromTime).format('HH:MM');
         this.appointment.endTime = moment(availability[0].toTime).format('HH:MM');
     }

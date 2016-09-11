@@ -1,47 +1,63 @@
 <div class="availability-component panel panel-default">
-    <form *ngIf="active" (ngSubmit)="update()" #availabilityForm="ngForm">
+    <form (ngSubmit)="update()">
         <div class="panel-heading">
             <h3 class="panel-title">Availability <small>add</small></h3>
         </div>
         <div class="panel-body">
             <div *ngIf="custom">
                 <div class="form-group col-xs-12 col-sm-4">
-                    <label for="datetime">Date:</label>
-                    <input type="text" name="datetime" id="datetime" class="form-control" placeholder="22/03/2016" [(ngModel)]="date" (click)="activateCalendar()" required>
+                    <label for="datetime">Date</label>
+                    <input type="text" name="datetime" id="datetime" class="form-control" placeholder="22/03/2016" [(ngModel)]="date" (click)="activateCalendar()">
                 </div>
                 <div *ngIf="calendarActive">
                     <em-calendar (dateSelection)="updateAvailability($event)"></em-calendar>
                 </div>
                 <div class="form-group col-xs-12 col-sm-4">
-                    <label for="timeFrom">From:</label>
-                    <select name="timeFrom" id="timeFrom" class="form-control" [(ngModel)]="fromTime" required>
-                        <option *ngFor="let time of times" [ngValue]="time">{{ time.hours | zeroPad }}:{{ time.minutes | zeroPad }}</option>
+                    <label for="timeFrom">From</label>
+                    <select name="timeFrom" id="timeFrom" class="form-control" [(ngModel)]="startTime">
+                        <option *ngFor="let time of times" [ngValue]="time">{{ time }}</option>
                     </select>
                 </div>
                 <div class="form-group col-xs-12 col-sm-4">
-                    <label for="timeTo">To:</label>
-                    <select name="timeTo" id="timeTo" class="form-control" [(ngModel)]="toTime" required>
-                        <option *ngFor="let time of times" [ngValue]="time">{{ time.hours | zeroPad }}:{{ time.minutes | zeroPad }}</option>
+                    <label for="timeTo">To</label>
+                    <select name="timeTo" id="timeTo" class="form-control" [(ngModel)]="finishTime">
+                        <option *ngFor="let time of times" [ngValue]="time">{{ time }}</option>
                     </select>
                 </div>
             </div>
             <div *ngIf="!custom">
                 <div class="form-group col-xs-12 col-sm-4">
-                    <label for="timeFrom">From:</label>
-                    <select name="timeFrom" id="timeFrom" class="form-control" [(ngModel)]="fromTime" required>
-                        <option *ngFor="let time of times" [ngValue]="time">{{ time.hours | zeroPad }}:{{ time.minutes | zeroPad }}</option>
+                    <label for="day">Day</label>
+                    <select name="day" id="day" class="form-control" [(ngModel)]="selectedDay">
+                        <option *ngFor="let day of daysOfWeek">{{ day | dayOfWeek }}</option>
                     </select>
                 </div>
                 <div class="form-group col-xs-12 col-sm-4">
-                    <label for="timeTo">To:</label>
-                    <select name="timeTo" id="timeTo" class="form-control" [(ngModel)]="toTime" required>
-                        <option *ngFor="let time of times" [ngValue]="time">{{ time.hours | zeroPad }}:{{ time.minutes | zeroPad }}</option>
+                    <label for="fromTime">From</label>
+                    <select name="fromTime" id="fromTime" class="form-control" [(ngModel)]="startTime">
+                        <option *ngFor="let time of times">{{ time }}</option>
                     </select>
+                </div>
+                <div class="form-group col-xs-12 col-sm-4">
+                    <label for="toTime">To</label>
+                    <select name="toTime" id="toTime" class="form-control" [(ngModel)]="finishTime">
+                        <option *ngFor="let time of times">{{ time }}</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-12 col-sm-4">
+                    <button type="button" class="btn btn-primary" (click)="addSelectedDayAndTimes()">Add</button>
+                </div>
+                <div class="col-xs-12">
+                    <div *ngFor="let availability of availabilities">
+                        <div>Day: {{availability.dayOfWeek}}</div>
+                        <div>Start: {{availability.fromTime}}</div>
+                        <div>Finish: {{availability.toTime}}</div>
+                    </div>
                 </div>
             </div>
             <div class="col-xs-12">
                 <div class="em-form-submit-buttons">
-                    <button type="submit" class="btn btn-success" [disabled]="!availabilityForm.form.valid">Add</button>
+                    <button type="submit" class="btn btn-success">Save</button>
                     <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
                 </div>
             </div>

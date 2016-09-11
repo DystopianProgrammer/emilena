@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 
 import { Snapshot } from '../common/calendar/calendar.service';
-import { Availability } from '../model/model';
+import { Availability, DayOfWeek } from '../model/model';
 
+import * as moment from 'moment';
 import { Subject } from 'rxjs/Subject';
 
-export class Time {
-    hours: number;
-    minutes: number;
-}
 
 @Injectable()
 export class AvailabilityService {
@@ -21,38 +18,14 @@ export class AvailabilityService {
         this.cancelAvailabilityForm.next(false);
     }
 
-    transform(snapshot: Snapshot): Availability {
-
-        let date = new Date();
-        date.setFullYear(snapshot.year);
-        date.setMonth(snapshot.month - 1);
-        date.setDate(snapshot.date);
-
-        let availability = new Availability();
-
-        availability.date = date;
-        availability.fromTime = date;
-        availability.toTime = date;
-
-        return availability;
-    }
-
-    availabilityTimes(): Time[] {
-
-        const MAX_HOURS = 23;
-        const MAX_MINUTES = 59;
-
-        let formattedSelectableTimes = new Array<Time>();
-
-        for (let i = 7; i <= MAX_HOURS; i++) {
-            for (let j = 0; j <= MAX_MINUTES; j += 15) {
-                let time = new Time();
-                time.hours = i;
-                time.minutes = j;
-                formattedSelectableTimes.push(time);
+    selectableTimesOfDay(): string[] {
+        let times: string[] = [];
+        for(let i = 0; i <= 24; i++) {
+            for(let j = 0; j <= 59; j+=30) {
+                let time = moment().hour(i).minute(j).format('HH:mm');
+                times.push(time);
             }
         }
-
-        return formattedSelectableTimes;
+        return times;
     }
 }
